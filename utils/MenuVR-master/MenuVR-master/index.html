@@ -1,0 +1,34 @@
+<head>
+  <title>An A-Frame Menu</title>
+  <script src="https://aframe.io/releases/0.3.0/aframe.min.js"></script>
+  <script src="MenuVR.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-box position="0 0 -2" rotation='0 45 45' ></a-box>
+        <a-sky color=#def ></a-sky>
+        <a-entity id=camera camera look-controls position='0 1.7 0' far=20 >
+            <a-entity cursor="fuse: false" geometry="primitive: ring; radiusInner: 0.01; radiusOuter: 0.02" material="color: red" position="0 0 -0.9"></a-entity>
+		</a-entity>
+    </a-scene>
+    <script>
+var menu ;
+    
+var expl_menu = { 
+    'start' :    function(){ alert('Start with option values : '+JSON.stringify(menu.values)); },
+    'options' : { 
+        'dark':true,
+        'nb lives':[1,2,3],
+        'difficulty': ['easy','normal','hard']
+    },
+    'about':    'A text\nwith many lines\nand some informations',
+        'exit':     function(){alert('quit')}
+};
+
+window.addEventListener('load',function(){
+    menu = new MenuVR(expl_menu);
+//    var menu = new MenuVR(expl_menu,{line_height:0.2,fonts:'mono'});              // an other example
+});
+    </script>
+</body>
