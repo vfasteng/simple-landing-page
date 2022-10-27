@@ -1,0 +1,2 @@
+define(["require","exports","tslib","react","modules/clean/react/app_directory/page_template/navigation_list"],(function(e,a,t,i,r){"use strict";Object.defineProperty(a,"__esModule",{value:!0}),a.NavigationSidebar=void 0,i=t.__importDefault(i),a.NavigationSidebar=function(){return i.default.createElement("div",{className:"app-directory-navigation-sidebar"},i.default.createElement("div",{className:"app-directory-navigation-sidebar__list"},i.default.createElement(r.NavigationList,null)))}}));
+//# sourceMappingURL=navigation_sidebar.min.js-vflnkljlS.map

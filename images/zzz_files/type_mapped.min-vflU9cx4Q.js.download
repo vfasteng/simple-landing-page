@@ -1,0 +1,2 @@
+define(["require","exports"],(function(e,r){"use strict";Object.defineProperty(r,"__esModule",{value:!0}),r.createTypeMappedHandler=void 0,r.createTypeMappedHandler=function(e,r){return function(t,i,n,o){var d=o.type[".tag"],a=r[d];if(void 0===a)throw Error("Failed to find "+e+" flow with type "+d);return a(t,i,n,o)}}}));
+//# sourceMappingURL=type_mapped.min.js-vflBhehXc.map

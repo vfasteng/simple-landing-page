@@ -1,0 +1,2 @@
+define(["require","exports","tslib","react","proto_utils/unpack"],(function(t,e,n,r,o){"use strict";Object.defineProperty(e,"__esModule",{value:!0}),e.ReactEntryPoint=void 0,r=n.__importDefault(r),e.ReactEntryPoint=function(t,e){return function(i){var u=i.encodedProto,c=o.unpackProto(u,t);return r.default.createElement(e,n.__assign({},c))}}}));
+//# sourceMappingURL=unpack_utils.min.js-vflOOun8x.map

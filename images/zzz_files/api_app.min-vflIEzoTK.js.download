@@ -1,0 +1,2 @@
+define(["require","exports","tslib","modules/clean/react/app_directory/connect/handler_utils"],(function(e,n,t,i){"use strict";Object.defineProperty(n,"__esModule",{value:!0}),n.apiAppHandler=void 0,n.apiAppHandler=function(e,n,a,r){var d=n.thirdPartyLandingPage||a?"learnMore":"connect",o=i.defaultOnClick(n);return a&&r.edu_modal_content&&(o=i.withEduModal((function(){return Promise.resolve(!0)}),t.__assign(t.__assign({},n),{thirdPartyLandingPage:void 0}),r.edu_modal_content)),{initialCta:d,onClick:o}}}));
+//# sourceMappingURL=api_app.min.js-vfln1lVHo.map

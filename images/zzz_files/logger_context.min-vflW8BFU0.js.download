@@ -1,0 +1,2 @@
+define(["require","exports","tslib","react"],(function(e,t,r,o){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.useWebLoggerContext=t.WebLoggerProvider=t.Context=void 0,o=r.__importStar(o),t.Context=o.default.createContext({}),t.WebLoggerProvider=function(e){var r=e.webLogger,n=e.children;return o.default.createElement(t.Context.Provider,{value:{webLogger:r}},n)},t.useWebLoggerContext=function(){return o.useContext(t.Context)}}));
+//# sourceMappingURL=logger_context.min.js-vflelqzOX.map

@@ -1,0 +1,202 @@
+
+<!-- saved from url=(0133)https://marketing.dropbox.com/apps/%3Aapp_page_id?referrer=https%3A%2F%2Fwww.dropbox.com%2Fapps%2Fcollections%2F%3Acollection_page_id -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+    <!--[if (gte IE 9) ]>
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <![endif]-->
+    <title>Dropbox</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src https: &#39;unsafe-inline&#39; &#39;unsafe-eval&#39;; ">
+    <script type="text/javascript" src="./optout_check"></script><script type="text/javascript" src="./7fe1f424-c09d-4781-af13-2352d2ee4229"></script><script async="" src="./controltag.js.0631b7d64dbbd3656a8b7368ad227a04"></script><script type="text/javascript" async="" src="./analytics.js.download"></script><script async="" src="./events.js.download"></script><script type="text/javascript" async="" charset="utf-8" id="utag_285" src="./up_loader.1.1.0.js.download"></script><script type="text/javascript" async="" charset="utf-8" id="utag_281" src="./insight.min.js.download"></script><script type="text/javascript" async="" charset="utf-8" id="utag_253" src="./up_loader.1.1.0.js.download"></script><script src="./tpxf4nq03.js.download" class="kxct" data-id="tpxf4nq03" data-timing="async" data-version="3.0" type="text/javascript" async=""></script><script async="" src="./uwt.js.download"></script><script type="text/javascript" async="" charset="utf-8" id="utag_dropbox.main_42" src="./utag.42.js.download"></script><link id="sa-css" rel="stylesheet" type="text/css" href="./sa.css" media="all"></head>
+<body>
+<script type="text/javascript" async="" charset="utf-8" id="utag_18" src="./insight.min.js.download"></script><script type="text/javascript" async="" charset="utf-8" id="utag_30" src="./js"></script><script src="./utag.js.download" type="text/javascript" async=""></script><script>
+    (function(){
+        // Enable debugging via localStorage.
+        var debug_enabled = false;
+        if (window.localStorage && window.localStorage.getItem('marketing_tracker_debug')) {
+            debug_enabled = true;
+        }
+
+        /**
+         * Grab referrer from query params and attempt to set on document. If we have a correct
+         * referrer reference then setup the trackers, otherwise, we need to reload.
+         */
+        var ref_match = RegExp('[?&]referrer=([^&]*)').exec(window.location.search);
+        var fakeref = ref_match ? decodeURIComponent(ref_match[1]) : "";
+        try {
+            if ('Object' in window && 'defineProperty' in Object){
+                Object.defineProperty(document,'referrer',{'get':function(){ return fakeref;}});
+            } else {
+                window.document.__defineGetter__('referrer', function () { return fakeref;});
+            }
+        } catch(e){}
+
+        // If we couldn't override the referrer, then replace the location and reload.
+        if (document.referrer !== fakeref && document.referrer !== "") {
+            location.replace(location.href);
+        } else {
+            setupTrackers();
+        }
+
+        /**
+         * Listens for postMessages and sets up the trackers.
+         */
+        function setupTrackers () {
+            // GTM dataLayer and status.
+            window.dataLayer = [];
+
+            // Tealium event queue and interval.
+            window.tealiumQueue = [];
+            window.tealiumLoading = false;
+
+            // Debug log our build 'version'.
+            debug('Version', '2020-12-11 19:23:38.007641');
+
+            // Listen for messages from marketing_tracker.ts.
+            window.addEventListener('message', function(event){
+                debug('postMessage received', event);
+
+                var isTrustedOrigin = (
+                    event.origin === "https://www.dropbox.com" ||
+                    event.origin === "https://paper.dropbox.com"
+                );
+
+                if (isTrustedOrigin) {
+                    var dataLayer = event.data || {};
+                    var config = {};
+                    var eventType = 'link';
+
+                    // If config was passed through, strip it from the dataLayer.
+                    if (dataLayer._config) {
+                        config = dataLayer._config;
+                        delete dataLayer._config;
+                    }
+                    if (dataLayer._eventType) {
+                        eventType = dataLayer._eventType;
+                        delete dataLayer._eventType;
+                    }
+
+                    // Debug log the dataLayer and config.
+                    debug('Config', config);
+                    debug('dataLayer', dataLayer);
+                    debug('eventType', eventType);
+
+                    handleTealium(dataLayer, config, eventType);
+                } else {
+                    debug('Untrusted origin, no trackers activated');
+                }
+            });
+        }
+
+        /**
+         * Load Tealium and push data to it. Since Tealium doesn't queue data the same way that
+         * GTM does, we need to setup our own queue and process it after Tealium's API
+         * has finished loading.
+         */
+        function handleTealium (dataLayer, config, eventType) {
+            var tealium_enabled = config.tealium_enabled !== undefined ? config.tealium_enabled : false;
+
+            // If Tealium is not enabled, bail out.
+            if (!tealium_enabled) {
+                return;
+            }
+
+            debug('Tealium - process event or queue if is not loaded');
+            processTealiumEvent(dataLayer, config, eventType);
+        }
+
+        /**
+         * Process Tealium event according to the current loading state:
+         *
+         *   - If not yet loaded, set dataLayer and load the Tealium script .
+         *   - If still loading, queue the event.
+         *   - If done loading, trigger the event with utag.link().
+         */
+        function processTealiumEvent (dataLayer, config, eventType) {
+            var tealium_profile = config.tealium_profile || 'main';
+            var tealium_env = config.tealium_env || 'prod';
+
+            // If Tealium has already loaded, fire off a utag.link() event instead of setting up
+            // the initial pageview data.
+            if (window.utag) {
+                if (eventType === 'link') {
+                    debug('Tealium - utag.link()');
+                    window.utag.link(dataLayer);
+                } else if (eventType === 'view') {
+                    debug('Tealium - utag.view()');
+                    window.utag.view(dataLayer);
+                } else {
+                    // TODO: throw exception by posting message
+                    debug('Tealium - unknown type of event ${eventType}!');
+                }
+                return;
+            }
+
+            // If we're already in the process of loading Tealium, add this event to the queue.
+            if (window.tealiumLoading) {
+                debug('Tealium - adding data to queue');
+                window.tealiumQueue.push(dataLayer);
+                return;
+            }
+
+            // Setup the Tealium data layer and start loading it.
+            debug('Tealium - setting utag_data and loading script');
+            window.tealiumLoading = true;
+            window.utag_data = dataLayer;
+            (function(a,b,c,d){
+                a='//tags.tiqcdn.com/utag/dropbox/'+ tealium_profile + '/' + tealium_env + '/utag.js';
+                b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true;
+                a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a);
+            })();
+
+            // Wait until Tealium is loaded, then drain the queue.
+            debug('Tealium - waiting for window.utag');
+            onPropertySet(window, 'utag', function () {
+                debug('Tealium - found window.utag');
+                window.tealiumLoading = false;
+                window.tealiumQueue.forEach(function (item) {
+                    debug('Tealium - utag.link() for queued item', item);
+                    window.utag.link(item);
+                });
+                window.tealiumQueue = [];
+            });
+        }
+
+        /**
+         * Helper to wait until an object property is set for the first time.
+         */
+        function onPropertySet(obj, prop, cb) {
+            Object.defineProperty(obj, prop, {
+                configurable: true,
+                enumerable: true,
+                writeable: true,
+                get: function () {
+                    return undefined;
+                },
+                set: function (val) {
+                    Object.defineProperty(obj, prop, {
+                        value: val,
+                        enumerable: true,
+                        writeable: true
+                    });
+                    cb();
+                }
+            });
+        }
+
+        /**
+         * Helper to do 'debug' logging (only visible if you are showing 'verbose' console logs).
+         */
+        function debug (msg, data) {
+            if (console.debug && debug_enabled) {
+                if (data) {
+                    console.debug('Marketing Tracker: ' + msg, data);
+                } else {
+                    console.debug('Marketing Tracker: ' + msg);
+                }
+            }
+        }
+    })();
+</script>
+
+
+<div id="ttdUniversalPixelTag" style="display: none;"></div><iframe id="utag_413_iframe" height="1" width="1" style="display:none" src="./activityi.html"></iframe><iframe id="universal_pixel_vwygxao" height="0" width="0" style="display:none;" src="./up.html" title="TTD Universal Pixel"></iframe><script src="./adsct" type="text/javascript"></script><script src="./adsct(1)" type="text/javascript"></script><iframe id="universal_pixel_o9lxggc" height="0" width="0" style="display:none;" src="./up(1).html" title="TTD Universal Pixel"></iframe><div class="kxhead" data-id="tpxf4nq03" style="display:none !important;"></div></body><iframe id="kx-proxy-tpxf4nq03" frameborder="0" width="0" height="0" tabindex="-1" title="empty" aria-hidden="true" src="./proxy.3d2100fd7107262ecb55ce6847f01fa5.html" style="display: none; visibility: hidden; height: 0; width: 0;"></iframe></html>
