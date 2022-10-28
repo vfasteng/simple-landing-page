@@ -2,13 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\images",
-    "\\images\\background_img",
-    "\\images\\comments_img",
+    "\\images\\brand",
     "\\images\\header_img",
+    "\\images\\logo",
+    "\\images\\news_img",
     "\\images\\product_features_img",
+    "\\images\\project",
     "\\images\\services_img",
     "\\images\\work_portfolio"
   ],
-  "SelectedNode": "\\images\\background_img\\background_1.png",
+  "SelectedNode": "\\images\\services_img\\graphic_design.jpg",
   "PreviewInSolutionExplorer": false
 }
