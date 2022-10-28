@@ -11,17 +11,21 @@
 <body>
     <a-scene renderer="colorManagement: true;" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="" id="space-station" animation__animation_aa="" pool__aa="" camera="" raycaster="" cursor="" event-set__aa="" geometry="" gltf-model="" oculus-touch-controls="" sound__aa="">
         <a-assets>
-            <a-asset-item id="engine" src="engine.glb"></a-asset-item>
+            <a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
             <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
             <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
             <a-asset-item id="linear" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
             <a-asset-item id="assembly" src="assets/assembly.glb"></a-asset-item>
-                       
+            <a-asset-item id="hands" src="assets/hands44.obj"></a-asset-item>
+            <a-asset-item id="fv8" src="assets/ferrariv8.glb"></a-asset-item>
+            <a-asset-item id="g16" src="assets/gear16.glb"></a-asset-item>
+            <a-asset-item id="sshafts" src="assets/splitshafts.glb"></a-asset-item>
+
             <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
             <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
             <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
             <audio id="blip2" src="audio/321104__nsstudios__blip2.wav"></audio>
-            <img id="glow1" src="img/glow1.png">
+            <!--img id="glow1" src="img/glow1.png">
             <img id="ring1" src="img/ring1.png">
             <img id="ring2" src="img/ring2.png">
             <img id="ring3" src="img/ring3.png">
@@ -35,7 +39,7 @@
             <img id="text1" src="img/text1.png">
             <img id="text2" src="img/text2.png">
             <img id="text3" src="img/text3.png">
-            <img id="text4" src="img/text4.png">
+            <img id="text4" src="img/text4.png"-->
         </a-assets>
         <a-entity position="1.75 0 1.2" rotation="0 28 0">
             <a-camera position="0 0 0" near="0.1" camera="" rotation="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera=""></a-camera>
