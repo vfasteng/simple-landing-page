@@ -12,6 +12,11 @@
     <a-scene renderer="colorManagement: true;" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="" id="space-station" animation__animation_aa="" pool__aa="" camera="" raycaster="" cursor="" event-set__aa="" geometry="" gltf-model="" oculus-touch-controls="" sound__aa="">
         <a-assets>
             <a-asset-item id="engine" src="engine.glb"></a-asset-item>
+            <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
+            <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
+            <a-asset-item id="linear" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
+            <a-asset-item id="assembly" src="assets/assembly.glb"></a-asset-item>
+                       
             <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
             <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
             <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
@@ -36,6 +41,10 @@
             <a-camera position="0 0 0" near="0.1" camera="" rotation="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera=""></a-camera>
         </a-entity>
         <a-entity position="0 0 -3" gltf-model="#engine" rotation="90 0 0" scale="18 18 18" ></a-entity>
+        <a-entity position="0 0 0" gltf-model="#crank" rotation="90 0 0" scale="1 1 1" ></a-entity>
+        <a-entity position="0 0 3" gltf-model="#pp11" rotation="90 0 0" scale="1 1 1" ></a-entity>
+        <a-entity position="0 0 0" gltf-model="#xxzz" rotation="90 0 0" scale="1 1 1" ></a-entity>
+        <a-entity position="0 0 3" gltf-model="#ppoo" rotation="90 0 0" scale="1 1 1" ></a-entity>
         
         <a-entity id="wall-lights" position="-7.25 1.5 2.9" rotation="0 90 0" scale="1.25 1.25 1.25">
             <a-entity position="" scale="0.05 0.05 0.05">
