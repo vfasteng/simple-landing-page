@@ -11,7 +11,7 @@
 <body>
     <a-scene renderer="colorManagement: true;" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="" id="space-station" animation__animation_aa="" pool__aa="" camera="" raycaster="" cursor="" event-set__aa="" geometry="" gltf-model="" oculus-touch-controls="" sound__aa="">
         <a-assets>
-            <a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
+            <!--<a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
             <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
             <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
             <a-asset-item id="linear" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
@@ -20,7 +20,7 @@
             <a-asset-item id="fv8" src="assets/ferrariv8.glb"></a-asset-item>
             <a-asset-item id="g16" src="assets/gear16.glb"></a-asset-item>
             <a-asset-item id="sshafts" src="assets/splitshafts.glb"></a-asset-item>
-
+                -->
             <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
             <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
             <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
@@ -38,14 +38,14 @@
             <img id="schematic5" src="img/schematic5.png">
             <img id="text1" src="img/text1.png">
             <img id="text2" src="img/text2.png">
-            <img id="text3" src="img/text3.png">
-            <img id="text4" src="img/text4.png"-->
+            <img id="text3" src="img/text3.png">-->
+            <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
         </a-assets>
         <a-entity position="1.75 0 1.2" rotation="0 28 0">
             <a-camera position="0 0 0" near="0.1" camera="" rotation="" look-controls="" wasd-controls="" data-aframe-inspector-original-camera=""></a-camera>
         </a-entity>
-        <a-entity position="0 0 -3" gltf-model="#engine" rotation="90 0 0" scale="18 18 18" ></a-entity>
-        <!--a-entity position="0 0 0" gltf-model="#crank" rotation="90 0 0" scale="1 1 1" ></a-entity>
+        <!--a-entity position="0 0 -3" gltf-model="#engine" rotation="90 0 0" scale="18 18 18" ></!--a-entity>
+        <a-entity position="0 0 0" gltf-model="#crank" rotation="90 0 0" scale="1 1 1" ></a-entity>
         <a-entity position="0 0 3" gltf-model="#pp11" rotation="90 0 0" scale="1 1 1" ></a-entity>
         <a-entity position="0 0 0" gltf-model="#xxzz" rotation="90 0 0" scale="1 1 1" ></a-entity>
         <a-entity position="0 0 3" gltf-model="#ppoo" rotation="90 0 0" scale="1 1 1" ></a-entity>
@@ -142,6 +142,8 @@
         <a-light type="point" color="#94c6ff" distance="15" position="0 0 -12" intensity="0" animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500" light="intensity: 2" visible=""></a-light>
         <a-light type="point" color="#94c6ff" distance="17" position="0 0 -6" intensity="0" animation="property: light.intensity; from: 0; to: 1; delay: 500; dur: 500" light="intensity: 1"></a-light>
         <a-light type="ambient" color="#4f6487" light=""></a-light>
+
+        <a-sky id="skeye" src="#imm1" radius="50" ></a-sky>
 
         <a-entity sound="autoplay: true; src: audio/321103__nsstudios__blip1.wav"></a-entity>
         <a-entity sound="autoplay: true; src: audio/321104__nsstudios__blip2.wav"></a-entity>
