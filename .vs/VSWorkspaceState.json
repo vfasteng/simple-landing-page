@@ -1,16 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\images",
-    "\\images\\brand",
-    "\\images\\header_img",
-    "\\images\\logo",
-    "\\images\\news_img",
-    "\\images\\product_features_img",
-    "\\images\\project",
-    "\\images\\services_img",
-    "\\images\\work_portfolio"
+    "\\aframe-boilerplate-master",
+    "\\anime-UI",
+    "\\js",
+    "\\js\\aframe"
   ],
-  "SelectedNode": "\\images\\services_img\\graphic_design.jpg",
+  "SelectedNode": "\\tester.html",
   "PreviewInSolutionExplorer": false
 }
