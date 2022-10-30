@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <script>
+        function foo() {
+            let overlay = document.querySelector("#overlay")
+            overlay.setAttribute("visible", !overlay.getAttribute("visible"))
+        }
+
+    </script>
+    <style>
+        #wrapper {
+            width: 600px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="wrapper">
+
+        <a-scene embedded>
+            <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+            <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+            <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+            <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+            <a-sky color="#ECECEC"></a-sky>
+            <a-sphere id="overlay" radius="2" material="opacity:0.4; color: black; side: back"></a-sphere>
+        </a-scene>
+        <button onclick="foo()">
+            Switch Overlay
+        </button>
+    </div>
+
+</body>
+</html>
+

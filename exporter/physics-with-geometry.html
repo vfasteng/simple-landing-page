@@ -1,0 +1,293 @@
+﻿<html>
+<head>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!--<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>-->
+    <script src="https://unpkg.com/aframe-physics-system@1.4.0/dist/aframe-physics-system.min.js"></script>
+    <script src="aframe-physics.min.js"></script>
+
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-extras.controls.min1.js"></script>
+    <script src="js/aframe-extras.misc.js"></script>
+    <script src="js/aframe-extras.loaders.js"></script>
+    <script src="js/aframe-extras.pathfinding.js"></script>
+    <script src="js/aframe-extras.primitives.js "></script>
+    <script src="js/aframe-stl-model-component.min.js"></script>
+    <script src="js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="js/aframe-physics-system.min.js"></script>
+
+    <!--reaction components-->
+    <script src="reaction_components/clickable.js"></script>
+    <script src="reaction_components/draggable.js"></script>
+    <script src="reaction_components/drag-droppable.js"></script>
+    <script src="reaction_components/hoverable.js"></script>
+    <script src="reaction_components/stretchable.js"></script>
+    <script src="reaction_components/droppable.js"></script>
+    <script src="reaction_components/grabbable.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="aframe.css">
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="~/js/play-all-model-animations.js"></script>
+    <!--<script src="../dist/aframe-gui.min.js"></script>
+    <script src="../dist/aframe-gui.js"></script>-->
+    <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
+    <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
+
+    <script>
+        AFRAME.registerComponent('click-impulse', {
+            init: function () {
+                var el = this.el;
+
+                el.addEventListener('click', function () {
+                    el.body.applyImpulse(
+                        /* impulse */
+                        new CANNON.Vec3(
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20)
+                        ),
+                                                            /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                    );
+                });
+
+            }
+        });
+
+        // forward mouse and touch events to the super-hands entity
+        AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+                this.eventRepeater = this.eventRepeater.bind(this)
+                this.el.sceneEl.addEventListener('loaded', () => {
+                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+                }, { once: true })
+            },
+            eventRepeater: function (evt) {
+                if (evt.type.startsWith('touch')) {
+                    evt.preventDefault()
+                 // avoid repeating touchmove because it interferes with look-controls
+                    if (evt.type === 'touchmove') { return }
+                }
+                this.el.emit(evt.type, evt.detail)
+            }
+        })
+    </script>
+
+    <style>
+        .button:hover {
+            background-color: #fff;
+            color: blue;
+        }
+
+        .button {
+            background-color: blue;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 12px;
+            height: 24px;
+            margin-top: 5px;
+            margin-left: 5px;
+            outline: none;
+            position: relative;
+            width: 100px;
+            z-index: 999;
+        }
+
+        #container {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="export-scene" class="button"><span>Export Scene</span></button>
+        <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
+        <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
+        <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
+        <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+        <button id="cmd1" class="button"><span>CMD1</span></button>
+        <button id="cmd2" class="button"><span>CMD2</span></button>
+        <button id="cmd3" class="button"><span>CMD3</span></button>
+        <button id="cmd4" class="button"><span>CMD4</span></button>
+        <button id="cmd5" class="button"><span>CMD5</span></button>
+
+        <!--
+
+          <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
+          <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
+          -->
+    </div>
+    <a-scene gltf-exporter physics="gravity:-9.81;friction:0">
+
+        <a-assets>
+            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
+            <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+
+        </a-assets>
+
+        <!--cadboxx walls, floor and lighting to 40 square-->
+        <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
+            <a-entity id="planeboxx" position="0 0 0">
+                <a-entity id="planebox" position="0 0 0">
+                    <a-plane side="double" color="green" position="0 -20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="green" position="0 20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="blue" position="0 0 20" rotation="0 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="blue" position="0 0 -20" rotation="0 0 0" height="40" width="40" material="" satic-body></a-plane>
+                    <a-plane side="double" color="red" position="20 0 0" rotation="0 -90 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="red" position="-20 0 0" rotation="0 90 0" height="40" width="40" material="" static-body></a-plane>
+                </a-entity>
+                <!--mesh overlay for walls-->
+                <a-box position="0 -20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 0 20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+
+                <!--panel hosts--
+                <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
+
+                </a-box>
+                <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
+                -->
+                <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
+                    <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+                    <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
+                    <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
+                    <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
+                    <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm5()" static-body></a-box>
+                    <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm6()" static-body></a-box>
+                    <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm7()" static-body></a-box>
+                    <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm8()" static-body></a-box>
+                    <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm9()" static-body></a-box>
+                    <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm10()" static-body></a-box>
+                    <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm11()" static-body></a-box>
+                    <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm12()" static-body></a-box>
+                    <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm13()" static-body></a-box>
+                    <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm14()" static-body></a-box>
+                    <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm15()" static-body></a-box>
+
+                </a-box>
+
+            </a-entity>
+
+        </a-entity>
+
+        <a-entity id="p1" position="5 3 0" rotation="0 0 0">
+            <a-entity id="bottom-square" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
+
+            </a-entity>
+            <a-entity id="top-hex" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 2 2"
+                      constraint="type:hinge;target:#bottom-square;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
+                      dynamic-body click-impulse>
+
+            </a-entity>
+
+        </a-entity>
+
+        <a-entity id="p2" position="-5 3 0" rotation="0 0 0">
+            <a-entity id="bottom-squar" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
+
+            </a-entity>
+            <a-entity id="top-hex" gltf-model="#ccyl1" position="1.5 0 0" rotation="0 0 90" scale=".5 1.5 1.5"
+                      constraint="type:hinge;target:#bottom-squar;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:1.5 0 0"
+                      dynamic-body click-impulse>
+
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body></a-entity>
+        <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+        <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
+        <a-entity id="bbb4" gltf-model="#cb1" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+
+        <!-- freewheel working with ckick-impulse from mouse-->
+
+        <a-entity position="0 0 0">
+            <a-entity id="anchor"
+                      geometry="primitive: box;"
+                      material="color: yellow; flatShading: true;"
+                      position="0 4 0"
+                      static-body>
+            </a-entity>
+
+            <a-entity id="targett"
+                      geometry="primitive: box; height: 1; width: 2; depth: 2;"
+                      material="color: red; flatShading: true;"
+                      position="0 3.0 0"
+                      xxxconstraint="target: #anchor; type: distance; distance: 1.0;"
+                      constraint="type: pointToPoint; target: #anchor; axis: 0 1 0; pivot: 0 3 0; targetPivot: 0 0 0; collideConnected: false;"
+                      dynamic-body
+                      click-impulse>
+            </a-entity>
+        </a-entity>
+
+        <a-entity light="type: hemisphere; color: #33C; groundColor: #3C3; intensity: 2"></a-entity>
+
+        <a-entity id="cameraRig" position="0 1.6 -8"  >
+            <a-entity camera look-controls wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 19; initialPosition: 0 8 17.5">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+            </a-entity>
+        </a-entity>
+
+
+
+
+        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body click-impulse></a-box>
+        <a-plane id="mainplane" position="0 0 0" rotation="-90 0 0" width="40" height="40" color="lightblue" opacity="0.25" static-body></a-plane>
+        <a-sky radius="55" color="#ECECEC"></a-sky>
+    </a-scene>
+    <script>
+        function getmodelall() {
+
+        }
+    </script>
+    <script>
+        function exportGLTF(input, options) {
+            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        }
+
+        document.getElementById('export-scene').addEventListener('click', function () {
+            exportGLTF();
+        });
+
+        document.getElementById('export-scene-bin').addEventListener('click', function () {
+            exportGLTF(undefined, { binary: true });
+        });
+
+        document.getElementById('export-redbxx').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbxx'), { binary: true });
+        });
+
+        document.getElementById('export-redbyy').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbyy'), { binary: true });
+        });
+
+        document.getElementById('export-redbzz').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbzz'), { binary: true });
+        });
+
+        document.getElementById('export-two').addEventListener('click', function () {
+            exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
+        });
+
+        document.getElementById('export-selector').addEventListener('click', function () {
+            exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
+        });
+
+    </script>
+</body>
+</html>

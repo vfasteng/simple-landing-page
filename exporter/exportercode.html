@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A-Frame GLTF Exporter Component - Basic</title>
+    <meta name="description" content="Basic example for GLTF Exporter component."></meta>
+    <!--<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>-->
+    <script src="aframe-master.min.js"></script>
+    <script src="aframe-gltf-exporter-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+
+    <style>
+        .button:hover {
+            background-color: #fff;
+            color: blue;
+        }
+
+        .button {
+            background-color: blue;
+            border-radius: 8px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 12px;
+            height: 34px;
+            margin-top: 5px;
+            margin-left: 5px;
+            outline: none;
+            position: relative;
+            width: 190px;
+            z-index: 999;
+        }
+
+        #container {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="export-scene" class="button"><span>Export Scene</span></button>
+        <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
+        <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
+        <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
+        <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+        <!--
+
+              <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
+              <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
+              -->
+    </div>
+    <a-scene gltf-exporter>
+        <a-assets>
+            <img id="groundTexture" src="https://cdn.aframe.io/a-painter/images/floor.jpg" crossorigin>
+            <img id="skyTexture" src="https://cdn.aframe.io/a-painter/images/sky.jpg" crossorigin>
+
+            <a-mixin id="blue" material="color: #4CC3D9"></a-mixin>
+            <a-mixin id="blueBoxMix" geometry="primitive: box; depth: 2; height: 5; width: 1" material="color: #4CC3D9"></a-mixin>
+            <a-mixin id="box" geometry="primitive: box; depth: 1; height: 1; width: 1"></a-mixin>
+            <a-mixin id="cylinder" geometry="primitive: cylinder; height: 0.3; radius: 0.75; segmentsRadial: 6"></a-mixin>
+            <a-mixin id="green" material="color: #7BC8A4"></a-mixin>
+            <a-mixin id="orange" material="color: #F16745"></a-mixin>
+            <a-mixin id="purple" material="color: #93648D"></a-mixin>
+            <a-mixin id="short" scale="1 0.5 1"></a-mixin>
+            <a-mixin id="yellow" material="color: #FFC65D"></a-mixin>
+            <img id="crateImg" src="https://aframe.io/sample-assets/assets/images/wood/crate.gif" crossOrigin="true">
+            <img id="floorImg" src="https://aframe.io/sample-assets/assets/images/terrain/grasslight-big.jpg" crossOrigin="true">
+            <a-asset-item id="wheel" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
+
+            <img id="pic1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/border-pic.jpg?v=1654934865728">
+            <img id="pic2" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
+            <img id="pic3" src="#">
+            <a-asset-item id="bb01" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/onebox.glb?v=1655710263791"></a-asset-item>
+            <a-asset-item id="bb02" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/sphorb1.glb?v=1655710163279"></a-asset-item>
+            <a-asset-item id="bb03" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/sphorb2.glb?v=1655710178528"></a-asset-item>
+            <a-asset-item id="bb04" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/sphorb3.glb?v=1655710192379"></a-asset-item>
+            <a-asset-item id="bb05" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/sphorb4.glb?v=1655710213868"></a-asset-item>
+            <a-asset-item id="bb06" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/con-rod-top.glb?v=1655626679794"></a-asset-item>
+            <a-asset-item id="bb07" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-boxx.glb?v=1655717437382"></a-asset-item>
+            <a-asset-item id="bb08" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-xx.glb?v=1655717457786"></a-asset-item>
+            <a-asset-item id="bb09" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-x-x.glb?v=1655717477839"></a-asset-item>
+            <a-asset-item id="bb010" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-yy.glb?v=1655717521091"></a-asset-item>
+            <a-asset-item id="bb011" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-y-y.glb?v=1655717561218"></a-asset-item>
+            <a-asset-item id="bb012" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-zz.glb?v=1655717583030"></a-asset-item>
+            <a-asset-item id="bb013" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/box-axis-z-z.glb?v=1655717667672"></a-asset-item>
+            <a-asset-item id="bb014" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Faxle.glb?v=1612266270042"></a-asset-item>
+            <a-asset-item id="bb015" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
+            <a-asset-item id="bb016" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/generic-wheel.glb?v=1655896082243"></a-asset-item>
+            <a-asset-item id="bb017" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/carrr.glb?v=1656143276591"></a-asset-item>
+            <a-asset-item id="bb018" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2FPiston_.glb?v=1603793459228"></a-asset-item>
+            <a-asset-item id="bb019" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/generic-wheel.glb?v=1655896082243"></a-asset-item>
+            <a-asset-item id="bb020" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/32stub.glb?v=1656255390214"></a-asset-item>
+            <a-asset-item id="bb021" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/16stub.glb?v=1656313611998"></a-asset-item>
+            <a-asset-item id="bb022" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/roller-ball-assy.glb?v=1655472956891"></a-asset-item>
+            <a-asset-item id="bb023" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fcadboxx-standard.glb?v=1618293365748"></a-asset-item>
+            <a-asset-item id="bb024" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g16-3.glb?v=1656487133082"></a-asset-item>
+            <a-asset-item id="bb025" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g32-3.glb?v=1656486880844"></a-asset-item>
+            <a-asset-item id="bb026" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g48-3.glb?v=1656487231427"></a-asset-item>
+            <a-asset-item id="bb027" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/fan-center.glb?v=1656475522384"></a-asset-item>
+            <a-asset-item id="bb028" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/fan-blades.glb?v=1656475487109"></a-asset-item>
+            <a-asset-item id="bb029" src="#"></a-asset-item>
+            <a-asset-item id="bb030" src="https://cdn.glitch.me/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fplanex1sq.glb?v=1635660167471"></a-asset-item>
+            <a-asset-item id="bb031" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fiin3speed.glb?v=1601200846073"></a-asset-item>
+            <a-asset-item id="bb032" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fout3speed.glb?v=1601200880607"></a-asset-item>
+            <a-asset-item id="bb033" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g16-3.glb?v=1656487133082"></a-asset-item>
+            <a-asset-item id="bb034" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g32-3.glb?v=1656486880844"></a-asset-item>
+            <a-asset-item id="bb035" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/g48-3.glb?v=1656487231427"></a-asset-item>
+            <a-asset-item id="bb036" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/yyyzzz.glb?v=1656646905880"></a-asset-item>
+            <a-asset-item id="bb037" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/yyyxxx.glb?v=1656646922662"></a-asset-item>
+            <a-asset-item id="bb038" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/dddxxx.glb?v=1656646954681"></a-asset-item>
+            <a-asset-item id="optimerBoldFont" src="https://rawgit.com/mrdoob/three.js/dev/examples/fonts/optimer_bold.typeface.json"></a-asset-item>
+        </a-assets>
+
+        <!-- Meshes. --
+        <a-entity id="blueBox" mixin="blueBoxMix" position="0 8 0"></a-entity>
+        <a-entity id="shortOrangeBox" mixin="short orange box" position="-5 2 0"></a-entity>
+        <a-entity id="shortYellowBox" mixin="short yellow box" position="5 2 0"></a-entity>
+        <a-entity id="spherxx" geometry="primitive: sphere" material="color:#ff0; metalness:0.0; roughness:1.0" position="-2 2 -2"></a-entity>
+        <a-box src="https://aframe.io/sample-assets/assets/images/bricks/brick_bump.jpg" position="-5 5 -2" width="1" color="#F16745"></a-box>
+
+        <a-entity geometry="primitive: box" material="src: #crateImg" position="3 4 0"></a-entity>
+        <a-entity geometry="primitive: box" material="color: #0f0" position="4 2 4"></a-entity>-->
+        <a-entity id="redbxx" geometry="primitive: box" material="color:#f00" position="-2 1 0">
+            <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+        <a-entity id="redbyy" geometry="primitive: box" material="color:#f00" position="-4 1 0">
+            <a-animation attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+        <a-entity id="redbzz" geometry="primitive: box" material="color:#f00" position="-6 1 0">
+            <a-animation attribute="rotation" to="0 0 360" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+        <a-entity id="whl" gltf-model="#wheel" position="2 2 -2">
+            <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+
+        <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
+        <a-light type="ambient" color="#445451"></a-light>
+        <a-light type="point" intensity="2" position="2 4 4"></a-light>
+        <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
+
+        <!-- Camera. -->
+        <a-entity id="cameraWrapper" position="0 1 8">
+            <a-entity id="camera" camera look-controls wasd-controls></a-entity>
+        </a-entity>
+    </a-scene>
+</body>
+<script>
+    function exportGLTF (input, options) {
+      AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+    }
+
+    document.getElementById('export-scene').addEventListener('click', function () {
+      exportGLTF();
+    });
+
+    document.getElementById('export-scene-bin').addEventListener('click', function () {
+      exportGLTF(undefined, {binary: true});
+    });
+
+    document.getElementById('export-redbxx').addEventListener('click', function () {
+      exportGLTF(document.getElementById('redbxx'), {binary: true});
+    });
+
+    document.getElementById('export-redbyy').addEventListener('click', function () {
+      exportGLTF(document.getElementById('redbyy'), {binary: true});
+    });
+
+    document.getElementById('export-redbzz').addEventListener('click', function () {
+      exportGLTF(document.getElementById('redbzz'), {binary: true});
+    });
+
+    document.getElementById('export-two').addEventListener('click', function () {
+      exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
+    });
+
+    document.getElementById('export-selector').addEventListener('click', function () {
+      exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
+    });
+
+</script>
+</html>

@@ -1,0 +1,28 @@
+﻿<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-vreditor-component/dist/aframe-vreditor-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
+            <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+            <a-asset-item id="hex-square" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/hex-square.glb?v=1661357506327"></a-asset-item>
+
+            <a-asset-item id="wheel" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
+
+        </a-assets>
+        <!-- A-Frame markup -->
+        <a-entity id="prt1" gltf-model="#cb1" edit position="0 2 0">
+            <a-entity id="prt2" gltf-model="#ccyl1" position="2 2 0" ></a-entity>
+        </a-entity>
+
+
+
+
+
+
+    </a-scene>
+</body>

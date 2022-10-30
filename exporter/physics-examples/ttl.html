@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Examples • TTL</title>
+    <meta name="description" content="Simple Physics">
+    <script src="../js/aframe/aframe.min.js"></script>
+    <script src="../js/aframe/aframe-physics-system.min.js"></script>
+    <script>
+    AFRAME.registerComponent('ttl', {
+      schema: {
+        time: {type: 'number', default: 100}
+      },
+      init: function(){
+        this.ticks = 0;
+        this.lifetime = this.data.time;
+      },
+      tick: function(){
+        this.lifetime--;
+        if(this.lifetime === 0){
+
+          // TTL has expired remove the entity
+          this.el.sceneEl.removeChild(this.el);
+        }
+      }
+    });
+    </script>
+  </head>
+  <body>
+      <a-scene physics="debug: true">
+          <a-mixin id="test" ttl dynamic-body></a-mixin>
+          <a-box position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" shadow dynamic-body></a-box>
+          <a-sphere position="0 3.75 -5" radius="1.25" color="#EF2D5E" shadow dynamic-body></a-sphere>
+          <a-cylinder position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" shadow dynamic-body></a-cylinder>
+
+
+          <!--cadboxx walls, floor and lighting to 40 square-->
+          <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
+              <a-entity id="planeboxx" position="0 0 0">
+                  <a-entity id="planebox" position="0 0 0">
+                      <a-plane side="double" color="green" position="0 -20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                      <a-plane side="double" color="green" position="0 20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                      <a-plane side="double" color="blue" position="0 0 20" rotation="0 0 0" height="40" width="40" material="" static-body></a-plane>
+                      <a-plane side="double" color="blue" position="0 0 -20" rotation="0 0 0" height="40" width="40" material="" satic-body></a-plane>
+                      <a-plane side="double" color="red" position="20 0 0" rotation="0 -90 0" height="40" width="40" material="" static-body></a-plane>
+                      <a-plane side="double" color="red" position="-20 0 0" rotation="0 90 0" height="40" width="40" material="" static-body></a-plane>
+                  </a-entity>
+                  <!--mesh overlay for walls-->
+                  <a-box position="0 -20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                  <a-box position="0 20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                  <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                  <a-box position="0 0 20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                  <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                  <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+
+                  <!--panel hosts--
+            <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
+
+            </a-box>
+            <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
+            -->
+                  <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
+                      <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="injinsp()" static-body></a-box>
+                      <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="evr()" static-body></a-box>
+                      <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+                      <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="myFunction()" static-body></a-box>
+
+                  </a-box>
+                  <!--
+            <a-box position="0 0 19" rotation="90 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body>
+                <a-box id="cmnd2" class="clickable" position="0 -2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="blue" opacity="1" onclick="myFunction()" static-body>
+
+                </a-box>
+            </a-box>
+            <a-box position="-19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+
+
+            <!-- <a-box position="0 -0.1 0" rotation="0 0 0" width="15" depth="15" height="0.2" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body></a-box>-->
+                  <a-cylinder id="ground" position="0 -0.0001 0" rotation="0 0 0" radius="30" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 40;divisions:20" static-body></a-cylinder>
+
+                  <a-light type="hemisphere" intensity="2.0"></a-light>
+              </a-entity>
+              <a-sky color="#ECECEC"></a-sky>
+      </a-scene>
+  </body>
+</html>
+

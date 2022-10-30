@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>On-screen menu bar</title>
+    <meta name="description" content="on-screen menu bar">
+    <script src="./js/aframe.min.js"></script>
+    <script src="./js/aframe-stl-model-component.min.js"></script>
+    <script src="./js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="./js/aframe-crawling-cursor.min.js"></script>
+
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/huebee@1/dist/huebee.min.css">
+    <script src="https://unpkg.com/huebee@1/dist/huebee.pkgd.min.js"></script>
+
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+    <!--extras--
+      <script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE--
+    -->
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-extras.controls.mih.js"></script>
+    <script src="js/aframe-extras.misc.js"></script>
+    <script src="js/aframe-extras.loaders.js"></script>
+    <script src="js/aframe-extras.pathfinding.js"></script>
+    <script src="js/aframe-extras.primitives.js"></script>
+    <script src="js/aframe-stl-model-component.min.js"></script>
+    <script src="js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="js/aframe-crawling-cursor.min.js"></script>
+
+    <!--reaction components-->
+    <script src="reaction_components/clickable.js"></script>
+    <script src="reaction_components/draggable.js"></script>
+    <script src="reaction_components/drag-droppable.js"></script>
+    <script src="reaction_components/hoverable.js"></script>
+    <script src="reaction_components/stretchable.js"></script>
+    <script src="reaction_components/droppable.js"></script>
+    <script src="reaction_components/grabbable.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="aframe.css">
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <!--<script src="~/js/play-all-model-animations.js"></script>
+    <script src="../dist/aframe-gui.min.js"></script-->
+    <script src="../dist/aframe-gui.js"></script>
+    <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
+    <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
+
+    <script>
+				AFRAME.registerComponent('click-impulse', {
+					init: function () {
+						var el = this.el;
+
+						el.addEventListener('click', function () {
+							el.body.applyImpulse(
+								/* impulse */
+								new CANNON.Vec3(
+									THREE.Math.randInt(-20, 20),
+									THREE.Math.randInt(-20, 20),
+									THREE.Math.randInt(-20, 20)
+								),
+								/* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+							);
+						});
+
+					}
+				});
+
+				        // forward mouse and touch events to the super-hands entity
+					AFRAME.registerComponent('capture-mouse', {
+						init: function () {
+							this.eventRepeater = this.eventRepeater.bind(this)
+							this.el.sceneEl.addEventListener('loaded', () => {
+								this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+								this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+								this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+								this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+								this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+							}, { once: true })
+						},
+						eventRepeater: function (evt) {
+							if (evt.type.startsWith('touch')) {
+								evt.preventDefault()
+								// avoid repeating touchmove because it interferes with look-controls
+								if (evt.type === 'touchmove') { return }
+							}
+							this.el.emit(evt.type, evt.detail)
+						}
+					})
+    </script>
+    <style>
+        button {
+            width: 100px;
+            height: 30px;
+            position: relative;
+            top: 1px;
+            z-index: 2;
+        }
+    </style>
+
+</head>
+<style media="screen">
+    #toolbar {
+        position: absolute;
+        top: 10px;
+        left: 30px;
+        background-color: #ffffff99;
+        padding: 5px;
+        border-radius: 20px;
+    }
+
+    button, input, select {
+        padding: 5px;
+        border-radius: 20px;
+        border-color: transparent;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .active {
+        background-color: #aaa;
+    }
+
+    .color-input {
+        width: 20px;
+        font-size: 6px;
+    }
+</style>
+<body>
+    <a-scene physics="" vr-mode-ui="enabled: false" drag-and-drop>
+        <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
+        <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
+        <a-entity id="geo" geometry="preset: box; color: lightblue">
+            </e-entity>
+
+            <a-sky src="#im2" radius="50"></a-sky>
+
+    </a-scene>
+    <div id="toolbar">
+        <select id="geometry">
+            <!--Supplement an id here instead of using 'text'-->
+            <option value="box">Box</option>
+            <option value="sphere">Sphere</option>
+            <option value="Assembler">Assembler</option>
+            <option value="Gearboxx">Gearboxx</option>
+            <option value="Robots">Robots</option>
+            <option value="Spaceship">Spaceship</option>
+            <option value="Space">Space</option>
+            <option value="Racetrack">Racetrack</option>
+            <option value="Wheels">Wheels</option>
+            <option value="5aside">5-a-side</option>
+            <option value="checkerboard">Checkboard</option>
+            <option value="goldmine">Goldmine</option>
+            <option value="Water">Water</option>
+            <option value="Stereo">Stereo</option>
+            <option value="JanusWeb">JanusWeb</option>
+            <option value="Steam">Steam</option>
+            <option value="default" selected>Default</option>
+        </select>
+        <input class="color-input" value="#ffffff" />
+        <button id="add" class="active" type="button">ADD</button>
+        <button id="remove" type="button">REMOVE</button>
+        <button id="edit" type="button">EDIT</button>
+        <button id="screenshot" type="button">SCREENSHOT</button>
+        <!-- TODO: add save/load for electron implementation
+        <button id="save" type="button">SAVE</button>
+         -->
+    </div>
+</body>
+<script type="text/javascript">
+  var hueb = new Huebee( '.color-input', {
+  // options
+  notation: 'hex',
+  saturations: 2,
+  setText: true,
+  customColors: ['#ffffff']
+});
+  const ADD = 0;
+  const REMOVE = 1;
+  const EDIT = 2;
+  var state = ADD;
+  var cursor3D = document.querySelector('#my-cursor');
+  var scene = document.querySelector('a-scene');
+  var initialScale = 0.01;
+  var rotationYOffset = 0;
+  var selected = null;
+
+  var reader  = new FileReader();
+  var colorIndex = 0;
+  var usedColor = 10;
+  hueb.on( 'change', function( color, hue, sat, lum ) {
+    if (state == ADD && cursor3D.getAttribute('stl-model'))
+      cursor3D.setAttribute('material', 'color', color);
+
+    if (state == EDIT && selected)
+      selected.setAttribute('material', 'color', color);
+
+    for(var i = 0; i < hueb.options.customColors.length; i++)
+      if (hueb.options.customColors[i] == color)
+        return;
+
+    hueb.options.customColors[colorIndex] = color;
+    hueb.updateColors();
+    colorIndex++;
+    if (colorIndex > usedColor)
+      colorIndex = 0;
+  })
+
+  // document.querySelector('#save').addEventListener('click', function() {
+     // TODO: save function for electron implementation
+  //   scene.flushToDOM(true);
+  //   console.log(scene);
+  // });
+  document.querySelector('#screenshot').addEventListener('click', function() {
+    document.querySelector('a-scene').components.screenshot.capture('perspective');
+  });
+  document.querySelector('#environment').addEventListener('change', function() {
+    document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
+    //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
+    //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
+    document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
+    //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
+    document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
+    var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
+    if (reducedDressing > 50)
+    document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
+  });
+  document.querySelector('#add').addEventListener('click', function() {
+    state = ADD;
+    if (cursor3D.getAttribute('material'))
+    hueb.setColor(cursor3D.getAttribute('material').color);
+    cursor3D.setAttribute('visible', true);
+    document.querySelector('.active').classList.toggle('active');
+    document.querySelector('#add').classList.toggle('active');
+  });
+  document.querySelector('#remove').addEventListener('click', function() {
+    state = REMOVE;
+    cursor3D.setAttribute('visible', false);
+    document.querySelector('.active').classList.toggle('active');
+    document.querySelector('#remove').classList.toggle('active');
+
+  });
+  document.querySelector('#edit').addEventListener('click', function() {
+    state = EDIT;
+    cursor3D.setAttribute('visible', false);
+    document.querySelector('.active').classList.toggle('active');
+    document.querySelector('#edit').classList.toggle('active');
+
+  });
+  var inventoryIndex = 0;
+  reader.addEventListener("load", function () {
+    if (state != ADD)
+      return;
+    cursor3D.setAttribute('stl-model', {src:reader.result});
+    cursor3D.setAttribute('scale', {x:initialScale, y:initialScale, z:initialScale});
+    cursor3D.setAttribute('material', 'color', hueb.color);
+    var listElement = document.createElement('a-entity')
+    listElement.setAttribute('position', {x:-1.8 + (.45 * inventoryIndex), y:-1, z: -1.5})
+
+    listElement.setAttribute('rotation', {x:-90, y:0, z: 0})
+    listElement.setAttribute('class', 'ignore-ray');
+    listElement.setAttribute('stl-model', {src:reader.result});
+    listElement.setAttribute('scale', {x:initialScale * .2, y:initialScale * .2, z:initialScale * .2});
+    var shortCutText = document.createElement('a-entity');
+    shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
+    shortCutText.setAttribute('text', 'anchor: left')
+    shortCutText.setAttribute('text', 'baseline',"center")
+    shortCutText.setAttribute('scale', '1000 1000 1000')
+    //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
+    shortCutText.setAttribute('position', {x: 0, y: 0, z: -90})
+    shortCutText.setAttribute('rotation', {x: 90, y: 0, z: 0})
+    shortCutText.object3D.layers.set(1)
+    inventoryIndex++;
+
+    listElement.appendChild(shortCutText)
+    document.querySelector('#my-camera').appendChild(listElement)
+  }, false);
+
+
+    scene.addEventListener("drag-and-drop", function(event){
+      var file = event.detail.file;
+      reader.readAsDataURL(file);
+    });
+    window.addEventListener("keydown", function (event) {
+      //console.log(event.key)
+      if (inventoryIndex + 1 > event.key) {
+        //console.log()
+        cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
+      }
+    }, true)
+
+    window.addEventListener("contextmenu", function(event) {
+      if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
+        var el = document.createElement('a-entity');
+        el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
+        el.setAttribute('scale', cursor3D.getAttribute('scale'));
+        var rotation = {x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z)};
+        var position = cursor3D.getAttribute('position');
+        var material = cursor3D.getAttribute('material');
+        el.setAttribute('position',{x: position.x, y: position.y, z: position.z});
+        el.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z});
+        el.setAttribute('material', 'color', material.color );
+
+        el.addEventListener('raycaster-intersected', function () {
+          selected = el;
+
+          if (state == EDIT)
+            hueb.setColor(selected.getAttribute('material').color)
+        }, true);
+        el.addEventListener('raycaster-intersected-cleared', function () {
+          selected = null;
+        }, true);
+
+        scene.appendChild(el);
+      } else if (state == REMOVE && selected) {
+        selected.parentNode.removeChild(selected);
+        selected = null;
+      }
+      event.preventDefault();
+    });
+    //
+    window.addEventListener("wheel", function(event) {
+      var currentlySelected;
+      if (state == ADD) {
+        currentlySelected = cursor3D;
+      } else if (state == EDIT) {
+        currentlySelected = selected;
+      }
+
+      if (!currentlySelected)
+        return;
+
+      if (!event.ctrlKey) {
+        var currentScale = currentlySelected.getAttribute('scale').x;
+        var delta = 0.001;
+        if (event.shiftKey)
+          delta = 0.01;
+        if (event.deltaY > 0) {
+          delta = -delta;
+        }
+        currentScale += delta;
+        if (currentScale <= 0)
+          currentScale = 0.001;
+
+        currentlySelected.setAttribute('scale', {x: currentScale, y: currentScale, z: currentScale});
+      } else {
+        var currentRotation = currentlySelected.getAttribute('rotation');
+        var delta = 5;
+        if (event.shiftKey)
+          delta = 10;
+        if (event.deltaY > 0) {
+          delta = -delta;
+        }
+        currentRotation.y += delta;
+
+        currentlySelected.setAttribute('rotation', {x: currentRotation.x, y: currentRotation.y, z: currentRotation.z});
+        //console.log(currentRotation.y);
+      }
+      event.preventDefault();
+      //return true;
+    },true)
+    document.addEventListener("wheel", function() {
+      event.preventDefault();
+    })
+</script>
+</html>
+<!--
+
+
+
+
+-->
