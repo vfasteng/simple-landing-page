@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="js/aframe/aframe.min.js"></script>
+    <script type="text/javascript" src="js/aframe/aframe-htmlembed.min.js"></script>
+    <script type="text/javascript" src="js/aframe/aframe-environment-component.min.js"></script>
+    <script type="text/javascript" src="js/aframe/aframe-physics-system.min.js"></script>
+    <script type="text/javascript" src="js/aframe/aframe-teleport-controls.min.js"></script>
+    <script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
+    <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
+    <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
+    <script type="text/javascript" src="js/aframe-extras-controls.min.js"></script>
+    <script type="text/javascript" src="js/aframe-extras-loaders.min.js"></script>
+    <script type="text/javascript" src="js/aframe-extras-misc.min.js"></script>
+    <script type="text/javascript" src="js/aframe-extras-pathfinding.min.js"></script>
+    <script type="text/javascript" src="js/aframe-extras-primitives.min.js"></script>
+
+
+<!--<script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
+    <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
+    <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
+    -->
+</head>
+<body>
+    <a-scene debug="true" stats="false" loading-screen={`enabled: false`}>
+        
+        <a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body ></a-box>
+        <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
+        <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
+        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
+
+    </a-scene>
+    <script type="text/javascript" src="aframe-physics-system.min.js"></script>
+</body>
+</html>
