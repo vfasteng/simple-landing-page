@@ -4,7 +4,39 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <script type="text/javascript" src="js/aframe/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-teleport-controls@0.2.x/dist/aframe-teleport-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-controller-cursor-component@0.2.x/dist/aframe-controller-cursor-component.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/random-color.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/snap.js"></script>
+    <script src="https://rawgit.com/ngokevin/kframe/csstricks/scenes/aincraft/components/intersection-spawn.js"></script>
+
+    <script src="https://unpkg.com/aframe-web-portals@1.0.1/dist/aframe-web-portals.umd.js"></script>
+    <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+    <script src="https://unpkg.com/aframe-text-geometry-component@0.5.1/dist/aframe-text-geometry-component.min.js"></script>
+
+
+    <!--script-- type="text/javascript" src="js/aframe/aframe.min.js"></!--script-->
     <script type="text/javascript" src="js/aframe/aframe-htmlembed.min.js"></script>
     <script type="text/javascript" src="js/aframe/aframe-environment-component.min.js"></script>
     <script type="text/javascript" src="js/aframe/aframe-physics-system.min.js"></script>
@@ -19,10 +51,10 @@
     <script type="text/javascript" src="js/aframe-extras-primitives.min.js"></script>
 
 
-<!--<script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
-    <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
-    <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
-    -->
+    <!--<script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
+        <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
+        <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
+        -->
 </head>
 <body>
     <a-scene debug="true" stats="false" loading-screen={`enabled: false`}>
@@ -30,9 +62,23 @@
         <a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body ></a-box>
         <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
         <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
+        <a-plane position="0 0 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
 
+    
+        <a-light type="hemisphere" color="white" position="0 0 0" intensity="2.0"></a-light><!--animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"-->
+
+        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321103__nsstudios__blip1.wav"></a-entity>
+        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321104__nsstudios__blip2.wav"></a-entity>
+
+        <!--a-entity id="seenmodel" gltf-model="#engine" position="0 0 0"></a-entity-->
+        <a-box id="ground" static-body width="40" height="0.001" depth="40" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:10;divisions:20"></a-box>
+        <a-entity>
+            <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 0 0 7.5">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+            </a-entity>
+        </a-entity>
     </a-scene>
-    <script type="text/javascript" src="aframe-physics-system.min.js"></script>
+    <script type="text/javascript" src="js/aframe-physics-system.min.js"></script>
 </body>
 </html>

@@ -109,25 +109,28 @@
         }
     </style>
 </head>
+
+<div id="container">
+    <button id="export-scene" class="button"><span>Export Scene</span></button>
+    <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
+    <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
+    <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
+    <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+    <button id="cmd1" class="button"><span>CMD1</span></button>
+    <button id="cmd2" class="button"><span>CMD2</span></button>
+    <button id="cmd3" class="button"><span>CMD3</span></button>
+    <button id="cmd4" class="button"><span>CMD4</span></button>
+    <button id="cmd5" class="button"><span>CMD5</span></button>
+
+    <!--
+
+      <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
+      <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
+      -->
+</div>
+
 <body>
-    <div id="container">
-        <button id="export-scene" class="button"><span>Export Scene</span></button>
-        <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
-        <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
-        <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
-        <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
-        <button id="cmd1" class="button"><span>CMD1</span></button>
-        <button id="cmd2" class="button"><span>CMD2</span></button>
-        <button id="cmd3" class="button"><span>CMD3</span></button>
-        <button id="cmd4" class="button"><span>CMD4</span></button>
-        <button id="cmd5" class="button"><span>CMD5</span></button>
-
-        <!--
-
-          <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
-          <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
-          -->
-    </div>
+    
     <a-scene gltf-exporter physics="gravity:-9.81;friction:0">
 
         <a-assets>
@@ -245,7 +248,7 @@
 
 
 
-        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body="mass:100" click-impulse></a-box>
+        <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body="mass:10" click-impulse></a-box>
         <a-plane id="mainplane" position="0 0 0" rotation="-90 0 0" width="40" height="40" color="lightblue" opacity="0.25" static-body></a-plane>
         <a-sky radius="55" color="#ECECEC"></a-sky>
     </a-scene>

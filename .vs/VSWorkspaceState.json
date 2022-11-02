@@ -3,9 +3,14 @@
     "",
     "\\aframe-boilerplate-master",
     "\\anime-UI",
-    "\\js",
-    "\\js\\aframe"
+    "\\anime-UI\\ammo_worker",
+    "\\anime-UI\\ammo_worker\\src",
+    "\\anime-UI\\ammo_worker\\src\\vendor",
+    "\\anime-UI\\assets",
+    "\\anime-UI\\audio",
+    "\\exporter",
+    "\\exporter\\360"
   ],
-  "SelectedNode": "\\tester.html",
+  "SelectedNode": "\\exporter\\physics.html",
   "PreviewInSolutionExplorer": false
 }
