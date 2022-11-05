@@ -1,36 +1,145 @@
-﻿<!DOCTYPE html>
-
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    <script type="text/javascript" src="js/aframe/aframe.min.js"></script>
-    <script type="text/javascript" src="js/aframe/aframe-htmlembed.min.js"></script>
-    <script type="text/javascript" src="js/aframe/aframe-environment-component.min.js"></script>
-    <script type="text/javascript" src="js/aframe/aframe-physics-system.min.js"></script>
-    <script type="text/javascript" src="js/aframe/aframe-teleport-controls.min.js"></script>
-    <script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
-    <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
-    <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
-    <script type="text/javascript" src="js/aframe-extras-controls.min.js"></script>
-    <script type="text/javascript" src="js/aframe-extras-loaders.min.js"></script>
-    <script type="text/javascript" src="js/aframe-extras-misc.min.js"></script>
-    <script type="text/javascript" src="js/aframe-extras-pathfinding.min.js"></script>
-    <script type="text/javascript" src="js/aframe-extras-primitives.min.js"></script>
-
-
-<!--<script type="text/javascript" src="js/aframe/ammo.wasm.js"></script>
-    <script type="text/javascript" src="js/aframe/sphere-collider.js"></script>
-    <script type="text/javascript" src="js/aframe-ammo-constraints.js"></script>
-    -->
-</head>
-<body>
-    <a-scene debug="true" stats="false" loading-screen={`enabled: false`}>
-        
-        <a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body ></a-box>
-        <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
-        <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>cadboxx</title>
+  </head>
+  <body>
+    <section class="header_section">
+      <div class="header_top_background">
+        <div class="container">
+          <div class="header_menu">
+            <a class="logo" href="index.html">
+              <img
+                class="logo_img"
+                width="250"
+                height="100"
+                src="./images/cadboxx-logo.png"
+                alt="company_logo_icon"
+              /></span>
+            </a>
+            <nav>
+              <ul class="nav_list">
+                <li>
+                  <a class="nav_link" href="#">home</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="../anime-UI/index.html">UI</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="https://cadboxx-geometry-builder.netlify.app/">BUILDER</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="https://networked-cadboxx.netlify.app/">NETWORKED</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="https://assembler22.netlify.app/">ASSEMBLER</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="https://wheel-me.netlify.app/">Wheel-me</a>
+                </li>
+                <li>
+                  <a class="nav_link" href="#">Testimonial</a>
+                </li>
+              </ul>
+            </nav>
+            <button class="search_btn" type="button">
+              <img
+                width="20"
+                height="20"
+                src="./images/header_img/search_icon.png"
+                alt="search_icon"
+              />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="header_content">
+          <h2 class="header_title">
+            The boxx is <span class="accent_font">boxxenough</span>
+          </h2>
+          <h3 class="header_subtitle">we are creative</h3>
+          <p class="header_text">Just PURCHASE AND USE IMMEDIATELY</p>
+          <a class="header_content_btn green" href="#">EXPLORE NOW</a>
+          <a class="header_content_btn blue" href="#">purchase now</a>
+        </div>
+      </div>
+    </section>
+    <section class="product_features">
+      <div class="feature_item dark_green">
+        <img
+          width="250"
+          height="250"
+          src="./images/slider1.jpg"
+          alt="hand"
+        />
+        <p class="feature_item_text green_text">Mechanical Assemblies</p>
+      </div>
+      <div class="feature_item green">
+          <img width="250"
+               height="250"
+               src="./images/slider2.jpg"
+               alt="hand" />
+        <p class="feature_item_text white_text">Connect Any Models</p>
+      </div>
+      <div class="feature_item dark_green">
+          <img width="250"
+               height="250"
+               src="./images/slider3.jpg"
+               alt="hand" />
+        <p class="feature_item_text green_text">Easy to learn</p>
+      </div>
+      <div class="feature_item green">
+          <img width="250"
+               height="250"
+               src="./images/ytr.jpg"
+               alt="hand" />
+        <p class="feature_item_text white_text">responsive all device</p>
+      </div>
+    </section>
+    <section class="services">
+      <div class="container">
+        <h2 class="section_title">Getting Started</h2>
+        <ul class="services_tabs">
+          <li class="tabs-title active" data-tab="#tab_1">cadboxx environment</li>
+          <li class="tabs-title" data-tab="#tab_2">Joints</li>
+          <li class="tabs-title" data-tab="#tab_3">Animation</li>
+          <li class="tabs-title" data-tab="#tab_4">Simulation</li>
+          <li class="tabs-title" data-tab="#tab_5">Hosting and Development</li>
+          <li class="tabs-title" data-tab="#tab_6">Virtual Reality</li>
+        </ul>
+        <ul class="tabs-content">
+            <li class="tabs-item active" id="tab_1">
+                <img class="service_img"
+                     src="./images/services_img/web_design.png"
+                     alt="web_design"
+                     width="192"
+                     height="139" />
+                <p class="services_text">
+                   The cadboxx is a 3D environment and workspace with a focus on building mechanical assemblies. It is not a CAD system, yet can produce 3D Models for both CAD Systems and the latest 3D Games. Users can edit, create, import and position Models, then connect them using dynamic joints to define their relative motion. Simulations, Animations, interactivity, high quality models and unlimited downloads are just part of a very special service.
+                </p>
+                
+            </li>
+            <li class="tabs-item" id="tab_2">
+                <img class="service_img"
+                     src="./images/services_img/graphic_design.jpg"
+                     alt="graphic_design"
+                     width="192"
+                     height="139" />
+                <p class="services_text">
+                <p>
+                    A CADBOXX can be used not only as a physics workspace, but can also create and export dynamic mechanical assemblies of 3D solid models. Run Simulations and record Animations, then view the results on our player or upload to YouTube. Publish and share your creations on Hubs.
 
                 </p>
             </li>
@@ -137,7 +246,7 @@
         </p>
         <a class="offer_btn" href="https://store.cad-boxx.com/">purchase now</a>
       </div>
-    </section><!--
+    </section>
     <section class="work_portfolio">
       <div class="container">
         <h2 class="section_title">Our Amazing Services</h2>
@@ -691,7 +800,7 @@
             alt="plus_icon"
           />
           Load More
-        </!--button--
+        </!--button-->
       </div>
     </section>
     <section class="comments">
@@ -847,7 +956,7 @@
           </button>
         </div>
       </div>
-    </section>-->
+    </section>
     <footer class="page_footer">
       <div class="container">
         <p class="footer_text">
