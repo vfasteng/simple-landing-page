@@ -74,35 +74,50 @@
 <body>
     <a-scene renderer="colorManagement: true;" inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="" device-orientation-permission-ui="" id="space-station" animation__animation_aa="" pool__aa="" camera="" raycaster="" cursor="" event-set__aa="" geometry="" gltf-model="" oculus-touch-controls="" sound__aa="">
         <a-assets>
-    <a-asset-item id="engine" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/engine-edges.glb?v=1667026289142"></a-asset-item>
-    <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
-    <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+            <a-asset-item id="engine" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/engine-edges.glb?v=1667026289142"></a-asset-item>
+            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
+            <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+            https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Faxleandwheels.glb?v=1612273413372
 
 
-    <!--<a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
-        <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
-        <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
-        <a-asset-item id="linear" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
-        <a-asset-item id="assembly" src="assets/assembly.glb"></a-asset-item>
-        <a-asset-item id="hands" src="assets/hands44.obj"></a-asset-item>
-        <a-asset-item id="fv8" src="assets/ferrariv8.glb"></a-asset-item>
-        <a-asset-item id="g16" src="assets/gear16.glb"></a-asset-item>
-        <a-asset-item id="sshafts" src="assets/splitshafts.glb"></a-asset-item>
-            -->
-    <a-mixin id="objectimage" src="#imm2" style="width:200px;height:200px"></a-mixin>
 
-    <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
-    <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
-    <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
-    <audio id="blip2" src="audio/321104__nsstudios__blip2.wav"></audio>
-    <img id="ring1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cblogo-t.png?v=1648022923987">
-    <img id="ring2" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
-    <img id="ring3" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-border.png?v=1659362950670">
-    <img id="ring4" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
-    <img id="ring5" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/model.png?v=1665597644170">
-    <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
-    <img id="imm2" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
-</a-assets>
+
+
+
+    <a-asset-item id="k2" src="engine-edges.glb"></a-asset-item>
+    <a-asset-item id="k3" src="assets/p1.glb"></a-asset-item>
+    <a-asset-item id="k4" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
+    <a-asset-item id="k5" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
+    <a-asset-item id="k6" src="assets/assembly.glb"></a-asset-item>
+    <a-asset-item id="k7" src="assets/hands44.obj"></a-asset-item>
+    <a-asset-item id="k8" src="assets/ferrariv8.glb"></a-asset-item>
+    <a-asset-item id="k9" src="assets/gear16.glb"></a-asset-item>
+    <a-asset-item id="k10" src="assets/splitshafts.glb"></a-asset-item>
+    
+            <!--<a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
+    <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
+    <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
+    <a-asset-item id="linear" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
+    <a-asset-item id="assembly" src="assets/assembly.glb"></a-asset-item>
+    <a-asset-item id="hands" src="assets/hands44.obj"></a-asset-item>
+    <a-asset-item id="fv8" src="assets/ferrariv8.glb"></a-asset-item>
+    <a-asset-item id="g16" src="assets/gear16.glb"></a-asset-item>
+    <a-asset-item id="sshafts" src="assets/splitshafts.glb"></a-asset-item>
+        -->
+            <a-mixin id="objectimage" src="#imm2" style="width:200px;height:200px"></a-mixin>
+
+            <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+            <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
+            <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
+            <audio id="blip2" src="audio/321104__nsstudios__blip2.wav"></audio>
+            <img id="ring1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cblogo-t.png?v=1648022923987">
+            <img id="ring2" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
+            <img id="ring3" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-border.png?v=1659362950670">
+            <img id="ring4" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
+            <img id="ring5" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/model.png?v=1665597644170">
+            <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
+            <img id="imm2" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
+        </a-assets>
 
         <a-entity>
             <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 2 0 7.5">

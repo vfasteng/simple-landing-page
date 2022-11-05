@@ -5,12 +5,12 @@
     "\\anime-UI",
     "\\anime-UI\\ammo_worker",
     "\\anime-UI\\ammo_worker\\src",
+    "\\anime-UI\\ammo_worker\\src\\proxy",
+    "\\anime-UI\\ammo_worker\\src\\proxy\\three",
     "\\anime-UI\\ammo_worker\\src\\vendor",
-    "\\anime-UI\\assets",
-    "\\anime-UI\\audio",
     "\\exporter",
     "\\exporter\\360"
   ],
-  "SelectedNode": "\\exporter\\physics.html",
+  "SelectedNode": "\\exporter\\index.html",
   "PreviewInSolutionExplorer": false
 }
