@@ -5,12 +5,10 @@
     "\\anime-UI",
     "\\anime-UI\\ammo_worker",
     "\\anime-UI\\ammo_worker\\src",
-    "\\anime-UI\\ammo_worker\\src\\proxy",
-    "\\anime-UI\\ammo_worker\\src\\proxy\\three",
-    "\\anime-UI\\ammo_worker\\src\\vendor",
     "\\exporter",
-    "\\exporter\\360"
+    "\\exporter\\360",
+    "\\indexedfaceset"
   ],
-  "SelectedNode": "\\anime-UI\\index.html",
+  "SelectedNode": "\\indexedfaceset\\index.html",
   "PreviewInSolutionExplorer": false
 }

@@ -12,6 +12,8 @@
         <a-assets>
             <a-asset-item id="onelink" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2FOneLink.glb?v=1606803487600"></a-asset-item>
             <a-asset-item id="cyldia2x2h" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fcyl-r1-h2-p010.glb?v=1615396272580"></a-asset-item>
+            <a-asset-item id="#" src="#"></a-asset-item>
+            <!--<a-asset-item id="" src="https"></a-asset-item>
             <a-asset-item id="" src="https"></a-asset-item>
             <a-asset-item id="" src="https"></a-asset-item>
             <a-asset-item id="" src="https"></a-asset-item>
@@ -29,19 +31,20 @@
             <a-asset-item id="" src="https"></a-asset-item>
             <a-asset-item id="" src="https"></a-asset-item>
             <a-asset-item id="" src="https"></a-asset-item>
-            <a-asset-item id="" src="https"></a-asset-item>
-            <a-asset-item id="" src="https"></a-asset-item>
+                -->
 
 
-
-
-
-
-
-
-
-
-
+            <a-mixin id="image" geometry="height: 2; width: 2"></a-mixin>
+            <a-mixin id="delayVisible" event-set__loaded="visible: true" visible="false"></a-mixin>
+            <audio id="blip1" src="audio/321103__nsstudios__blip1.wav"></audio>
+            <audio id="blip2" src="audio/321104__nsstudios__blip2.wav"></audio>
+            <img id="ring1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cblogo-t.png?v=1648022923987">
+            <img id="ring2" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
+            <img id="ring3" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-border.png?v=1659362950670">
+            <img id="ring4" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
+            <img id="ring5" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/model.png?v=1665597644170">
+            <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
+            <img id="imm2" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
         </a-assets>
 
 
@@ -52,7 +55,7 @@
       <a-entity id="hex6-red" geometry="primitive: box" material="color:#ff0000" position="2 1 0"></a-entity>
       <a-entity id="string-blue" geometry="primitive: box" material="color:blue" position="4 1 0"></a-entity>
     	<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-sphere src="#ring2" position="0 1.25 -5" radius="1.25" ></a-sphere>
       <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
       <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
       

@@ -1,0 +1,13 @@
+﻿<head>
+    <title>indexed faceset A-Frame Scene</title>
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-triangleset-component/dist/aframe-indexedfaceset-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-entity geometry="primitive: indexedfaceset"></a-entity>
+        <a-indexedfaceset vertices="0 0 -5, 2.5 1 -5, 5 0 -5, 5 5 -5, 2.5 4 -5, 0 5 -5"
+                          faces="0 1 4 5 -1, 1 2 3 4 -1"></a-indexedfaceset>
+    </a-scene>
+</body>
