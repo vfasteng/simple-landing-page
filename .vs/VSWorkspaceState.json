@@ -3,12 +3,10 @@
     "",
     "\\aframe-boilerplate-master",
     "\\anime-UI",
-    "\\anime-UI\\ammo_worker",
-    "\\anime-UI\\ammo_worker\\src",
     "\\exporter",
-    "\\exporter\\360",
+    "\\exporter\\assets",
     "\\indexedfaceset"
   ],
-  "SelectedNode": "\\indexedfaceset\\index.html",
+  "SelectedNode": "\\exporter\\index.html",
   "PreviewInSolutionExplorer": false
 }

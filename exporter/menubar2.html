@@ -151,10 +151,12 @@
 </style>
 <body>
     <a-scene physics="" vr-mode-ui="enabled: false" drag-and-drop>
+        <a-assete>
+
+        </a-assete>
         <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
         <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-        <a-entity id="geo" geometry="preset: box; color: lightblue">
-            </e-entity>
+        <a-entity id="geo" geometry="preset: box; color: lightblue"></a-entity>
 
             <a-sky src="#im2" radius="50"></a-sky>
 
@@ -162,9 +164,9 @@
     <div id="toolbar">
         <select id="geometry">
             <!--Supplement an id here instead of using 'text'-->
-            <option value="box">Box</option>
-            <option value="sphere">Sphere</option>
-            <option value="Assembler">Assembler</option>
+            <option geo="a-box">Box</option>
+            <option geo="a-sphere">Sphere</option>
+            <option geo="a-cylinder">Cylinder</option>
             <option value="Gearboxx">Gearboxx</option>
             <option value="Robots">Robots</option>
             <option value="Spaceship">Spaceship</option>

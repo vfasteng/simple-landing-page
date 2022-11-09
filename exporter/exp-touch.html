@@ -5,9 +5,11 @@
     <title>CADBOXX DEMO</title>
     <meta name="description" content="Basic example for GLTF Exporter component."></meta>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
 
-    <script src="aframe-master.min.js"></script>
+    <!--<script src="aframe-master.min.js"></script-->
     <script src="aframe-gltf-exporter-component.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
     <!--<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
@@ -16,14 +18,10 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
 
-    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
 
     <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
     <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
     <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
     <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
     <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
     <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
@@ -82,7 +80,7 @@
                             THREE.Math.randInt(-20, 20),
                             THREE.Math.randInt(-20, 20)
                         ),
-                                                    /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                                                            /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
                     );
                 });
 
@@ -245,11 +243,11 @@
                 <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
 
                 <!--panel hosts--
-                <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
+        <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
 
-                </a-box>
-                <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
-                -->
+        </a-box>
+        <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
+        -->
                 <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
                     <a-box id="cmnd1" mixin="ol" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
                     <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
@@ -269,22 +267,31 @@
 
                 </a-box>
                 <!--
-                <a-box position="0 0 19" rotation="90 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body>
-                    <a-box id="cmnd2" class="clickable" position="0 -2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="blue" opacity="1" onclick="myFunction()" static-body>
+        <a-box position="0 0 19" rotation="90 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body>
+            <a-box id="cmnd2" class="clickable" position="0 -2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="blue" opacity="1" onclick="myFunction()" static-body>
 
-                    </a-box>
-                </a-box>
-                <a-box position="-19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
-                <a-box position="19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+            </a-box>
+        </a-box>
+        <a-box position="-19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+        <a-box position="19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
 
 
-                <!-- <a-box position="0 -0.1 0" rotation="0 0 0" width="15" depth="15" height="0.2" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body></a-box>-->
+        <!-- <a-box position="0 -0.1 0" rotation="0 0 0" width="15" depth="15" height="0.2" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body></a-box>-->
                 <a-cylinder id="ground" position="0 -0.0001 0" rotation="0 0 0" radius="30" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 40;divisions:20" static-body></a-cylinder>
 
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
 
-
+            <a-entity id="redbxx" geometry="primitive: sphere" material="color:#f00;wireframe:true" position="-2 3 0" dynamic-body>
+                
+            </a-entity>
+            <a-entity id="redbyy" geometry="primitive: sphere" material="color:#f00;wireframe:true" position="-4 3 0" dynamic-body>
+    
+            </a-entity>
+            <a-entity id="redbzz" geometry="primitive: sphere" material="color:#f00;wireframe:true" position="-6 3 0" dynamic-body>
+                
+            </a-entity>
+            <!--
             <a-entity id="redbxx" geometry="primitive: box" material="color:#f00" position="-2 3 0" dynamic-body>
                 <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
             </a-entity>
@@ -295,26 +302,26 @@
                 <a-animation attribute="rotation" to="0 0 360" repeat="indefinite" easing="linear" dur="9600"></a-animation>
             </a-entity>
             <!--<a-entity id="whl" gltf-model="#wheel" position="2 2 -2">
-                <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
-            </a-entity>
+        <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+    </a-entity>
 
-            <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
-            <a-light type="ambient" color="#445451"></a-light>
-            <a-light type="point" intensity="2" position="2 4 4"></a-light>
-            <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
+    <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
+    <a-light type="ambient" color="#445451"></a-light>
+    <a-light type="point" intensity="2" position="2 4 4"></a-light>
+    <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
 
-                <a-entity>
-                <a-entity camera look-controls  wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 5; initialPosition: 5 0 7.5">
-                    <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+        <a-entity>
+        <a-entity camera look-controls  wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 5; initialPosition: 5 0 7.5">
+            <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
-                </a-entity>
-            </a-entity>
+        </a-entity>
+    </a-entity>
 
-            <!-- Camera. -->
+    <!-- Camera. -->
             <a-entity id="cameraWrapper" position="0 1 5">
                 <a-entity id="camera" camera look-controls wasd-controls></a-entity>
             </a-entity>
-    </a-scene>
+</a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
     <script>
