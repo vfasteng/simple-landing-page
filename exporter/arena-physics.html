@@ -209,7 +209,7 @@
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
             <a-asset-item id="gear16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273" position="0 2.5 0" rotation="0 0 0" scale="1 1 1""></a-asset-item>
 
-            <a-asset-item id="wheel" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
+            <a-asset-item id="waddler" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/waddler.glb?v=1668021723166"></a-asset-item>
 
             <img id="galaxy" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/780593/galaxy.jpg">
             <img id="moon" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/moon_1024.jpg">
@@ -460,8 +460,8 @@
             </a-box>
             <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
             -->
-                <a-box position="0 0 -19.5" rotation="0 0 0" width="40" depth="0.5" height="40" color="lightblue" opacity=".1" static-body>
-                    <a-box id="cmnd1" class="clickable" position="-16 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+                <a-box position="0 0 -20" rotation="0 0 0" width="40" depth="0.5" height="40" color="lightblue" opacity=".1" static-body>
+                    <a-entity id="cmnd1" mixin="trigger-box" position="-16 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm1()" static-body></a-entity>
                     <a-box id="cmnd2" class="clickable" position="-16 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm2()" static-body></a-box>
                     <a-box id="cmnd3" class="clickable" position="-16 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm3()" static-body></a-box>
                     <a-box id="cmnd4" class="clickable" position="-8 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm4()" static-body></a-box>
