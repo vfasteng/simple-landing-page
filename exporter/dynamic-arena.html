@@ -139,12 +139,13 @@
             }
         })
     </script>
-    <a-mixin id="prrt1" gltf-part="src:assembly.glb;buffers:false;model-center:bottomAlign:true" constraint="" dynamic-body click-impulse></a-mixin>
+    
 </head>
 <body>
     <a-scene physics="debug: false">
         <a-assets>
-            <a-mixin id="dybod" dynamic-body="mass:2.0" click-impulse grabbable draggable droppable drag-droppable></a-mixin>
+            <a-mixin id="dybod" class="clickable" dynamic-body="mass:2.0" click-impulse grabbable draggable droppable drag-droppable></a-mixin>
+            <a-mixin id="prrt1" gltf-part="src:assembly.glb;buffers:false;model-center:bottomAlign:true" constraint="" dynamic-body click-impulse></a-mixin>
 
 
             <a-asset-item id="prt1" gltf-model="#name1" mixin="prrt1" target="#assyp1"></a-asset-item>

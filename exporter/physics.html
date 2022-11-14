@@ -30,8 +30,8 @@
     <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
     <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
     <script src="~/js/play-all-model-animations.js"></script>
-    <!--<script src="../dist/aframe-gui.min.js"></script>
-    <script src="../dist/aframe-gui.js"></script>-->
+    <script src="../dist/aframe-gui.min.js"></script>
+    <script src="../dist/aframe-gui.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
 
@@ -112,15 +112,15 @@
 
 <div id="container">
     <button id="export-scene" class="button"><span>Export Scene</span></button>
-    <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
+    <button id="export-scene-bin" class="button" onclick=""><span>Export Scene Binary</span></button>
     <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
     <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
     <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
-    <button id="cmd1" class="button"><span>CMD1</span></button>
-    <button id="cmd2" class="button"><span>CMD2</span></button>
-    <button id="cmd3" class="button"><span>CMD3</span></button>
-    <button id="cmd4" class="button"><span>CMD4</span></button>
-    <button id="cmd5" class="button"><span>CMD5</span></button>
+    <button id="cmd1" class="button" onclick="cmm1()" ><span>CMD1</span></button>
+    <button id="cmd2" class="button" onclick="cmm2()" ><span>CMD2</span></button>
+    <button id="cmd3" class="button" onclick="cmm3()" ><span>CMD3</span></button>
+    <button id="cmd4" class="button" onclick="cmm4()" ><span>CMD4</span></button>
+    <button id="cmd5" class="button" onclick="cmm5()" ><span>CMD5</span></button>
 
     <!--
 
@@ -130,8 +130,7 @@
 </div>
 
 <body>
-    
-    <a-scene gltf-exporter physics="gravity:-9.81;friction:0">
+    <a-scene gltf-exporter physics="gravity:-9.81;friction:0.5;restution:0.5">
 
         <a-assets>
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
@@ -187,7 +186,7 @@
 
         </a-entity>
 
-        <a-entity id="p1" position="5 3 0" rotation="0 0 0">
+        <a-entity id="redbxx" position="5 3 0" rotation="0 0 0">
             <a-entity id="bottom-square" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
 
             </a-entity>
@@ -199,7 +198,7 @@
 
         </a-entity>
 
-        <a-entity id="p2" position="-5 3 0" rotation="0 0 0">
+        <a-entity id="redbyy" position="-5 3 0" rotation="0 0 0">
             <a-entity id="bottom-squar" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
 
             </a-entity>
@@ -238,8 +237,8 @@
 
         <a-entity light="type: hemisphere; color: #33C; groundColor: #3C3; intensity: 2"></a-entity>
 
-        <a-entity id="cameraRig" position="0 1.6 -8"  >
-            <a-entity camera look-controls wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 19; initialPosition: 0 8 17.5">
+        <a-entity id="cameraRig" >
+            <a-entity camera look-controls wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 19; initialPosition: 0 5 15">
                 <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
             </a-entity>
@@ -249,14 +248,56 @@
 
 
         <a-box position="-1 4 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body="mass:10" click-impulse></a-box>
-        <a-plane id="mainplane" position="0 0 0" rotation="-90 0 0" width="40" height="40" color="lightblue" opacity="0.25" static-body></a-plane>
+        <a-box id="mainplane" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.1" color="lightblue" opacity="0.25" static-body gridhelper="size:40;divisions:10;ColoredCenterLine:yellow" ></a-box>
         <a-sky radius="55" color="#ECECEC"></a-sky>
     </a-scene>
     <script>
-        function getmodelall() {
+        function cmm1() {
 
         }
-    </script>
+        function cmm2() {
+
+        }
+        function cmm3() {
+
+        }
+        function cmm4() {
+
+        }
+        function cmm5() {
+
+        }
+        function cmm6() {
+
+        }
+        function cmm7() {
+
+        }
+        function cmm8() {
+
+        }
+        function cmm9() {
+
+        }
+        function cmm10() {
+
+        }
+        function cmm11() {
+
+        }
+        function cmm12() {
+
+        }
+        function cmm13() {
+
+        }
+        function cmm14() {
+
+        }
+        function cmm15() {
+
+        }
+            </script>
     <script>
         function exportGLTF(input, options) {
             AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <meta name="description" content="Basic example for GLTF Exporter component."></meta>
+    <meta name="description" content="Basifc example for GLTF Exporter component."></meta>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
@@ -163,15 +163,15 @@
             <a-asset-item id="g10" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fengineblock_.glb?v=1603793530601"></a-asset-item><!--block-->
             <a-asset-item id="g11" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2FCankshaft_.glb?v=1603793853839"></a-asset-item><!--crank-->
             <a-asset-item id="g12" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fthrustrod_.glb?v=1603794206862"></a-asset-item><!--rod-->
-            <a-asset-item id="g13" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fthrustcap_.glb?v=1603793815420"></a-asset-item><!--brgcap-->
+            <a-asset-item id="g13" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/pistonplus.glb?v=1668109554024"></a-asset-item><!--brgcap-->
 
             <a-asset-item id="g14" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/locaterdisc.glb?v=1667931972709"></a-asset-item><!--locaterdisc g14-->
             <a-asset-item id="g15" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylblock.glb?v=1667931983908"></a-asset-item><!--block-->
             <a-asset-item id="g16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylcrankandflywheel.glb?v=1667931998784"></a-asset-item><!--crankandflywheel-->
             <a-asset-item id="g17" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylconrodup.glb?v=1667932025097"></a-asset-item><!--conrod-->
             <a-asset-item id="g18" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylpiston.glb?v=1667932056792"></a-asset-item><!--piston-->
-            <a-asset-item id="g19" src="#"></a-asset-item><!--waddler-->
-            <a-asset-item id="g20" src="#"></a-asset-item><!--pulley-->
+            <a-asset-item id="g19" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/waddler.glb?v=1668021723166"></a-asset-item><!--waddler-->
+            <a-asset-item id="g20" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/locator-ring.glb?v=1668077509775"></a-asset-item><!--pulley-->
 
 
         </a-assetts>
@@ -201,14 +201,38 @@
 
             </a-entity>
 
-           
+
             <a-entity id="piston" gltf-model="#g17" position="-5 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
             </a-entity>
-            <a-entity id="conrod" gltf-model="#g18" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+            <a-entity id="conrod" gltf-model="#g13" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-            </a-entity>-->
+            </a-entity>
         </a-entity><!--4cylend-->
+
+        <a-entity id="engineassy" gltf-model="#g13" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+        </a-entity>
+
+        <a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
+        <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
+        <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
+        <a-plane position="0 0 0" rotation="-90 0 0" width="4" height="4" color="#7BC8A4" static-body></a-plane>
+
+
+        <a-light type="hemisphere" color="white" position="0 0 0" intensity="2.0"></a-light><!--animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"-->
+
+        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321103__nsstudios__blip1.wav"></a-entity>
+        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321104__nsstudios__blip2.wav"></a-entity>
+
+        <!--a-entity id="seenmodel" gltf-model="#engine" position="0 0 0"></a-entity-->
+        <a-box id="ground" static-body width="40" height="0.001" depth="40" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:10;divisions:20"></a-box>
+        <a-entity>
+            <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 0 0 7.5">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+            </a-entity>
+        </a-entity>
     </a-scene>
 </body>
 </html>
