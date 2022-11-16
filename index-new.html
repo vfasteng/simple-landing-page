@@ -1,0 +1,461 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Arena</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="~/js/play-all-model-animations.js"></script>
+
+    <!--extras--
+        <script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE-->
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-extras.controls.mih.js"></script>
+    <script src="js/aframe-extras.misc.js"></script>
+    <script src="js/aframe-extras.loaders.js"></script>
+    <script src="js/aframe-extras.pathfinding.js"></script>
+    <script src="js/aframe-extras.primitives.js"></script>
+    <script src="js/aframe-stl-model-component.min.js"></script>
+    <script src="js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="js/aframe-crawling-cursor.min.js"></script>
+
+    <!--reaction components-->
+    <script src="reaction_components/clickable.js"></script>
+    <script src="reaction_components/draggable.js"></script>
+    <script src="reaction_components/drag-droppable.js"></script>
+    <script src="reaction_components/hoverable.js"></script>
+    <script src="reaction_components/stretchable.js"></script>
+    <script src="reaction_components/droppable.js"></script>
+    <script src="reaction_components/grabbable.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="aframe.css">
+
+
+
+
+
+</head>
+<style media="screen">
+    #toolbar {
+        position: absolute;
+        top: 30px;
+        left: 30px;
+        background-color: #ffffff99;
+        padding: 5px;
+        border-radius: 20px;
+    }
+
+    button, input, select {
+        padding: 5px;
+        border-radius: 20px;
+        border-color: transparent;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .active {
+        background-color: #aaa;
+    }
+
+    .color-input {
+        width: 20px;
+        font-size: 6px;
+    }
+</style>
+<body>
+    <a-scene inspector="">
+        <a-assets>
+            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
+            <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+
+        </a-assets>
+
+        <!--cadboxx walls, floor and lighting to 40 square-->
+        <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
+            <a-entity id="planeboxx" position="0 0 0">
+                <a-entity id="planebox" position="0 0 0">
+                    <a-plane side="double" color="green" position="0 -20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="green" position="0 20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="blue" position="0 0 20" rotation="0 0 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="blue" position="0 0 -20" rotation="0 0 0" height="40" width="40" material="" satic-body></a-plane>
+                    <a-plane side="double" color="red" position="20 0 0" rotation="0 -90 0" height="40" width="40" material="" static-body></a-plane>
+                    <a-plane side="double" color="red" position="-20 0 0" rotation="0 90 0" height="40" width="40" material="" static-body></a-plane>
+                </a-entity>
+                <!--mesh overlay for walls-->
+                <a-box position="0 -20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="0 0 20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+
+                <!--panel hosts--
+                <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
+
+                </a-box>
+                <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
+                -->
+                <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
+                    <a-box id="bbttnn1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+                    <a-box id="bbttnn2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
+                    <a-box id="bbttnn3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
+                    <a-box id="bbttnn4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
+                    <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm5()" static-body></a-box>
+                    <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm6()" static-body></a-box>
+                    <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm7()" static-body></a-box>
+                    <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm8()" static-body></a-box>
+                    <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm9()" static-body></a-box>
+                    <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm10()" static-body></a-box>
+                    <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm11()" static-body></a-box>
+                    <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm12()" static-body></a-box>
+                    <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm13()" static-body></a-box>
+                    <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm14()" static-body></a-box>
+                    <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm15()" static-body></a-box>
+
+                </a-box>
+                <!--
+                <a-box position="0 0 19" rotation="90 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body>
+                    <a-box id="cmnd2" class="clickable" position="0 -2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="blue" opacity="1" onclick="myFunction()" static-body>
+
+                    </a-box>
+                </a-box>
+                <a-box position="-19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+                <a-box position="19 0 0" rotation="0 0 90" width="20" depth="20" height="0.5" color="yellow" opacity="0" gridhelper="size: 20;divisions:5" static-body></a-box>
+
+
+                <!-- <a-box position="0 -0.1 0" rotation="0 0 0" width="15" depth="15" height="0.2" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body></a-box>-->
+                <a-cylinder id="ground" position="0 -0.0001 0" rotation="0 0 0" radius="30" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 40;divisions:20" static-body></a-cylinder>
+
+                <a-light type="hemisphere" intensity="2.0"></a-light>
+            </a-entity>
+
+
+
+
+
+
+
+
+
+            <a-camera position="0 1.6 4">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+            </a-camera>
+    </a-scene>
+    <div id="toolbar">
+        <select id="ggeo">
+            <!--Supplement an id here instead of using 'text'-->
+            <option value="a-sphere">sphere</option>
+            <option value="contact">Contact</option>
+            <option value="threetowers">Three Towers</option>
+            <option value="poison">Poison</option>
+            <option value="starry">Starry</option>
+            <option value="volcano">Volcano</option>
+            <option value="dream">Dream</option>
+            <option value="yavapai">Yavapai</option>
+            <option value="tron">Tron</option>
+            <option value="goaland">Goaland</option>
+            <option value="checkerboard">Checkboard</option>
+            <option value="goldmine">Goldmine</option>
+            <option value="japan">Japan</option>
+            <option value="osiris">Osiris</option>
+            <option value="egypt">Egypt</option>
+            <option value="arches">Arches</option>
+            <option value="default" selected>Default</option>
+        </select>
+        <input class="color-input" value="#ffffff" />
+        <button id="add" class="active" type="button">ADD</button>
+        <button id="remove" type="button">REMOVE</button>
+        <button id="edit" type="button">EDIT</button>
+        <button id="bbttnn1" type="button">SCREENSHOT</button>
+        <!-- TODO: add save/load for electron implementation
+        <button id="save" type="button">SAVE</button>
+         -->
+    </div>
+</body>
+<script type="text/javascript">
+	var hueb = new Huebee('.color-input', {
+		// options
+		notation: 'hex',
+		saturations: 2,
+		setText: true,
+		customColors: ['#ffffff']
+	});
+	const ADD = 0;
+	const REMOVE = 1;
+	const EDIT = 2;
+	var state = ADD;
+	var cursor3D = document.querySelector('#my-cursor');
+	var scene = document.querySelector('a-scene');
+	var initialScale = 0.01;
+	var rotationYOffset = 0;
+	var selected = null;
+
+	var reader = new FileReader();
+	var colorIndex = 0;
+	var usedColor = 10;
+	hueb.on('change', function (color, hue, sat, lum) {
+		if (state == ADD && cursor3D.getAttribute('stl-model'))
+			cursor3D.setAttribute('material', 'color', color);
+
+		if (state == EDIT && selected)
+			selected.setAttribute('material', 'color', color);
+
+		for (var i = 0; i < hueb.options.customColors.length; i++)
+			if (hueb.options.customColors[i] == color)
+				return;
+
+		hueb.options.customColors[colorIndex] = color;
+		hueb.updateColors();
+		colorIndex++;
+		if (colorIndex > usedColor)
+			colorIndex = 0;
+	})
+
+	// document.querySelector('#save').addEventListener('click', function() {
+	// TODO: save function for electron implementation
+	//   scene.flushToDOM(true);
+	//   console.log(scene);
+	// });
+	document.querySelector('#cmnd1').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+	document.querySelector('#environment').addEventListener('change', function () {
+		document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
+		//document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
+		//document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
+		document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
+		//document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
+		document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
+		var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
+		if (reducedDressing > 50)
+			document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
+	});
+	document.querySelector('#add').addEventListener('click', function () {
+		state = ADD;
+		if (cursor3D.getAttribute('material'))
+			hueb.setColor(cursor3D.getAttribute('material').color);
+		cursor3D.setAttribute('visible', true);
+		document.querySelector('.active').classList.toggle('active');
+		document.querySelector('#add').classList.toggle('active');
+	});
+	document.querySelector('#remove').addEventListener('click', function () {
+		state = REMOVE;
+		cursor3D.setAttribute('visible', false);
+		document.querySelector('.active').classList.toggle('active');
+		document.querySelector('#remove').classList.toggle('active');
+
+	});
+	document.querySelector('#edit').addEventListener('click', function () {
+		state = EDIT;
+		cursor3D.setAttribute('visible', false);
+		document.querySelector('.active').classList.toggle('active');
+		document.querySelector('#edit').classList.toggle('active');
+
+	});
+	var inventoryIndex = 0;
+	reader.addEventListener("load", function () {
+		if (state != ADD)
+			return;
+		cursor3D.setAttribute('stl-model', { src: reader.result });
+		cursor3D.setAttribute('scale', { x: initialScale, y: initialScale, z: initialScale });
+		cursor3D.setAttribute('material', 'color', hueb.color);
+		var listElement = document.createElement('a-entity')
+		listElement.setAttribute('position', { x: -1.8 + (.45 * inventoryIndex), y: -1, z: -1.5 })
+
+		listElement.setAttribute('rotation', { x: -90, y: 0, z: 0 })
+		listElement.setAttribute('class', 'ignore-ray');
+		listElement.setAttribute('stl-model', { src: reader.result });
+		listElement.setAttribute('scale', { x: initialScale * .2, y: initialScale * .2, z: initialScale * .2 });
+		var shortCutText = document.createElement('a-entity');
+		shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
+		shortCutText.setAttribute('text', 'anchor: left')
+		shortCutText.setAttribute('text', 'baseline', "center")
+		shortCutText.setAttribute('scale', '1000 1000 1000')
+		//shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
+		shortCutText.setAttribute('position', { x: 0, y: 0, z: -90 })
+		shortCutText.setAttribute('rotation', { x: 90, y: 0, z: 0 })
+		shortCutText.object3D.layers.set(1)
+		inventoryIndex++;
+
+		listElement.appendChild(shortCutText)
+		document.querySelector('#my-camera').appendChild(listElement)
+	}, false);
+
+
+	scene.addEventListener("drag-and-drop", function (event) {
+		var file = event.detail.file;
+		reader.readAsDataURL(file);
+	});
+	window.addEventListener("keydown", function (event) {
+		//console.log(event.key)
+		if (inventoryIndex + 1 > event.key) {
+			//console.log()
+			cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
+		}
+	}, true)
+
+	window.addEventListener("contextmenu", function (event) {
+		if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
+			var el = document.createElement('a-entity');
+			el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
+			el.setAttribute('scale', cursor3D.getAttribute('scale'));
+			var rotation = { x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z) };
+			var position = cursor3D.getAttribute('position');
+			var material = cursor3D.getAttribute('material');
+			el.setAttribute('position', { x: position.x, y: position.y, z: position.z });
+			el.setAttribute('rotation', { x: rotation.x, y: rotation.y, z: rotation.z });
+			el.setAttribute('material', 'color', material.color);
+
+			el.addEventListener('raycaster-intersected', function () {
+				selected = el;
+
+				if (state == EDIT)
+					hueb.setColor(selected.getAttribute('material').color)
+			}, true);
+			el.addEventListener('raycaster-intersected-cleared', function () {
+				selected = null;
+			}, true);
+
+			scene.appendChild(el);
+		} else if (state == REMOVE && selected) {
+			selected.parentNode.removeChild(selected);
+			selected = null;
+		}
+		event.preventDefault();
+	});
+	//
+	window.addEventListener("wheel", function (event) {
+		var currentlySelected;
+		if (state == ADD) {
+			currentlySelected = cursor3D;
+		} else if (state == EDIT) {
+			currentlySelected = selected;
+		}
+
+		if (!currentlySelected)
+			return;
+
+		if (!event.ctrlKey) {
+			var currentScale = currentlySelected.getAttribute('scale').x;
+			var delta = 0.001;
+			if (event.shiftKey)
+				delta = 0.01;
+			if (event.deltaY > 0) {
+				delta = -delta;
+			}
+			currentScale += delta;
+			if (currentScale <= 0)
+				currentScale = 0.001;
+
+			currentlySelected.setAttribute('scale', { x: currentScale, y: currentScale, z: currentScale });
+		} else {
+			var currentRotation = currentlySelected.getAttribute('rotation');
+			var delta = 5;
+			if (event.shiftKey)
+				delta = 10;
+			if (event.deltaY > 0) {
+				delta = -delta;
+			}
+			currentRotation.y += delta;
+
+			currentlySelected.setAttribute('rotation', { x: currentRotation.x, y: currentRotation.y, z: currentRotation.z });
+			//console.log(currentRotation.y);
+		}
+		event.preventDefault();
+		//return true;
+	}, true)
+	document.addEventListener("wheel", function () {
+		event.preventDefault();
+	})
+</script>
+<script type="text/javascript">
+
+	function() {
+		scene.components.inspector.injectInspector;
+	};
+
+	function injinsp() {
+		scene.components.inspector.injectInspector;
+	};
+
+	function evr() {
+		document.querySelector('a-scene').enterVR();
+	};
+
+	function openEditor() {
+		window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
+	};
+
+	document.querySelector('#cmnd1').addEventListener('click', function () {
+		document.querySelector('a-scene').enterVR();
+	});
+	document.querySelector('#cmnd2').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+	});
+	document.querySelector('#cmnd3').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+
+	document.querySelector('#cmnd4').addEventListener('click', function () {
+		window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
+	};
+	document.querySelector('#cmnd5').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+	});
+	document.querySelector('#cmnd6').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+	document.querySelector('#cmnd7').addEventListener('click', function () {
+		document.querySelector('a-scene').enterVR();
+	});
+	document.querySelector('#cmnd8').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+	});
+	document.querySelector('#cmnd9').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+
+	document.querySelector('#cmnd10').addEventListener('click', function () {
+		document.querySelector('a-scene').enterVR();
+	});
+	document.querySelector('#cmnd11').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+	});
+	document.querySelector('#cmnd12').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+	document.querySelector('#cmnd13').addEventListener('click', function () {
+		document.querySelector('a-scene').enterVR();
+	});
+	document.querySelector('#cmnd14').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+	});
+	document.querySelector('#cmnd15').addEventListener('click', function () {
+		document.querySelector('a-scene').components.screenshot.capture('perspective');
+	});
+
+
+</script>
+	</body>
+</html>>
