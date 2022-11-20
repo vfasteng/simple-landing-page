@@ -367,16 +367,16 @@
 
 
             <!--
-        <a-asset-item id="k2" src="engine-edges.glb"></a-asset-item>
-        <a-asset-item id="k3" src="assets/p1.glb"></a-asset-item>
-        <a-asset-item id="k4" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
-        <a-asset-item id="k5" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
-        <a-asset-item id="k6" src="assets/assembly.glb"></a-asset-item>
-        <a-asset-item id="k7" src="assets/hands44.obj"></a-asset-item>
-        <a-asset-item id="k8" src="assets/ferrariv8.glb"></a-asset-item>
-        <a-asset-item id="k9" src="assets/gear16.glb"></a-asset-item>
-        <a-asset-item id="k10" src="assets/splitshafts.glb"></a-asset-item>
-        -->
+    <a-asset-item id="k2" src="engine-edges.glb"></a-asset-item>
+    <a-asset-item id="k3" src="assets/p1.glb"></a-asset-item>
+    <a-asset-item id="k4" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
+    <a-asset-item id="k5" src="assets/linear-screw-1000-assy.glb"></a-asset-item>
+    <a-asset-item id="k6" src="assets/assembly.glb"></a-asset-item>
+    <a-asset-item id="k7" src="assets/hands44.obj"></a-asset-item>
+    <a-asset-item id="k8" src="assets/ferrariv8.glb"></a-asset-item>
+    <a-asset-item id="k9" src="assets/gear16.glb"></a-asset-item>
+    <a-asset-item id="k10" src="assets/splitshafts.glb"></a-asset-item>
+    -->
             <!--<a-asset-item id="engine" src="engine-edges.glb"></a-asset-item>
     <a-asset-item id="pp11" src="assets/p1.glb"></a-asset-item>
     <a-asset-item id="crank" src="assets/Crankshaft_Pistons.glb"></a-asset-item>
@@ -400,44 +400,54 @@
             <img id="ring5" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/model.png?v=1665597644170">
             <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsclight.png?v=1618928375551">
             <img id="imm2" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
-        </a-assets>
+            
 
-        <a-entity>
-            <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 2 0 7.5">
-                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+                <img id="sand" crossorigin="anonymous" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8yk8DfEK3_p00rFA6v0HmoRRBUnofgIJkIe5ABarDJqJF3V3_">
+                <img id="glass" crossorigin="anonymous" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXhbpfWPwlvkCP7xAgq00gumbFRQ6q-eUNH4a9LUrIXs--J7ac">
+                <img id="rust" crossorigin="anonymous" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeeEo19vWWDeLx2o9a0ypIUv4qvpDAWcRa_AAo3UI2-nF_2Nus">
+                <img id="leaves" crossorigin="anonymous" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFECvldc9ayjqk6jZUFhHyLyhNJFXlp9Y7Fb6EuqTjw5BJE5J8KQ">
+                <img id="mix" crossorigin="anonymous" src="https://us.v-cdn.net/5021068/uploads/editor/f0/6kymf4lg6ium.jpg">
+                <img id="equi" crossorigin="anonymous" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/screenshot-toolbar-menu-1664451802701.png?v=1664451899625">
+
+            </a-assets>
+            <a-box position="-1 2.5 0.5" depth="1" height="1" width="1" color="#FFF65D" src="#equi"></a-box>
+            <!--If the shape has color and texture, the color will be like a filter to the image, the color will multiply -->
+
+
+            <a-entity>
+                <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 2 0 7.5">
+                    <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+                </a-entity>
+            </a-entity>
+            <!--
+            <a-entity id="assy" position="0 0 3" rotation="0 0 0" scale="1 1 1">
+
+                <a-entity id="prt1" position="0 1 -1" gltf-model="#cb1" rotation="0 0 0" scale="1 1 1"></a-entity>
+                <a-entity id="prt2" position="0 0 0" gltf-model="#cb1" rotation="0 0 0" scale="1 1 1"></a-entity>
+                <a-entity id="prt3" position="-1 0 -3" gltf-model="#ccyl1" rotation="0 180 90" scale="1 1 1"></a-entity>
+                <a-entity id="prt4" position="1 0 -3" gltf-model="#ccyl1" rotation="0 0 90" scale="1 1 1"></a-entity>
+                <a-entity id="prt5" position="-1 0 3" gltf-model="#ccyl1" rotation="0 180 90" scale="1 1 1"></a-entity>
+                <a-entity id="prt6" position="1 0 3" gltf-model="#ccyl1" rotation="0 0 90" scale="1 1 1"></a-entity>
 
             </a-entity>
-        </a-entity>
-<!--
-        <a-entity id="assy" position="0 0 3" rotation="0 0 0" scale="1 1 1">
+        -->
+            <!--<a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
+    <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
+    <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
+        -->
 
-            <a-entity id="prt1" position="0 1 -1" gltf-model="#cb1" rotation="0 0 0" scale="1 1 1"></a-entity>
-            <a-entity id="prt2" position="0 0 0" gltf-model="#cb1" rotation="0 0 0" scale="1 1 1"></a-entity>
-            <a-entity id="prt3" position="-1 0 -3" gltf-model="#ccyl1" rotation="0 180 90" scale="1 1 1"></a-entity>
-            <a-entity id="prt4" position="1 0 -3" gltf-model="#ccyl1" rotation="0 0 90" scale="1 1 1"></a-entity>
-            <a-entity id="prt5" position="-1 0 3" gltf-model="#ccyl1" rotation="0 180 90" scale="1 1 1"></a-entity>
-            <a-entity id="prt6" position="1 0 3" gltf-model="#ccyl1" rotation="0 0 90" scale="1 1 1"></a-entity>
+            <a-light type="hemisphere" color="white" position="0 0 0" intensity="2.0"></a-light>
+            <!--animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"-->
 
-        </a-entity>
-    -->
+            <a-sphere id="skeye" src="#ring4" radius="50"></a-sphere>
 
-        
-        <!--<a-box position="-1 2.5 -3" rotation="0 45 0" color="#4CC3D9" dynamic-body></a-box>
-        <a-sphere position="0 2.25 -5" radius="1.25" color="#EF2D5E" dynamic-body></a-sphere>
-        <a-cylinder position="1 2.75 -3" radius="0.5" height="1.5" color="#FFC65D" dynamic-body></a-cylinder>
-            -->
+            <a-entity sound="autoplay: true; src: audio/321103__nsstudios__blip1.wav"></a-entity>
+            <a-entity sound="autoplay: true; src: audio/321104__nsstudios__blip2.wav"></a-entity>
 
-        <a-light type="hemisphere" color="white" position="0 0 0" intensity="2.0"></a-light>
-        <!--animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"-->
-
-        <a-sphere id="skeye" src="#ring4" radius="50"></a-sphere>
-
-        <a-entity sound="autoplay: true; src: audio/321103__nsstudios__blip1.wav"></a-entity>
-        <a-entity sound="autoplay: true; src: audio/321104__nsstudios__blip2.wav"></a-entity>
-
-        <a-entity id="seenmodel" gltf-model="#engine" position="0 0 0"></a-entity>
-        <a-box id="ground" static-body width="10" height="0.001" depth="10" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:10;divisions:20"></a-box>
-    </a-scene>
+            <a-entity id="seenmodel" gltf-model="#engine" position="0 0 0"></a-entity>
+            <a-box id="ground" static-body width="10" height="0.001" depth="10" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:10;divisions:20"></a-box>
+</a-scene>
     <script src="../js/aframe-physics-system.min.js"></script>
     <script src="../js/aframe-animation-component.min.js"></script>
 

@@ -1,11 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\aframe-boilerplate-master",
     "\\exporter",
-    "\\exporter\\assets",
-    "\\indexedfaceset"
+    "\\exporter\\images",
+    "\\exporter\\models",
+    "\\utils"
   ],
-  "SelectedNode": "\\tester.html",
+  "SelectedNode": "\\arena.html",
   "PreviewInSolutionExplorer": false
 }

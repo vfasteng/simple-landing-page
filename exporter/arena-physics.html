@@ -207,7 +207,7 @@
         <a-assets>
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
-            <a-asset-item id="gear16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273" position="0 2.5 0" rotation="0 0 0" scale="1 1 1""></a-asset-item>
+            <a-asset-item id="gear16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273"></a-asset-item>
 
             <a-asset-item id="waddler" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/waddler.glb?v=1668021723166"></a-asset-item>
 
@@ -481,49 +481,50 @@
             </a-entity>
         </a-entity>
 
+        <a-entity id="redxyz" position="-3 0 3" rotation="0 0 0">
+            <a-entity id="redbx1" position="5 0 -0.5" rotation="0 0 0">
+                <a-entity id="bot11" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
 
-        <a-entity id="redbx1" position="5 3 0" rotation="0 0 0">
-            <a-entity id="bot11" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+                </a-entity>
+                <a-entity id="top11" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#bot11;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
+
+                </a-entity>
 
             </a-entity>
-            <a-entity id="top11" gltf-model="#gear16" position="0 2.5 0" rotation="0 0 0" scale="22 22 22"
-                      constraint="type:hinge;target:#bot11;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
-                      dynamic-body click-impulse>
+
+            <a-entity id="redbx2" position="5 0 -3" rotation="0 11 0">
+                <a-entity id="bot12" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+
+                </a-entity>
+                <a-entity id="top12" gltf-model="#gear16" rotation="0 0 0" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#bot12;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
+
+                </a-entity>
+
+            </a-entity>
+
+            <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
+                <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+
+                </a-entity>
+                <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
+
+                </a-entity>
 
             </a-entity>
 
         </a-entity>
-
-        <a-entity id="redbx2" position="5 3 -3" rotation="0 0 0">
-            <a-entity id="bot12" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273" position="0 2.5 0" rotation="0 0 0" scale="1 1 1""></a-asset-item>
-" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
-
-            </a-entity>
-            <a-entity id="top12" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="1 1 1"
-                      constraint="type:hinge;target:#bot12;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
-                      dynamic-body click-impulse>
-
-            </a-entity>
-
-        </a-entity>
-
-        <a-entity id="redbx3" position="5 3 -6" rotation="0 0 0">
-            <a-entity id="bot13" gltf-model="#gear16" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
-
-            </a-entity>
-            <a-entity id="top13" gltf-model="#gear16" position="0 2.5 0" rotation="0 0 0" scale="1 1 1"
-                      constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
-                      dynamic-body click-impulse>
-
-            </a-entity>
-
-        </a-entity>
+        
 
 
 
 
-
-        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body></a-entity>
+        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb4" gltf-model="#gear16" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
@@ -574,7 +575,7 @@
             <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
         </a-entity>
-    </a-entity-->
+    </a-entity--
         <a-entity id="redbx4" position="0 3 -6" rotation="0 0 0">
             <a-entity id="bot14" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body >
 

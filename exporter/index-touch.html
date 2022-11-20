@@ -143,19 +143,20 @@
         }
     </style>
 </head>
-<body>
-    <div id="container">
-        <button id="export-scene" class="button"><span>Export Scene</span></button>
-        <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
-        <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
-        <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
-        <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
-        <!--
+<div id="container">
+    <button id="export-scene" class="button"><span>Export Scene</span></button>
+    <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
+    <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
+    <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
+    <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+    <!--
 
-              <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
-              <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
-              -->
-    </div>
+          <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
+          <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
+          -->
+</div>
+<body>
+    
     <a-scene gltf-exporter physics="gravity:-9.81;friction:0" debug="false" stats="false" loading-screen={`enabled: false`}>
 
             <a-assets>
@@ -242,7 +243,7 @@
 
 
             <a-camera position="0 1.6 4">
-                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"><a-cursor></a-cursor></a-entity>
             </a-camera>
 
             <a-entity id="anchor"
@@ -300,7 +301,7 @@
         </a-scene>
         <script type="text/javascript" src="aframe-physics-system.min.js"></script>
         <script src="dist/aframe-inspector.min.js"></script>
-        <script src="js/aframe-physics-system.min.js"></script>
+        <script src="aframe-physics-system.min.js"></script>
         <script>
             function exportGLTF(input, options) {
                 AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
