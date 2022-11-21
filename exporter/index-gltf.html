@@ -198,7 +198,7 @@
             <a-asset-item id="wheel" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
 
             <!--<a-scene physics="gravity:-9.81;friction:0" debug="true" stats="false" loading-screen={`enabled: false`}>
-    -->
+        -->
             <img id="galaxy" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/780593/galaxy.jpg">
             <img id="moon" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/moon_1024.jpg">
             <img id="clouds" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/earth_clouds_2048.png">
@@ -295,8 +295,8 @@
                      material="shader: standard"
                      color="black"></a-mixin>
             <a-mixin id="voxel"
-                     gltf-model="#cb1"
-                     snap="offset: 0.5 0.5 0.5; snap: 1 1 1"></a-mixin>
+                     geometry="primitive:sphere;color:blue;wireframe:true;radius:0.1"
+                     snap="offset: 0 0 0; snap: 1 1 1"></a-mixin>
             <a-mixin id="baxbase"
                      gltf-model="#cb1" gltf-part="bufferGeometry:true" model-center="bottomAlign:true"
                      snap="offset: 0.5 0 0.5; snap: 1 0 1" constraint="type:hinge;target:p1;axis:1 0 0;targetAxis  "></a-mixin>
@@ -305,14 +305,14 @@
                      constraint="type:hinge;target:#plate1;axis:0 1 0;targetAxis:0 1 0;pivot:0 -0.5 0;targetPivot:0 0 0.2"
                      dynamic-body click-impulse>
                 <!--<a-sphere id="spher1-xz" radius="0.01" position="0 0 0" rotation="0 0 0" material="color:red;wireframe:true"
-                  constraint="type:pointTopoint;target:spher1-xy;pivot:0 0 0;targetPivot:0 0 0"
-                  static.body></a-sphere>
-        <a-sphere id="spher2-xz" radius="0.01" position="0 0 0" rotation="0 0 0" material="color:yellow;wireframe:true"
-                  static-body></a-sphere>-->
+                      constraint="type:pointTopoint;target:spher1-xy;pivot:0 0 0;targetPivot:0 0 0"
+                      static.body></a-sphere>
+            <a-sphere id="spher2-xz" radius="0.01" position="0 0 0" rotation="0 0 0" material="color:yellow;wireframe:true"
+                      static-body></a-sphere>-->
             </a-mixin>
         </a-assets>
 
-        
+
         <a-entity id="plate1" gltf-model="#bb030" position="0 0 0" rotation="0 0 0">
             <a-entity id="pm1" mixin="hinge-mixin">
 
@@ -380,7 +380,14 @@
             </a-entity>
         </a-entity>
 
+        <a-entity id="spin-boxx" position="3 0 3" rotation="" >
+            <a-cylinder id="hinge11-target" position="" rotation="" color="#777" static-body="sphereRadius: NaN" radius="0.5" height="0.01" material="" geometry="" velocity="">
 
+            </a-cylinder>
+            <a-entity gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/16stub.glb?v=1656313611998" position="1.3322676295501878e-15 1.999997599771623 -1.5e-323" rotation="-2.114872204233446e-15 160.47420896334523 4.48820375676091e-15" scale="" dynamic-body="sphereRadius: NaN" click-impulse="" constraint="type: hinge; target: #hinge11-target; axis: 0 1 0; targetAxis: 0 1 0; targetPivot: 0 2 0" velocity="">
+                
+            </a-entity>
+        </a-entity>
 
         <!--
     <a-entity id="redbxyz" position="-2 2 0">
