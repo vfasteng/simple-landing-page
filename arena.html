@@ -129,14 +129,16 @@
     </style>
     <link rel="stylesheet" type="text/css" href="aframe.css">
 </head>
+
+<div id="container">
+    <button id="btn1" class="button" onclick="cmm1()"><span>cmnd1</span></button>
+    <button id="btn2" class="button" onclick="cmm2()"><span>cmnd2</span></button>
+    <button id="btn3" class="button" onclick="cmm3()"><span>cmnd3</span></button>
+    <button id="btn4" class="button" onclick="cmm4()"><span>cmnd4</span></button>
+</div>
+
 <body>
-    <div id="container">
-        <button id="getmodel" class="button" onclick="getmodelall()"><span>cmd1</span></button>
-        <button id="position-it" class="button"><span>Physics </span></button>
-        <button id="set-limits" class="button"><span>Constraints</span></button>
-        <button id="export-scene" class="button"><span>Animate</span></button>
-        <button id="export-scene-bin" class="button"><span>Downloads</span></button>
-    </div>
+    
     <a-scene ground="preset: contact; ground: flat; dressingAmount: 0" physics="debug: false; friction: 0.1; restitution: 0.5">
         <a-assets>
             <a-mixin id="mycursor" position="0 0 -0.5" raycaster geometry="primitive: ring; radiusOuter: 0.008; radiusInner: 0.005; segmentsTheta: 32" material="color: white; shader: flat" static-body="shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;colliderEventProperty: els;colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;colliderState:"></a-mixin>
@@ -266,11 +268,6 @@
             <a-mixin id="weight16" mass="16.0"></a-mixin>
             <a-mixin id="weight32" mass="32.0"></a-mixin>
 
-
-
-            <a-asset-item id="boxxex" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/rb.glb?v=1665053294871"></a-asset-item>
-            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
-
             <a-asset-item id="g05" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fwheelassemblygd.glb?v=1613578464283"></a-asset-item>
             <a-asset-item id="g01" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsixboxx.glb?v=1606822401718"></a-asset-item>
             <a-asset-item id="g02" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2F6way6.glb?v=1606803426724"></a-asset-item>
@@ -284,8 +281,8 @@
             <a-asset-item id="g11" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2FCankshaft_.glb?v=1603793853839"></a-asset-item><!--crank-->
             <a-asset-item id="g12" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fthrustrod_.glb?v=1603794206862"></a-asset-item><!--rod-->
             <a-asset-item id="g13" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fthrustcap_.glb?v=1603793815420"></a-asset-item><!--brgcap-->
-            <a-asset-item id="g14" src=""></a-asset-item><!--frontmain-->
-            <a-asset-item id="g15" src=""></a-asset-item><!--piston-->
+            <a-asset-item id="6w6" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/6w6.glb?v=1669123423124"></a-asset-item><!--frontmain-->
+            <a-asset-item id="crankv6" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/crank-v6.glb?v=1669096307642"></a-asset-item><!--piston-->
             <a-asset-item id="g16" src=""></a-asset-item><!--frontcover-->
             <a-asset-item id="g17" src=""></a-asset-item><!--sump-->
             <a-asset-item id="g18" src=""></a-asset-item><!--pulley-->
