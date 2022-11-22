@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>index5</title>
-    <meta name="description" content="wip">
+    <title>ASSEMBLER</title>
+    <meta name="description" content="AND JOINT-MAKER">
 
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
@@ -39,13 +39,13 @@
     <script src="js/mouse-dnd-component.js"></script>
 
     <!--reaction components-->
-    <script src="js/clickable.js"></script>
-    <script src="js/draggable.js"></script>
-    <script src="js/drag-droppable.js"></script>
-    <script src="js/hoverable.js"></script>
-    <script src="js/stretchable.js"></script>
-    <script src="js/droppable.js"></script>
-    <script src="js/grabbable.js"></script>
+    <script src="reaction_components/clickable.js"></script>
+    <script src="reaction_components/draggable.js"></script>
+    <script src="reaction_components/drag-droppable.js"></script>
+    <script src="reaction_components/hoverable.js"></script>
+    <script src="reaction_components/stretchable.js"></script>
+    <script src="reaction_components/droppable.js"></script>
+    <script src="reaction_components/grabbable.js"></script>
 
     <link rel="stylesheet" type="text/css" href="aframe.css">
 
@@ -99,242 +99,215 @@
     </style>
 
     <script type="text/javascript">
-		if (window.AFRAME == null) {
-			console.error("aframe not found, please import it before this component.")
-		}
+        if (window.AFRAME == null) {
+            console.error("aframe not found, please import it before this component.")
+        }
 
-		AFRAME.registerSystem("track-cursor", {
-			init: function () {
-				this.el.setAttribute("cursor", { rayOrigin: "mouse" });
-			}
-		});
+        AFRAME.registerSystem("track-cursor", {
+            init: function () {
+                this.el.setAttribute("cursor", { rayOrigin: "mouse" });
+            }
+        });
 
-		AFRAME.registerComponent("track-cursor", {
-			init: function () {
-				this.el.addEventListener("mousedown", e => {
-					if (this.el.is("cursor-hovered")) {
-						this.el.sceneEl.camera.el.setAttribute("look-controls", {
-							enabled: false
-						});
-						this.el.addState("dragging");
-					}
-				})
-				this.el.addEventListener("click", e => {
-					if (this.el.is("dragging")) {
-						this.el.sceneEl.camera.el.setAttribute("look-controls", {
-							enabled: true
-						});
-						this.el.removeState("dragging");
-					}
-				})
-			},
-		});
+        AFRAME.registerComponent("track-cursor", {
+            init: function () {
+                this.el.addEventListener("mousedown", e => {
+                    if (this.el.is("cursor-hovered")) {
+                        this.el.sceneEl.camera.el.setAttribute("look-controls", {
+                            enabled: false
+                        });
+                        this.el.addState("dragging");
+                    }
+                })
+                this.el.addEventListener("click", e => {
+                    if (this.el.is("dragging")) {
+                        this.el.sceneEl.camera.el.setAttribute("look-controls", {
+                            enabled: true
+                        });
+                        this.el.removeState("dragging");
+                    }
+                })
+            },
+        });
 
-		AFRAME.registerComponent("dragndrop", {
-			dependencies: ["track-cursor"],
-			init: function () {
-				this.range = 0;
-				this.dist = 0;
+        AFRAME.registerComponent("dragndrop", {
+            dependencies: ["track-cursor"],
+            init: function () {
+                this.range = 0;
+                this.dist = 0;
 
-				this.el.addEventListener("stateadded", e => {
-					if (e.detail == "dragging") {
-						this.range = 0;
-						this.dist = this.el.object3D.position
-							.clone()
-							.sub(this.el.sceneEl.camera.el.object3D.position)
-							.length();
-					}
-				})
+                this.el.addEventListener("stateadded", e => {
+                    if (e.detail == "dragging") {
+                        this.range = 0;
+                        this.dist = this.el.object3D.position
+                            .clone()
+                            .sub(this.el.sceneEl.camera.el.object3D.position)
+                            .length();
+                    }
+                })
 
-				this.direction = new AFRAME.THREE.Vector3();
-				this.target = new AFRAME.THREE.Vector3();
-				document.addEventListener("wheel", e => {
-					if (e.deltaY < 0) {
-						this.range += 0.1;
-					} else {
-						this.range -= 0.1;
-					}
-				});
-			},
-			updateDirection: function () {
-				this.direction.copy(this.el.sceneEl.getAttribute("raycaster").direction);
-			},
-			updateTarget: function () {
-				let camera = this.el.sceneEl.camera.el
-				this.target.copy(
-					camera.object3D.position
-						.clone()
-						.add(this.direction.clone().multiplyScalar(this.dist + this.range))
-				);
-			},
-			tick: function () {
-				if (this.el.is("dragging")) {
-					this.updateDirection();
-					this.updateTarget();
-					this.el.object3D.position.copy(this.target);
-				}
-			}
-		});
+                this.direction = new AFRAME.THREE.Vector3();
+                this.target = new AFRAME.THREE.Vector3();
+                document.addEventListener("wheel", e => {
+                    if (e.deltaY < 0) {
+                        this.range += 0.1;
+                    } else {
+                        this.range -= 0.1;
+                    }
+                });
+            },
+            updateDirection: function () {
+                this.direction.copy(this.el.sceneEl.getAttribute("raycaster").direction);
+            },
+            updateTarget: function () {
+                let camera = this.el.sceneEl.camera.el
+                this.target.copy(
+                    camera.object3D.position
+                        .clone()
+                        .add(this.direction.clone().multiplyScalar(this.dist + this.range))
+                );
+            },
+            tick: function () {
+                if (this.el.is("dragging")) {
+                    this.updateDirection();
+                    this.updateTarget();
+                    this.el.object3D.position.copy(this.target);
+                }
+            }
+        });
     </script>
     <script>
-                AFRAME.registerComponent('click-impulse', {
-                        init: function () {
-                                var el = this.el;
+        AFRAME.registerComponent('click-impulse', {
+            init: function () {
+                var el = this.el;
 
-                                el.addEventListener('click', function () {
-                                        el.body.applyImpulse(
-                                                /* impulse */
-                                                new CANNON.Vec3(
-                                                        THREE.Math.randInt(-20, 20),
-                                                        THREE.Math.randInt(-20, 20),
-                                                        THREE.Math.randInt(-20, 20)
-                                                ),
-                                                                                /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
-                                        );
-                                });
-
-                        }
+                el.addEventListener('click', function () {
+                    el.body.applyImpulse(
+                        /* impulse */
+                        new CANNON.Vec3(
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20)
+                        ),
+                                                                                    /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                    );
                 });
 
-                // forward mouse and touch events to the super-hands entity
-                        AFRAME.registerComponent('capture-mouse', {
-                                init: function () {
-                                        this.eventRepeater = this.eventRepeater.bind(this)
-                                        this.el.sceneEl.addEventListener('loaded', () => {
-                                                this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
-                                                this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
-                                                this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
-                                                this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
-                                                this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
-                                        }, { once: true })
-                                },
-                                eventRepeater: function (evt) {
-                                        if (evt.type.startsWith('touch')) {
-                                                evt.preventDefault()
-                                                // avoid repeating touchmove because it interferes with look-controls
-                                                if (evt.type === 'touchmove') { return }
-                                        }
-                                        this.el.emit(evt.type, evt.detail)
-                                }
-                        })
+            }
+        });
+
+        // forward mouse and touch events to the super-hands entity
+        AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+                this.eventRepeater = this.eventRepeater.bind(this)
+                this.el.sceneEl.addEventListener('loaded', () => {
+                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+                }, { once: true })
+            },
+            eventRepeater: function (evt) {
+                if (evt.type.startsWith('touch')) {
+                    evt.preventDefault()
+                    // avoid repeating touchmove because it interferes with look-controls
+                    if (evt.type === 'touchmove') { return }
+                }
+                this.el.emit(evt.type, evt.detail)
+            }
+        })
     </script>
 
 
+    <style>
+        button {
+            width: 70px;
+            height: 20px;
+            position: relative;
+            top: 1px;
+            z-index: 2;
+        }
+    </style>
 </head>
 <body>
     <script>
-                function setpartOrigin(target) {
-                        target.setAttribute('position', 'rotation', x, y, z, w);
-                        // position selected part
-                }
+        function setpartOrigin(target) {
+            target.setAttribute('position', 'rotation', x, y, z, w);
+            // color randomizer credit: http://stackoverflow.com/a/7638362
+        }
     </script>
     <script>
-			function exportpartinc() {
-				//set the parent entity or place the assembly templat
+        var changesphere = function () {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
 
-				//get assembly-plane element position rotation and scale
+            }
+        }
+        var changecylinder = function () {
+            console.log(document.querySelector("a-cylinder").getAttribute("color"))
+            if (document.querySelector("a-cylinder").getAttribute("color") !== "blue") {
+                document.querySelector("a-cylinder").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-cylinder").setAttribute("color", "green");
 
-				//get assembly plane´s final position relative to the part origim
-
-				//set the position of the part
-
-				//set the constraints and limits of movement
-
-				//animate the motion
-
-				document.getElementById('p1')
-
-
-			}
-    </script>
-    <script>
-			function setpartOrigin(target) {
-					target.setAttribute('position', 'rotation', x, y, z, w);
-					// color randomizer credit: http://stackoverflow.com/a/7638362
-			}
-    </script>
-    <script>
-			function setpartOrigin(target) {
-					target.setAttribute('position', 'rotation', x, y, z, w);
-					// color randomizer credit: http://stackoverflow.com/a/7638362
-			}
-    </script>
-
-
-
-
-    <script>
-		var changesphere = function () {
-			console.log(document.querySelector("a-sphere").getAttribute("color"))
-			if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-				document.querySelector("a-sphere").setAttribute("color", "blue");
-			} else {
-				document.querySelector("a-sphere").setAttribute("color", "green");
-
-			}
-		}
-		var changecylinder = function () {
-			console.log(document.querySelector("a-cylinder").getAttribute("color"))
-			if (document.querySelector("a-cylinder").getAttribute("color") !== "blue") {
-				document.querySelector("a-cylinder").setAttribute("color", "blue");
-			} else {
-				document.querySelector("a-cylinder").setAttribute("color", "green");
-
-			}
-		}
+            }
+        }
 
 
 
     </script>
-
-
-    <div id="container" aligncontent="center">
-        <button id="physicstoggle" top="10px" onclick="physicsonoff()">
+    <div id="container" align="center">
+        <button id="changesphere" top="10px" onclick="changesphere()">
             physics
         </button>
         <button id="changecylinder" top="10px" onclick="changecylinder()">
-            cylinder
+            t-table
         </button>
         <button id="changesphere" top="10px" onclick="changesphere()">
             sphere
         </button>
-        <button id="insertpart" top="10px" onclick="insertpart()">
+        <button id="changecylinder" top="10px" onclick="changecylinder()">
+            cylinder
+        </button>
+        <button id="loader" top="10px" onclick="loaderglb()">
             part
         </button>
-        <button id="insertjoint" top="10px" onclick="insertjoint()">
-            joint
+        <button id="networker" top="10px" onclick="layout()">
+            Layout
         </button>
-        <button id="selectactivepart" top="10px" onclick="selectactivepart()">
-            active
+        <button id="prtorigin" top="10px" onclick="prtorigin()">
+            <!---->
+            ORIGIN
         </button>
-        <button id="configpart" top="10px" onclick="configpart()">
-            config
+        <button id="axispivot" top="10px" onclick="axispivot()">
+            AXIS/PIVOT
         </button>
-        <button id="animenv" top="10px" onclick="animenv()">
-            animate
+        <button id="configtable" top="10px" onclick="configtable()">
+            CONFIG
         </button>
-        <button id="simenv" top="10px" onclick="configtable()">
-            simulate
-        </button>
-        <button id="recordd" top="10px" onclick="recordd()">
-            record
+        <button id="runapp" top="10px" onclick="runapp()">
+            RUN
         </button>
     </div>
-    <a-scene physics="gravity:-9.81;friction:0">
+    <a-scene>
         <a-assets>
-            <a-asset-item id="prt1" src="#"></a-asset-item>
-            <a-asset-item id="prt2" src="#"></a-asset-item>
-            <a-asset-item id="prt3" src="#"></a-asset-item>
-            <a-asset-item id="prt4" src="#"></a-asset-item>
-            <a-asset-item id="prt5" src="#"></a-asset-item>
-            <a-asset-item id="prt6" src="#"></a-asset-item>
-            <a-asset-item id="prt7" src="#"></a-asset-item>
-            <a-asset-item id="prt8" src="#"></a-asset-item>
-            <a-asset-item id="prt9" src="#"></a-asset-item>
-            <a-asset-item id="prt0" src="#"></a-asset-item>
-
-            <a-mixin id="mix01" dynamic-body="shape: box; mass: 1.5;linearDamping: 0.05;angularDamping:0.05"></a-mixin>
-            <a-mixin id="mix02" dynamic-body="shape: cylinder; cylinderAxis:y; mass: 1.5;linearDamping: 0.05;angularDamping:0.05"></a-mixin>
+            <!--a-asset-item id="prt1" src="#"></!--a-asset-item>
+    <a-asset-item id="prt2" src="#"></a-asset-item>
+    <a-asset-item id="prt3" src="#"></a-asset-item>
+    <a-asset-item id="prt4" src="#"></a-asset-item>
+    <a-asset-item id="prt5" src="#"></a-asset-item>
+    <a-asset-item id="prt6" src="#"></a-asset-item>
+    <a-asset-item id="prt7" src="#"></a-asset-item>
+    <a-asset-item id="prt8" src="#"></a-asset-item>
+    <a-asset-item id="prt9" src="#"></a-asset-item>
+    <a-asset-item id="prt0" src="#"></a-asset-item>
+    -->
+            <a-mixin id="mix01" src="#"></a-mixin>
+            <a-mixin id="mix02" src="#"></a-mixin>
             <a-mixin id="mix03" src="#"></a-mixin>
             <a-mixin id="mix04" src="#"></a-mixin>
             <a-mixin id="mix05" src="#"></a-mixin>
@@ -356,9 +329,9 @@
             <a-asset-item id="cadboxx-three" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fcadboxxthree.glb?v=1618302772439"></a-asset-item>
 
             <!---<a-asset-item id="" src=""></a-asset-item>--
-                        <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Ftexture.PNG?v=1633143378841">
-                        <a-asset-item id="xx" src=""></a-asset-item>
-            -->
+                <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Ftexture.PNG?v=1633143378841">
+                <a-asset-item id="xx" src=""></a-asset-item>
+    -->
             <img id="imm1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Ftexture.PNG?v=1633143378841">
             <a-asset-item id="gg01" src="#"></a-asset-item>
             <a-asset-item id="gg02" src="#"></a-asset-item>
@@ -391,7 +364,7 @@
             <a-asset-item id="chlink1" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fchink1.glb?v=1606822463366"></a-asset-item>
             <a-asset-item id="chlink2" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fchink2.glb?v=1606822434718"></a-asset-item>
             <a-asset-item id="layplane" geometry="primitive: plane; side: double; material.color:red; material.wireframe:true;"></a-asset-item>
-            <a-mixin id="gltf-util" gltf-helpers="buffer:false; src:selector; resetPosition:true; model-center:bottomAlign:true"></a-mixin>
+            <a-mixin id="gltf-util" gltf-helpers="buffer:false; resetPosition:true; model-center:bottomAlign:true"></a-mixin>
 
             <!---->
             <a-mixin id="gltf-util-1" gltf-helpers="buffer:false; name:prt1; src:selector; resetPosition:true; model-center:bottomAlign:true"></a-mixin>
@@ -474,9 +447,9 @@
 					grabStartButtons: gripdown, pointdown, triggerdown;
 					grabEndButtons: gripup, pointup, triggerup"></a-mixin>
             <!--	 static-body="shape: sphere; sphereRadius: 0.11"
-                     oculus-touch-controls="hand: left" physics-collider
-                     collision-filter="collidesWith: default;" collisionForces="false">
-            -->
+             oculus-touch-controls="hand: left" physics-collider
+             collision-filter="collidesWith: default;" collisionForces="false">
+    -->
 
             <a-mixin id="constraint_hinge" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
             <a-mixin id="constraint_distance" constraint="type: distance;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
@@ -500,9 +473,28 @@
             <img id="im7" src="../images/negx.jpg" />
             <img id="im8" src="../images/negy.jpg" />
             <img id="im9" src="../images/negz.jpg" />
+
+            <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
+            <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+            <a-asset-item id="prt1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/crank-v6.glb?v=1669096307642"></a-asset-item>
+            <a-asset-item id="prt2" src="#"></a-asset-item>
+            <a-asset-item id="prt3" src="#"></a-asset-item>
+            <a-asset-item id="prt4" src="#"></a-asset-item>
+            <a-asset-item id="prt5" src="#"></a-asset-item>
+            <a-asset-item id="prt6" src="#"></a-asset-item>
+            <a-asset-item id="prt7" src="#"></a-asset-item>
+            <a-asset-item id="prt8" src="#"></a-asset-item>
+            <a-asset-item id="prt9" src="https://uploads-prod.reticulum.io/files/54ac6a8d-7e0e-4d98-8ed8-6d4f09716c05.glb"></a-asset-item>
+            <a-asset-item id="prt0" src="#"></a-asset-item>
+
+            <mixin id="movement1" constraint="type:hinge;target:#center;axis:0 0 1;targetAxis:0 0 1;pivot:0 0 0;targetPivot:0 0 0" dynamic-body click-impulse></mixin>
+
+            <mixin id="position1" gltf-helpers="model-center:bottomAlign" position="0 0 0" rotation="0 0 0" ></mixin>
+
+
         </a-assets>
 
-        <!--cadboxx walls, floor and lighting-->
+        <!--cadboxx walls, floor and lighting to 40 square-->
         <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
             <a-entity id="planeboxx" position="0 0 0">
                 <a-entity id="planebox" position="0 0 0">
@@ -521,474 +513,515 @@
                 <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
                 <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
 
-                <a-box id="ground" position="0 -0.001 0" rotation="0 0 0" width="40" depth="40" height="0.002" color="lightblue" opacity=".25" gridhelper="size: 40;divisions:20;colorCenterLine:red" static-body></a-box>
+                <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
+                    <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+                    <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
+                    <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
+                    <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
+                    <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm5()" static-body></a-box>
+                    <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm6()" static-body></a-box>
+                    <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="red" opacity="1" onclick="cmm7()" static-body></a-box>
+                    <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="orange" opacity="1" onclick="cmm8()" static-body></a-box>
+                    <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm9()" static-body></a-box>
+                    <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm10()" static-body></a-box>
+                    <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm11()" static-body></a-box>
+                    <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="green" opacity="1" onclick="cmm12()" static-body></a-box>
+                    <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="red" opacity="1" onclick="cmm13()" static-body></a-box>
+                    <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm14()" static-body></a-box>
+                    <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm15()" static-body></a-box>
+
+                </a-box>
+
+
+                <!-- <a-box position="0 -0.1 0" rotation="0 0 0" width="15" depth="15" height="0.2" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body></a-box>-->
+                <a-cylinder id="ground" position="0 -0.0001 0" rotation="0 0 0" radius="30" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 40;divisions:20" static-body></a-cylinder>
 
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
 
-            <a-entity>
+            <!--
+    <a-entity id="assy-planes" position="0 2.5 0" rotation="-90 0 0" layout="type: circle; radius: 2.5">
+        <a-plane id="pl1" side="double" color="black" rotation="0 0 0"></a-plane>
+        <a-plane id="pl2" side="double" color="black" rotation="0 0 40"></a-plane>
+        <a-plane id="pl3" side="double" color="black" rotation="0 0 80"></a-plane>
+        <a-plane id="pl4" side="double" color="black" rotation="0 0 120"></a-plane>
+        <a-plane id="pl5" side="double" color="black" rotation="0 0 160"></a-plane>
+        <a-plane id="pl6" side="double" color="black" rotation="0 0 200"></a-plane>
+        <a-plane id="pl7" side="double" color="black" rotation="0 0 240"></a-plane>
+        <a-plane id="pl8" side="double" color="black" rotation="0 0 280"></a-plane>
+        <a-plane id="pl9" side="double" color="black" rotation="0 0 320"></a-plane>
 
-                <a-entity id="assy-planes" position="0 2.5 0" rotation="-90 0 0" layout="type: circle; radius: 2.5">
-                    <a-plane id="pl1" side="double" color="black" rotation="0 0 0" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl2" side="double" color="black" rotation="0 0 40" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl3" side="double" color="black" rotation="0 0 80" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl4" side="double" color="black" rotation="0 0 120" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl5" side="double" color="black" rotation="0 0 160" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl6" side="double" color="black" rotation="0 0 200" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl7" side="double" color="black" rotation="0 0 240" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl8" side="double" color="black" rotation="0 0 280" opacity="0.25" static-body></a-plane>
-                    <a-plane id="pl9" side="double" color="black" rotation="0 0 320" opacity="0.25" static-body></a-plane>
+    </a-entity>-->
+
+            <a-entity id="prt00" position="0 0 0" rotation="0 0 0">
+                <a-dodecahedron id="prt0" radius="2.5" color="yellow" material="wireframe:true" rotation="144 0 0"></a-dodecahedron>
+
+            </a-entity>
+
+            <a-entity id="examiner" position="0 0 0" rotation="0 0 0" scale="1 1 1">
+                <a-entity id="exam1" gltf-model="#cb1" mixin="position1" ></a-entity>
+
+            </a-entity>
+
+            <a-entity id="assembly" position="0 0 0" rotation="0 0 0" scale="10 10 10">
+                <a-entity id="part1" gltf-model="#prt9" model-center="bottomAlign:true" position="0 0 0" rotation="0 0 90"></a-entity>
+
+            </a-entity>
+
+            <a-entity id="rotorz" position="0 0 0" rotation="0 0 0">
+                <a-cylinder id="flywheel" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="center" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+
+
+                <a-entity id="crank-throw" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
+                    <a-cylinder id="pos-zero" radius="0.05" height="10.1" color="red" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-two" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-six" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-ten" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="pos-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
 
                 </a-entity>
-
-                <a-entity id="p1" position="5 3 0" rotation="0 0 0">
-                    <a-entity id="bottom-square" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
-
-                    </a-entity>
-                    <a-entity id="top-hex" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 2 2"
-                              constraint="type:hinge;target:#bottom-square;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
-                              dynamic-body click-impulse>
-
-                    </a-entity>
-
-                </a-entity>
-                <!--<a-entity id="boxx-outers" position="0 0 0" rotation="0 0 0" >
-                        <a-box id="b1" position="0 10.5 0" color="green" width="20" height="1.0" depth="20" opacity="1"></a-box>
-
-                        <a-box id="b2" position="0 -10.5 0" color="green" width="20" height="1.0" depth="20" opacity="1"></a-box>
-                        <a-box id="b3" position="10.5 0 0" color="red" width="1.0" height="20" depth="20" opacity="1"></a-box>
-                        <a-box id="b4" position="-10.5 0 0" color="red" width="1.0" height="20" depth="20" opacity="1"></a-box>
-                        <a-box id="b5" position="0 0 10.5" color="blue" width="20" height="20.0" depth="1" opacity="1"></a-box>
-                        <a-box id="b6" position="0 0 -10.5" color="blue" width="20" height="20.0" depth="1" opacity="1"></a-box>
-
-                </a-entity>
-
-                <a-entity id="boxx-inners" position="0 0 0" rotation="0 0 0" >
-                        <a-box id="b11" position="0 9.5 0" color="yellow" width="15" height=".5" depth="15" opacity="1"></a-box>
-
-                        <a-box id="b21" position="0 -9.5 0" color="yellow" width="15" height=".5" depth="15" opacity="1"></a-box>
-                        <a-box id="b31" position="9.5 0 0" color="yellow" width=".5" height="15" depth="15" opacity="1"></a-box>
-                        <a-box id="b41" position="-9.5 0 0" color="yellow" width=".5" height="15" depth="15" opacity="1"></a-box>
-                        <a-box id="b51" position="0 0 9.5" color="yellow" width="15" height="15.0" depth=".5" opacity="1"></a-box>
-                        <a-box id="b61" position="0 0 -9.5" color="yellow" width="15" height="15.0" depth=".5" opacity="1"></a-box>
-
-                </a-entity>
-
-                <a-entity id="boxx-spinners" position="0 0 0" rotation="0 0 0" >
-                        <a-box id="b111" position="0 8.5 0" color="green" width="10" height=".5" depth="10" opacity="1"></a-box>
-
-                        <a-box id="b211" position="0 -8.5 0" color="green" width="10" height=".5" depth="10" opacity="1"></a-box>
-                        <a-box id="b311" position="8.5 0 0" color="red" width=".5" height="10" depth="10" opacity="1"></a-box>
-                        <a-box id="b411" position="-8.5 0 0" color="red" width=".5" height="10" depth="10" opacity="1"></a-box>
-                        <a-box id="b511" position="0 0 8.5" color="blue" width="10" height="10.0" depth=".5" opacity="1"></a-box>
-                        <a-box id="b611" position="0 0 -8.5" color="blue" width="10" height="10.0" depth=".5" opacity="1"></a-box>
-
-                </a-entity>-->
-                <!--
-                <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="3.0" height="8.5"
-                                      panel-color="#072B73"
-                                      panel-rounded="0.2"
-                                      position="2.5 10 -19" rotation="0 0 0">
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="label radio"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="label radio"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="label radio"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="label radio"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="label radio"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Slider"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Solid"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="label toggle"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="label toggle"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="label toggle"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                </a-gui-flex-container>
-                <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="2.5" height="8.5"
-                                      panel-color="#072B73"
-                                      panel-rounded="0.2"
-                                      position="-0.5 10 -19" rotation="0 0 0">
+            </a-entity>
 
 
 
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="Slider"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="Solid"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="Facet"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="Edge"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
-                    <a-gui-radio width="2.0" height="0.65"
-                                 onclick="toggleActionFunction"
-                                 value="Vertex"
-                                 font-family="Arial"
-                                 margin="0 0 0.05 0">
-                    </a-gui-radio>
+            <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="3.0" height="8.5"
+                                  panel-color="#072B73"
+                                  panel-rounded="0.2"
+                                  position="2.5 0 -8.5" rotation="0 0 0">
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="label radio"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="label radio"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="label radio"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="label radio"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="label radio"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
 
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Shade"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Normals"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Outline"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Grid"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                    <a-gui-toggle width="2.0" height="0.65"
-                                  onclick="testToggleAction"
-                                  value="Clear"
-                                  font-family="Arial"
-                                  margin="0 0 0.05 0">
-                    </a-gui-toggle>
-                </a-gui-flex-container>
-                <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="2.0" height="8.5"
-                                      panel-color="#072B73"
-                                      panel-rounded="0.2"
-                                      position="-3.0 10 -19" rotation="0 0 0">
-                    <a-gui-button mouse-cursor
-                                  width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Create"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Create"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Convert"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="CSG"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Merge"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Origin"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="Face"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="function setAxisandpoint()" key-code="32"
-                                  value="Axis/Pt"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="function motionofPart()" key-code="32"
-                                  value="Motion"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-
-                    <a-gui-button width="1.5"
-                                  height="0.7"
-                                  base-depth="0.025"
-                                  depth="0.1"
-                                  gap="0.2"
-                                  onclick="buttonActionFunction" key-code="32"
-                                  value="ClickMe"
-                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
-                                  font-size="0.35"
-                                  margin="0 0 0.05 0"
-                                  font-color="black"
-                                  active-color="red"
-                                  hover-color="yellow"
-                                  border-color="white"
-                                  focus-color="black"
-                                  background-color="orange"
-                                  bevel="true">
-                    </a-gui-button>
-                </a-gui-flex-container>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Slider"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Solid"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="label toggle"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="label toggle"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="label toggle"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+            </a-gui-flex-container>
+            <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="2.5" height="8.5"
+                                  panel-color="#072B73"
+                                  panel-rounded="0.2"
+                                  position="-0.5 0 -8.5" rotation="0 0 0">
 
 
 
-                <!--
-                <a-entity id="mm1" position="-2 2 0" rotation="0 0 0" dynamic-body>
-                    <a-box color="red"></a-box>
-                </a-entity>
-                <a-entity id="mm2" position="0 2 0" rotation="0 0 0" dynamic-body>
-                    <a-cylinder color="yellow"></a-cylinder>
-                </a-entity>
-                <a-entity id="mm3" position="2 2 0" rotation="0 0 0" dynamic-body>
-                    <a-sphere color="green"></a-sphere>
-                </a-entity>
-                -->
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="Slider"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="Solid"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="Facet"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="Edge"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+                <a-gui-radio width="2.0" height="0.65"
+                             onclick="toggleActionFunction"
+                             value="Vertex"
+                             font-family="Arial"
+                             margin="0 0 0.05 0">
+                </a-gui-radio>
+
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Shade"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Normals"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Outline"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Grid"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+                <a-gui-toggle width="2.0" height="0.65"
+                              onclick="testToggleAction"
+                              value="Clear"
+                              font-family="Arial"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+            </a-gui-flex-container>
+            <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="2.0" height="8.5"
+                                  panel-color="#072B73"
+                                  panel-rounded="0.2"
+                                  position="-3.0 0 -8.5" rotation="0 0 0">
+                <a-gui-button mouse-cursor
+                              width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Create"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Create"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Convert"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="CSG"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Merge"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Origin"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="Face"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="function setAxisandpoint()" key-code="32"
+                              value="Axis/Pt"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="function motionofPart()" key-code="32"
+                              value="Motion"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+
+                <a-gui-button width="1.5"
+                              height="0.7"
+                              base-depth="0.025"
+                              depth="0.1"
+                              gap="0.2"
+                              onclick="buttonActionFunction" key-code="32"
+                              value="ClickMe"
+                              font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                              font-size="0.35"
+                              margin="0 0 0.05 0"
+                              font-color="black"
+                              active-color="red"
+                              hover-color="yellow"
+                              border-color="white"
+                              focus-color="black"
+                              background-color="orange"
+                              bevel="true">
+                </a-gui-button>
+            </a-gui-flex-container>
 
 
-                <!--cameras AND LIGHT--><!--templates, superhands, websurfaces, layout, spawn, load ftp, teleporter-cursor, joints, datgui-->
-                <a-entity light="type: hemisphere; color: #33C; groundColor: #3C3; intensity: 2"></a-entity>
-                <!--camera rig-->
-                <a-entity id="main-camera">
-                    <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 6 0 6" ;active:false></a-entity>
-                </a-entity>
-                <a-entity id="second-camera">
-                    <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0" ; active:true></a-entity>
-                </a-entity>
-                <!--<a-entity id="cam3">
-                        <a-entity camera look-controls orbit-controls="target: 0 0 -7.5; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
-                </a-entity>
-                    <a-entity id="cam4">
-                        <a-entity camera look-controls orbit-controls="target: -7.5 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
-                </a-entity>
-                    <a-entity id="cam5">
-                        <a-entity camera look-controls orbit-controls="target: 0 7.5 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
-                </a-entity>
-                    <a-entity id="cam6">
-                        <a-entity camera look-controls orbit-controls="target: 0 7.5 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 0 0"></a-entity>
-                </a-entity>-->
-                <a-box id="stopper" position="0 0 0" color="lightblue" width="15" height="0.0001" depth="15" opacity="0.1" gridhelper="size:15;divisions:15"></a-box>
+            <!--cameras AND LIGHT--><!--templates, superhands, websurfaces, layout, spawn, load ftp, teleporter-cursor, joints, datgui-->
+            <a-entity light="type: hemisphere; color: #33C; groundColor: #3C3; intensity: 2"></a-entity>
+            <!--camera rig-->
+            <a-entity id="main-camera">
+                <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 6 0 6" ;active:false></a-entity>
+            </a-entity>
+            <a-entity id="second-camera">
+                <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0" ; active:true></a-entity>
+            </a-entity>
+            <!--<a-entity id="cam3">
+            <a-entity camera look-controls orbit-controls="target: 0 0 -7.5; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
+    </a-entity>
+        <a-entity id="cam4">
+            <a-entity camera look-controls orbit-controls="target: -7.5 0 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
+    </a-entity>
+        <a-entity id="cam5">
+            <a-entity camera look-controls orbit-controls="target: 0 7.5 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 2 0"></a-entity>
+    </a-entity>
+        <a-entity id="cam6">
+            <a-entity camera look-controls orbit-controls="target: 0 7.5 0; minDistance: 0.2; maxDistance: 9.0; initialPosition: 0 0 0"></a-entity>
+    </a-entity>-->
+            <a-box id="stopper" position="0 0 0" color="yellow" width="15" height="0.0001" depth="15" opacity="0.1" gridhelper="size:15;divisions:15"></a-box>
 
-                <!--<a-plane id="pm" rotation="-90 0 0" scale="15 15 15" side="double" color="yellow" opacity="0.2" ></a-plane>
-                -->
-                <a-sky color="lightblue"></a-sky>
-    </a-scene>
-    <script>
-        function exportGLTF(input, options) {
-            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+            <!--<a-plane id="pm" rotation="-90 0 0" scale="15 15 15" side="double" color="yellow" opacity="0.2" ></a-plane>
+    -->
+            <a-sky color="lightblue"></a-sky>
+</a-scene>
+
+    <script type="text/javascript">
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.setAttribute('count-down', seconds);
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
         }
 
-        document.getElementById('export-scene').addEventListener('click', function () {
-            exportGLTF();
-        });
+        window.onload = function () {
+            var countDownEntity = document.getElementById("timer"),
+                duration = countDownEntity.getAttribute('count-down');
+            startTimer(duration, countDownEntity);
+        };
 
-        document.getElementById('export-scene-bin').addEventListener('click', function () {
-            exportGLTF(undefined, { binary: true });
-        });
+        window.timedout = function () {
+            console.log("GUI timer timed out");
+        }
 
-        document.getElementById('export-redbxx').addEventListener('click', function () {
-            exportGLTF(document.getElementById('redbxx'), { binary: true });
-        });
+        window.testButtonAction = function () {
+            console.log("clicked GUI");
+        }
 
-        document.getElementById('export-redbyy').addEventListener('click', function () {
-            exportGLTF(document.getElementById('redbyy'), { binary: true });
-        });
+        window.testToggleAction = function () {
+            console.log("clicked GUI");
+        }
 
-        document.getElementById('export-redbzz').addEventListener('click', function () {
-            exportGLTF(document.getElementById('redbzz'), { binary: true });
-        });
+        window.testSliderAction = function () {
+            console.log("clicked GUI");
+        }
 
-        document.getElementById('bbttnn1').addEventListener('click', function () {
-            exportGLTF(document.getElementById('p1'), { binary: true });
-        });
+        window.testInputAction = function () {
+            console.log("clicked GUI");
+        }
 
-        document.getElementById('export-selector').addEventListener('click', function () {
-            exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
-        });
+
+
+        var data = document.querySelector("#cursor");
+        var controls;
+
+        var initControls = function () {
+            this.color = "#011C40";
+            this.hoverColor = "#F2BB16";
+            this.activeColor = "#2a5b7a";
+            this.design = "ring";
+        };
+
+        window.onload = function () {
+            controls = new initControls();
+            setValue();
+            var gui = new dat.GUI();
+            gui.addColor(controls, 'color').onChange(setValue);
+            gui.addColor(controls, 'hoverColor').onChange(setValue);
+            gui.addColor(controls, 'activeColor').onChange(setValue);
+            gui.add(controls, 'design', ["dot", "ring", "reticle", "cross"]).onChange(setValue);
+        };
+
+        function setValue() {
+            data.setAttribute('color', controls.color);
+            data.setAttribute('hover-color', controls.hoverColor);
+            data.setAttribute('active-color', controls.activeColor);
+            data.setAttribute('design', controls.design);
+        }
+
+
 
     </script>
+
 </body>
 </html>
