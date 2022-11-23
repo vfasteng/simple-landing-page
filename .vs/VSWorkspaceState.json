@@ -1,13 +1,11 @@
 {
   "ExpandedNodes": [
     "",
-    "\\anime",
     "\\exporter",
     "\\exporter\\images",
     "\\exporter\\models",
-    "\\indexedfaceset",
-    "\\utils"
+    "\\indexedfaceset"
   ],
-  "SelectedNode": "\\exporter\\index-gltf.html",
+  "SelectedNode": "\\exporter\\arena-physics.html",
   "PreviewInSolutionExplorer": false
 }
