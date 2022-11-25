@@ -70,46 +70,46 @@
     <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
 
     <script>
-				AFRAME.registerComponent('click-impulse', {
-					init: function () {
-						var el = this.el;
+        AFRAME.registerComponent('click-impulse', {
+            init: function () {
+                var el = this.el;
 
-						el.addEventListener('click', function () {
-							el.body.applyImpulse(
-								/* impulse */
-								new CANNON.Vec3(
-									THREE.Math.randInt(-20, 20),
-									THREE.Math.randInt(-20, 20),
-									THREE.Math.randInt(-20, 20)
-								),
-								/* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
-							);
-						});
+                el.addEventListener('click', function () {
+                    el.body.applyImpulse(
+                        /* impulse */
+                        new CANNON.Vec3(
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20),
+                            THREE.Math.randInt(-20, 20)
+                        ),
+                                    /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                    );
+                });
 
-					}
-				});
+            }
+        });
 
-				        // forward mouse and touch events to the super-hands entity
-					AFRAME.registerComponent('capture-mouse', {
-						init: function () {
-							this.eventRepeater = this.eventRepeater.bind(this)
-							this.el.sceneEl.addEventListener('loaded', () => {
-								this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
-								this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
-								this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
-								this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
-								this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
-							}, { once: true })
-						},
-						eventRepeater: function (evt) {
-							if (evt.type.startsWith('touch')) {
-								evt.preventDefault()
-								// avoid repeating touchmove because it interferes with look-controls
-								if (evt.type === 'touchmove') { return }
-							}
-							this.el.emit(evt.type, evt.detail)
-						}
-					})
+        // forward mouse and touch events to the super-hands entity
+        AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+                this.eventRepeater = this.eventRepeater.bind(this)
+                this.el.sceneEl.addEventListener('loaded', () => {
+                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+                }, { once: true })
+            },
+            eventRepeater: function (evt) {
+                if (evt.type.startsWith('touch')) {
+                    evt.preventDefault()
+                    // avoid repeating touchmove because it interferes with look-controls
+                    if (evt.type === 'touchmove') { return }
+                }
+                this.el.emit(evt.type, evt.detail)
+            }
+        })
     </script>
     <style>
         button {
@@ -354,7 +354,6 @@
             </a-mixin>
             <a-mixin id="voxel"
                      geometry="#geo"
-                     
                      intersection-spawn="event: click; mixin: voxel; material.color: green"
                      snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
                      event-set__mouseenter="material.opacity: 0.7"
@@ -437,7 +436,7 @@
             <a-mixin id="weight8" mass="8.0"></a-mixin>
             <a-mixin id="weight16" mass="16.0"></a-mixin>
             <a-mixin id="weight32" mass="32.0"></a-mixin>
-            <a-mixin id="trigger-box" geometry="primitive:box;width:4; depth:4; height:4; color:yellow; opacity:1"
+            <a-mixin id="trigger-box" geometry="primitive:box;width:4; depth:4; height:4; color:green; opacity:1"
                      class="clickable" event-set__enter="_event: mouseenter; color: #026fc9" event-set__leave="_event: mouseleave; color: #4CC3D9"
                      static-body></a-mixin>
 
@@ -464,270 +463,475 @@
 
 
                 <a-box position="0 0 -20" rotation="0 0 0" width="40" depth="0.5" height="40" color="lightblue" opacity=".1" static-body>
-                    <a-entity id="cmnd1" mixin="trigger-box" position="-16 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm1()" static-body></a-entity>
-                    <a-box id="cmnd2" class="clickable" position="-16 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm2()" static-body></a-box>
-                    <a-box id="cmnd3" class="clickable" position="-16 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm3()" static-body></a-box>
-                    <a-box id="cmnd4" class="clickable" position="-8 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm4()" static-body></a-box>
-                    <a-box id="cmnd5" class="clickable" position="-8 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm5()" static-body></a-box>
-                    <a-box id="cmnd6" class="clickable" position="-8 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm6()" static-body></a-box>
-                    <a-box id="cmnd7" class="clickable" position="0 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm7()" static-body></a-box>
-                    <a-box id="cmnd8" class="clickable" position="0 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm8()" static-body></a-box>
-                    <a-box id="cmnd9" class="clickable" position="0 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm9()" static-body></a-box>
-                    <a-box id="cmnd10" class="clickable" position="8 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm10()" static-body></a-box>
-                    <a-box id="cmnd11" class="clickable" position="8 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm11()" static-body></a-box>
-                    <a-box id="cmnd12" class="clickable" position="8 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm12()" static-body></a-box>
-                    <a-box id="cmnd13" class="clickable" position="16 0 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm13()" static-body></a-box>
-                    <a-box id="cmnd14" class="clickable" position="16 8 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm14()" static-body></a-box>
-                    <a-box id="cmnd15" class="clickable" position="16 16 0" rotation="0 0 0" width="4" depth="2" height="4" color="green" opacity="1" onclick="cmm15()" static-body></a-box>
+                    <a-entity id="cmnd1" mixin="trigger-box" position="-16 0 0" rotation="0 0 0" onclick="cmm1()" static-body></a-entity>
+                    <a-entity id="cmnd2" mixin="trigger-box" position="-16 8 0" rotation="0 0 0" onclick="cmm2()" static-body></a-entity>
+                    <a-entity id="cmnd3" mixin="trigger-box" position="-16 16 0" rotation="0 0 0" onclick="cmm3()" static-body></a-entity>
+                    <a-entity id="cmnd4" mixin="trigger-box" position="-8 0 0" rotation="0 0 0" onclick="cmm4()" static-body></a-entity>
+                    <a-entity id="cmnd5" mixin="trigger-box" position="-8 8 0" rotation="0 0 0" onclick="cmm5()" static-body></a-entity>
+                    <a-entity id="cmnd6" mixin="trigger-box" position="-8 16 0" rotation="0 0 0" onclick="cmm6()" static-body></a-entity>
+                    <a-entity id="cmnd7" mixin="trigger-box" position="0 0 0" rotation="0 0 0" onclick="cmm7()" static-body></a-entity>
+                    <a-entity id="cmnd8" mixin="trigger-box" position="0 8 0" rotation="0 0 0" onclick="cmm8()" static-body></a-entity>
+                    <a-entity id="cmnd9" mixin="trigger-box" position="0 16 0" rotation="0 0 0" onclick="cmm9()" static-body></a-entity>
+                    <a-entity id="cmnd10" mixin="trigger-box" position="8 0 0" rotation="0 0 0" onclick="cmm10()" static-body></a-entity>
+                    <a-entity id="cmnd11" mixin="trigger-box" position="8 8 0" rotation="0 0 0" onclick="cmm11()" static-body></a-entity>
+                    <a-entity id="cmnd12" mixin="trigger-box" position="8 16 0" rotation="0 0 0" onclick="cmm12()" static-body></a-entity>
+                    <a-entity id="cmnd13" mixin="trigger-box" position="16 0 0" rotation="0 0 0" onclick="cmm13()" static-body></a-entity>
+                    <a-entity id="cmnd14" mixin="trigger-box" position="16 8 0" rotation="0 0 0" onclick="cmm14()" static-body></a-entity>
+                    <a-entity id="cmnd15" mixin="trigger-box" position="16 16 0" rotation="0 0 0" onclick="cmm15()" static-body></a-entity>
 
                 </a-box>
             </a-entity>
         </a-entity>
 
+        <a-entity id="redbxx" position="3 0 0" rotation="0 11 0">
+            <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+            </a-entity>
+            <a-entity id="topxx" gltf-model="#gear16" rotation="0 0 0" scale="0.05 0.05 0.05"
+                      constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                      dynamic-body click-impulse>
+
+            </a-entity>
+
+        </a-entity>
+
+        <a-entity id="redbyy" position="0 0 3" rotation="0 0 0">
+            <a-entity id="botyy" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+            </a-entity>
+            <a-entity id="topyy" gltf-model="#gear16" rotation="0 0 0" scale="0.05 0.05 0.05"
+                      constraint="type:hinge;target:#botyy;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                      dynamic-body click-impulse>
+
+            </a-entity>
+
+        </a-entity>
+
+        <!--
+        <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
+            <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+
+            </a-entity>
+            <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                      constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                      dynamic-body click-impulse>
+
+            </a-entity>
+
+        </a-entity>
+
+    </a-entity>-->
+
+
+
+
+
+        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body click-impulse></a-entity>
+        <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+        <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
+        <a-entity id="bbb4" gltf-model="#gear16" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+
+        <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
+        <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
+
+
+        <!-- freewheel working with click-impulse from mouse-->
+
+        <a-entity position="0 0 0">
+            <a-entity id="anchor"
+                      geometry="primitive: box;"
+                      material="color: yellow; flatShading: true;"
+                      position="0 4 0"
+                      static-body>
+            </a-entity>
+
+            <a-entity id="targett"
+                      geometry="primitive: box; height: 1; width: 2; depth: 2;"
+                      material="color: red; flatShading: true;"
+                      position="0 3.0 0"
+                      xxxconstraint="target: #anchor; type: distance; distance: 1.0;"
+                      constraint="type: pointToPoint; target: #anchor; axis: 0 1 0; pivot: 0 3 0; targetPivot: 0 0 0; collideConnected: false;"
+                      dynamic-body
+                      click-impulse>
+            </a-entity>
+        </a-entity>
 
         <a-box position="2 3 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse>
 
         </a-box>
         <a-box position="-2 4 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse></a-box>
 
+        <a-entity id="rotorxx" position="-19 0 0" rotation="0 90 0" scale="10 10 10">
+            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
 
 
+            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
+                <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+
+            </a-entity>
+        </a-entity>
+
+        <a-entity id="rotorzz" position="0 0 19" rotation="0 0 90" scale="10 10 10">
+            <a-cylinder id="flywheelz" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="centerz" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+
+
+            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
+                <a-cylinder id="pozs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-cylinder id="pozs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+
+            </a-entity>
+        </a-entity>
+        <!--
         <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
         <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-        <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity>//select mixins from list var modmix = ""
-        
-        
-        <a-box id="ground" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.001" color="lightblue" opacity=".1" static-body></a-box>
+        <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
+        -->
+
+        <a-box id="ground" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.001" color="lightblue" opacity=".1" gridhelper="size:40;divisions:20;ColoredCenterLine:yellow" static-body></a-box>
         <a-sky src="#im2" radius="50"></a-sky>
 
+        <a-entity id="camerarig1">
+            <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 20; initialPosition: 0 3 11">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+            </a-entity>
+        </a-entity>
+
     </a-scene>
-        <div id="toolbar">
-            <select id="geometry">
-                <!--Supplement an id here instead of using 'text'-->
-                <option value="#cb1">Box</option>
-                <option value="#csph1">Sphere</option>
-                <option value="#ccyl1">Cylinder</option>
-                <option value="a-tetrahedron">tetrahedron</option>
-                <option value="a-octahedron">octahedron</option>
-                <option value="a-tube">tube</option>
-                <option value="Space">Space</option>
-                <option value="Racetrack">Racetrack</option>
-                <option value="Wheels">Wheels</option>
-                <option value="5aside">5-a-side</option>
-                <option value="checkerboard">Checkboard</option>
-                <option value="goldmine">Goldmine</option>
-                <option value="Water">Water</option>
-                <option value="Stereo">Stereo</option>
-                <option value="JanusWeb">JanusWeb</option>
-                <option value="Steam">Steam</option>
-                <option value="default" selected>Default</option>
-            </select>
-            <input class="color-input" value="#ffffff" />
-            <button id="add" class="active" type="button">ADD</button>
-            <button id="remove" type="button">REMOVE</button>
-            <button id="edit" type="button">EDIT</button>
-            <button id="screenshot" type="button">SCREENSHOT</button>
-            <!-- TODO: add save/load for electron implementation
+    <div id="toolbar">
+        <select id="cams">
+            <!--Supplement an id here instead of using 'text'-->
+            <option value="#cb1">Box</option>
+            <option value="#csph1">Sphere</option>
+            <option value="#ccyl1">Cylinder</option>
+            <option value="a-tetrahedron">tetrahedron</option>
+            <option value="a-octahedron">octahedron</option>
+            <option value="a-tube">tube</option>
+            <option value="Space">Space</option>
+            <option value="Racetrack">Racetrack</option>
+            <option value="Wheels">Wheels</option>
+            <option value="5aside">5-a-side</option>
+            <option value="checkerboard">Checkboard</option>
+            <option value="goldmine">Goldmine</option>
+            <option value="Water">Water</option>
+            <option value="Stereo">Stereo</option>
+            <option value="JanusWeb">JanusWeb</option>
+            <option value="Steam">Steam</option>
+            <option value="default" selected>Default</option>
+        </select>
+        <input class="color-input" value="#ffffff" />
+        <!--<button id="add" class="active" type="button">ADD</button>
+        <button id="remove" type="button">REMOVE</button>
+        <button id="edit" type="button">EDIT</button>-->
+        <button id="screenshotp" type="button">Persp</button>
+        <button id="screenshote" type="button">Equi</button>
+        <button id="screenshotp" type="button">Persp</button>
+        <button id="screenshote" type="button">Equi</button>
+        <button id="screenshotp" type="button">Persp</button>
+
+        <!-- TODO: add save/load for electron implementation
         <button id="save" type="button">SAVE</button>
          -->
-        </div>
+    </div>
+    <script type="text/javascript">
+        var hueb = new Huebee('.color-input', {
+            // options
+            notation: 'hex',
+            saturations: 2,
+            setText: true,
+            customColors: ['#ffffff']
+        });
+        const ADD = 0;
+        const REMOVE = 1;
+        const EDIT = 2;
+        var state = ADD;
+        var cursor3D = document.querySelector('#my-cursor');
+        var scene = document.querySelector('a-scene');
+        var initialScale = 0.01;
+        var rotationYOffset = 0;
+        var selected = null;
+
+        var reader = new FileReader();
+        var colorIndex = 0;
+        var usedColor = 10;
+        hueb.on('change', function (color, hue, sat, lum) {
+            if (state == ADD && cursor3D.getAttribute('stl-model'))
+                cursor3D.setAttribute('material', 'color', color);
+
+            if (state == EDIT && selected)
+                selected.setAttribute('material', 'color', color);
+
+            for (var i = 0; i < hueb.options.customColors.length; i++)
+                if (hueb.options.customColors[i] == color)
+                    return;
+
+            hueb.options.customColors[colorIndex] = color;
+            hueb.updateColors();
+            colorIndex++;
+            if (colorIndex > usedColor)
+                colorIndex = 0;
+        })
+
+        // document.querySelector('#save').addEventListener('click', function() {
+        // TODO: save function for electron implementation
+        //   scene.flushToDOM(true);
+        //   console.log(scene);
+        // });
+        document.querySelector('#screenshotp').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+        document.querySelector('#screenshote').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#environment').addEventListener('change', function () {
+            document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
+            //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
+            //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
+            document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
+            //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
+            document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
+            var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
+            if (reducedDressing > 50)
+                document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
+        });
+        document.querySelector('#add').addEventListener('click', function () {
+            state = ADD;
+            if (cursor3D.getAttribute('material'))
+                hueb.setColor(cursor3D.getAttribute('material').color);
+            cursor3D.setAttribute('visible', true);
+            document.querySelector('.active').classList.toggle('active');
+            document.querySelector('#add').classList.toggle('active');
+        });
+        document.querySelector('#remove').addEventListener('click', function () {
+            state = REMOVE;
+            cursor3D.setAttribute('visible', false);
+            document.querySelector('.active').classList.toggle('active');
+            document.querySelector('#remove').classList.toggle('active');
+
+        });
+        document.querySelector('#edit').addEventListener('click', function () {
+            state = EDIT;
+            cursor3D.setAttribute('visible', false);
+            document.querySelector('.active').classList.toggle('active');
+            document.querySelector('#edit').classList.toggle('active');
+
+        });
+        var inventoryIndex = 0;
+        reader.addEventListener("load", function () {
+            if (state != ADD)
+                return;
+            cursor3D.setAttribute('stl-model', { src: reader.result });
+            cursor3D.setAttribute('scale', { x: initialScale, y: initialScale, z: initialScale });
+            cursor3D.setAttribute('material', 'color', hueb.color);
+            var listElement = document.createElement('a-entity')
+            listElement.setAttribute('position', { x: -1.8 + (.45 * inventoryIndex), y: -1, z: -1.5 })
+
+            listElement.setAttribute('rotation', { x: -90, y: 0, z: 0 })
+            listElement.setAttribute('class', 'ignore-ray');
+            listElement.setAttribute('stl-model', { src: reader.result });
+            listElement.setAttribute('scale', { x: initialScale * .2, y: initialScale * .2, z: initialScale * .2 });
+            var shortCutText = document.createElement('a-entity');
+            shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
+            shortCutText.setAttribute('text', 'anchor: left')
+            shortCutText.setAttribute('text', 'baseline', "center")
+            shortCutText.setAttribute('scale', '1000 1000 1000')
+            //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
+            shortCutText.setAttribute('position', { x: 0, y: 0, z: -90 })
+            shortCutText.setAttribute('rotation', { x: 90, y: 0, z: 0 })
+            shortCutText.object3D.layers.set(1)
+            inventoryIndex++;
+
+            listElement.appendChild(shortCutText)
+            document.querySelector('#my-camera').appendChild(listElement)
+        }, false);
+
+
+        scene.addEventListener("drag-and-drop", function (event) {
+            var file = event.detail.file;
+            reader.readAsDataURL(file);
+        });
+        window.addEventListener("keydown", function (event) {
+            //console.log(event.key)
+            if (inventoryIndex + 1 > event.key) {
+                //console.log()
+                cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
+            }
+        }, true)
+
+        window.addEventListener("contextmenu", function (event) {
+            if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
+                var el = document.createElement('a-entity');
+                el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
+                el.setAttribute('scale', cursor3D.getAttribute('scale'));
+                var rotation = { x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z) };
+                var position = cursor3D.getAttribute('position');
+                var material = cursor3D.getAttribute('material');
+                el.setAttribute('position', { x: position.x, y: position.y, z: position.z });
+                el.setAttribute('rotation', { x: rotation.x, y: rotation.y, z: rotation.z });
+                el.setAttribute('material', 'color', material.color);
+
+                el.addEventListener('raycaster-intersected', function () {
+                    selected = el;
+
+                    if (state == EDIT)
+                        hueb.setColor(selected.getAttribute('material').color)
+                }, true);
+                el.addEventListener('raycaster-intersected-cleared', function () {
+                    selected = null;
+                }, true);
+
+                scene.appendChild(el);
+            } else if (state == REMOVE && selected) {
+                selected.parentNode.removeChild(selected);
+                selected = null;
+            }
+            event.preventDefault();
+        });
+        //
+        window.addEventListener("wheel", function (event) {
+            var currentlySelected;
+            if (state == ADD) {
+                currentlySelected = cursor3D;
+            } else if (state == EDIT) {
+                currentlySelected = selected;
+            }
+
+            if (!currentlySelected)
+                return;
+
+            if (!event.ctrlKey) {
+                var currentScale = currentlySelected.getAttribute('scale').x;
+                var delta = 0.001;
+                if (event.shiftKey)
+                    delta = 0.01;
+                if (event.deltaY > 0) {
+                    delta = -delta;
+                }
+                currentScale += delta;
+                if (currentScale <= 0)
+                    currentScale = 0.001;
+
+                currentlySelected.setAttribute('scale', { x: currentScale, y: currentScale, z: currentScale });
+            } else {
+                var currentRotation = currentlySelected.getAttribute('rotation');
+                var delta = 5;
+                if (event.shiftKey)
+                    delta = 10;
+                if (event.deltaY > 0) {
+                    delta = -delta;
+                }
+                currentRotation.y += delta;
+
+                currentlySelected.setAttribute('rotation', { x: currentRotation.x, y: currentRotation.y, z: currentRotation.z });
+                //console.log(currentRotation.y);
+            }
+            event.preventDefault();
+            //return true;
+        }, true)
+        document.addEventListener("wheel", function () {
+            event.preventDefault();
+        })
+    </script>
+
+    <script type="text/javascript">
+
+        function() {
+            scene.components.inspector.injectInspector;
+        };
+
+        function injinsp() {
+            scene.components.inspector.injectInspector;
+        };
+
+        function evr() {
+            document.querySelector('a-scene').enterVR();
+        };
+
+        function openEditor() {
+            window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
+        };
+
+        document.querySelector('#cmnd1').addEventListener('click', function () {
+            document.querySelector('a-scene').enterVR();
+        });
+        document.querySelector('#cmnd2').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#cmnd3').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+
+        document.querySelector('#cmnd4').addEventListener('click', function () {
+            window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
+        };
+        document.querySelector('#cmnd5').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#cmnd6').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+        document.querySelector('#cmnd7').addEventListener('click', function () {
+            document.querySelector('a-scene').enterVR();
+        });
+        document.querySelector('#cmnd8').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#cmnd9').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+
+        document.querySelector('#cmnd10').addEventListener('click', function () {
+            document.querySelector('a-scene').enterVR();
+        });
+        document.querySelector('#cmnd11').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#cmnd12').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+        document.querySelector('#cmnd13').addEventListener('click', function () {
+            document.querySelector('a-scene').enterVR();
+        });
+        document.querySelector('#cmnd14').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+        document.querySelector('#cmnd15').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+        document.querySelector('#screenshotp').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('perspective');
+        });
+        document.querySelector('#screenshote').addEventListener('click', function () {
+            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+        });
+    </script>
+
 </body>
-<script type="text/javascript">
-  var hueb = new Huebee( '.color-input', {
-  // options
-  notation: 'hex',
-  saturations: 2,
-  setText: true,
-  customColors: ['#ffffff']
-});
-  const ADD = 0;
-  const REMOVE = 1;
-  const EDIT = 2;
-  var state = ADD;
-  var cursor3D = document.querySelector('#my-cursor');
-  var scene = document.querySelector('a-scene');
-  var initialScale = 0.01;
-  var rotationYOffset = 0;
-  var selected = null;
 
-  var reader  = new FileReader();
-  var colorIndex = 0;
-  var usedColor = 10;
-  hueb.on( 'change', function( color, hue, sat, lum ) {
-    if (state == ADD && cursor3D.getAttribute('stl-model'))
-      cursor3D.setAttribute('material', 'color', color);
-
-    if (state == EDIT && selected)
-      selected.setAttribute('material', 'color', color);
-
-    for(var i = 0; i < hueb.options.customColors.length; i++)
-      if (hueb.options.customColors[i] == color)
-        return;
-
-    hueb.options.customColors[colorIndex] = color;
-    hueb.updateColors();
-    colorIndex++;
-    if (colorIndex > usedColor)
-      colorIndex = 0;
-  })
-
-  // document.querySelector('#save').addEventListener('click', function() {
-     // TODO: save function for electron implementation
-  //   scene.flushToDOM(true);
-  //   console.log(scene);
-  // });
-  document.querySelector('#screenshot').addEventListener('click', function() {
-    document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-  });
-  document.querySelector('#environment').addEventListener('change', function() {
-    document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
-    //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
-    //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
-    document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
-    //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
-    document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
-    var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
-    if (reducedDressing > 50)
-    document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
-  });
-  document.querySelector('#add').addEventListener('click', function() {
-    state = ADD;
-    if (cursor3D.getAttribute('material'))
-    hueb.setColor(cursor3D.getAttribute('material').color);
-    cursor3D.setAttribute('visible', true);
-    document.querySelector('.active').classList.toggle('active');
-    document.querySelector('#add').classList.toggle('active');
-  });
-  document.querySelector('#remove').addEventListener('click', function() {
-    state = REMOVE;
-    cursor3D.setAttribute('visible', false);
-    document.querySelector('.active').classList.toggle('active');
-    document.querySelector('#remove').classList.toggle('active');
-
-  });
-  document.querySelector('#edit').addEventListener('click', function() {
-    state = EDIT;
-    cursor3D.setAttribute('visible', false);
-    document.querySelector('.active').classList.toggle('active');
-    document.querySelector('#edit').classList.toggle('active');
-
-  });
-  var inventoryIndex = 0;
-  reader.addEventListener("load", function () {
-    if (state != ADD)
-      return;
-    cursor3D.setAttribute('stl-model', {src:reader.result});
-    cursor3D.setAttribute('scale', {x:initialScale, y:initialScale, z:initialScale});
-    cursor3D.setAttribute('material', 'color', hueb.color);
-    var listElement = document.createElement('a-entity')
-    listElement.setAttribute('position', {x:-1.8 + (.45 * inventoryIndex), y:-1, z: -1.5})
-
-    listElement.setAttribute('rotation', {x:-90, y:0, z: 0})
-    listElement.setAttribute('class', 'ignore-ray');
-    listElement.setAttribute('stl-model', {src:reader.result});
-    listElement.setAttribute('scale', {x:initialScale * .2, y:initialScale * .2, z:initialScale * .2});
-    var shortCutText = document.createElement('a-entity');
-    shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
-    shortCutText.setAttribute('text', 'anchor: left')
-    shortCutText.setAttribute('text', 'baseline',"center")
-    shortCutText.setAttribute('scale', '1000 1000 1000')
-    //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
-    shortCutText.setAttribute('position', {x: 0, y: 0, z: -90})
-    shortCutText.setAttribute('rotation', {x: 90, y: 0, z: 0})
-    shortCutText.object3D.layers.set(1)
-    inventoryIndex++;
-
-    listElement.appendChild(shortCutText)
-    document.querySelector('#my-camera').appendChild(listElement)
-  }, false);
-
-
-    scene.addEventListener("drag-and-drop", function(event){
-      var file = event.detail.file;
-      reader.readAsDataURL(file);
-    });
-    window.addEventListener("keydown", function (event) {
-      //console.log(event.key)
-      if (inventoryIndex + 1 > event.key) {
-        //console.log()
-        cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
-      }
-    }, true)
-
-    window.addEventListener("contextmenu", function(event) {
-      if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
-        var el = document.createElement('a-entity');
-        el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
-        el.setAttribute('scale', cursor3D.getAttribute('scale'));
-        var rotation = {x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z)};
-        var position = cursor3D.getAttribute('position');
-        var material = cursor3D.getAttribute('material');
-        el.setAttribute('position',{x: position.x, y: position.y, z: position.z});
-        el.setAttribute('rotation', {x:rotation.x, y:rotation.y, z:rotation.z});
-        el.setAttribute('material', 'color', material.color );
-
-        el.addEventListener('raycaster-intersected', function () {
-          selected = el;
-
-          if (state == EDIT)
-            hueb.setColor(selected.getAttribute('material').color)
-        }, true);
-        el.addEventListener('raycaster-intersected-cleared', function () {
-          selected = null;
-        }, true);
-
-        scene.appendChild(el);
-      } else if (state == REMOVE && selected) {
-        selected.parentNode.removeChild(selected);
-        selected = null;
-      }
-      event.preventDefault();
-    });
-    //
-    window.addEventListener("wheel", function(event) {
-      var currentlySelected;
-      if (state == ADD) {
-        currentlySelected = cursor3D;
-      } else if (state == EDIT) {
-        currentlySelected = selected;
-      }
-
-      if (!currentlySelected)
-        return;
-
-      if (!event.ctrlKey) {
-        var currentScale = currentlySelected.getAttribute('scale').x;
-        var delta = 0.001;
-        if (event.shiftKey)
-          delta = 0.01;
-        if (event.deltaY > 0) {
-          delta = -delta;
-        }
-        currentScale += delta;
-        if (currentScale <= 0)
-          currentScale = 0.001;
-
-        currentlySelected.setAttribute('scale', {x: currentScale, y: currentScale, z: currentScale});
-      } else {
-        var currentRotation = currentlySelected.getAttribute('rotation');
-        var delta = 5;
-        if (event.shiftKey)
-          delta = 10;
-        if (event.deltaY > 0) {
-          delta = -delta;
-        }
-        currentRotation.y += delta;
-
-        currentlySelected.setAttribute('rotation', {x: currentRotation.x, y: currentRotation.y, z: currentRotation.z});
-        //console.log(currentRotation.y);
-      }
-      event.preventDefault();
-      //return true;
-    },true)
-    document.addEventListener("wheel", function() {
-      event.preventDefault();
-    })
-</script>
 </html>
 <!--
 

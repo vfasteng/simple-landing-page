@@ -1,93 +1,104 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Arena</title>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+	<title>Arena</title>
+	<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+	<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
 
-    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
-    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
-    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
-    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
-    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+	<script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+	<script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+	<script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+	<script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+	<script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+	<script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+	<script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+	<script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+	<script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
 
-    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
-    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
-    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
-    <script src="~/js/play-all-model-animations.js"></script>
+	<script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+	<script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+	<script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+	<script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+	<script src="~/js/play-all-model-animations.js"></script>
 
-    <!--extras--
-        <script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE-->
-    <script src="js/aframe-extras.min.js"></script>
-    <script src="js/aframe-extras.controls.mih.js"></script>
-    <script src="js/aframe-extras.misc.js"></script>
-    <script src="js/aframe-extras.loaders.js"></script>
-    <script src="js/aframe-extras.pathfinding.js"></script>
-    <script src="js/aframe-extras.primitives.js"></script>
-    <script src="js/aframe-stl-model-component.min.js"></script>
-    <script src="js/aframe-drag-and-drop-component.min.js"></script>
-    <script src="js/aframe-crawling-cursor.min.js"></script>
+	<!--extras--
+		<script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE-->
+	<script src="js/aframe-extras.min.js"></script>
+	<script src="js/aframe-extras.controls.mih.js"></script>
+	<script src="js/aframe-extras.misc.js"></script>
+	<script src="js/aframe-extras.loaders.js"></script>
+	<script src="js/aframe-extras.pathfinding.js"></script>
+	<script src="js/aframe-extras.primitives.js"></script>
+	<script src="js/aframe-stl-model-component.min.js"></script>
+	<script src="js/aframe-drag-and-drop-component.min.js"></script>
+	<script src="js/aframe-crawling-cursor.min.js"></script>
 
-    <!--reaction components-->
-    <script src="reaction_components/clickable.js"></script>
-    <script src="reaction_components/draggable.js"></script>
-    <script src="reaction_components/drag-droppable.js"></script>
-    <script src="reaction_components/hoverable.js"></script>
-    <script src="reaction_components/stretchable.js"></script>
-    <script src="reaction_components/droppable.js"></script>
-    <script src="reaction_components/grabbable.js"></script>
+	<!--reaction components-->
+	<script src="reaction_components/clickable.js"></script>
+	<script src="reaction_components/draggable.js"></script>
+	<script src="reaction_components/drag-droppable.js"></script>
+	<script src="reaction_components/hoverable.js"></script>
+	<script src="reaction_components/stretchable.js"></script>
+	<script src="reaction_components/droppable.js"></script>
+	<script src="reaction_components/grabbable.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="aframe.css">
+	<link rel="stylesheet" type="text/css" href="aframe.css">
 
+	<style media="screen">
+		#toolbar {
+			position: absolute;
+			top: 30px;
+			left: 30px;
+			background-color: #ffffff99;
+			padding: 5px;
+			border-radius: 20px;
+		}
 
+		button, input, select {
+			padding: 5px;
+			border-radius: 20px;
+			border-color: transparent;
+			font-weight: bold;
+			color: #333;
+		}
 
+		.active {
+			background-color: #aaa;
+		}
 
-
+		.color-input {
+			width: 20px;
+			font-size: 6px;
+		}
+	</style>
 </head>
-<style media="screen">
-    #toolbar {
-        position: absolute;
-        top: 30px;
-        left: 30px;
-        background-color: #ffffff99;
-        padding: 5px;
-        border-radius: 20px;
-    }
 
-    button, input, select {
-        padding: 5px;
-        border-radius: 20px;
-        border-color: transparent;
-        font-weight: bold;
-        color: #333;
-    }
-
-    .active {
-        background-color: #aaa;
-    }
-
-    .color-input {
-        width: 20px;
-        font-size: 6px;
-    }
-</style>
 <body>
 	<a-scene inspector="">
 		<a-assets>
 			<a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
 			<a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+
+
+
+
+
+
+			<a-asset-item id="g14" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/locaterdisc.glb?v=1667931972709"></a-asset-item><!--locaterdisc g14-->
+			<a-asset-item id="g15" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylblock.glb?v=1667931983908"></a-asset-item><!--block-->
+			<a-asset-item id="g16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylcrankandflywheel.glb?v=1667931998784"></a-asset-item><!--crankandflywheel-->
+			<a-asset-item id="g17" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylconrodup.glb?v=1667932025097"></a-asset-item><!--conrod-->
+			<a-asset-item id="g18" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/4cylpiston.glb?v=1667932056792"></a-asset-item><!--piston-->
+			<a-asset-item id="g19" src=""></a-asset-item><!--waddler-->
+			<a-asset-item id="g20" src=""></a-asset-item><!--pulley-->
 
 		</a-assets>
 
@@ -117,10 +128,10 @@
 				<a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
 				-->
 				<a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
-					<a-box id="bbttnn1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
-					<a-box id="bbttnn2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
-					<a-box id="bbttnn3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
-					<a-box id="bbttnn4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
+					<a-box id="cmnd" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+					<a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
+					<a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
+					<a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
 					<a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm5()" static-body></a-box>
 					<a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm6()" static-body></a-box>
 					<a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="red" opacity="1" onclick="cmm7()" static-body></a-box>
