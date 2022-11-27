@@ -1,0 +1,23 @@
+﻿<!-- Example webpage with a working file upload button. -->
+<html>
+<head>
+    <script src="https://js.upload.io/upload-js/v2"></script>
+    <script>
+        const upload = Upload({
+
+            // This is your API key:
+            apiKey: "public_kW15ayx7x8vJ3XvQ28zMpUPm7QaD"
+
+        })
+        const onFileSelected = async event => {
+            const file = event.target.files[0];
+            const { fileUrl } = await upload.uploadFile(file)
+            alert(`File uploaded! ${fileUrl}`);
+        };
+    </script>
+</head>
+<body>
+    <input type="file" onchange="onFileSelected(event)" />
+</body>
+</html>
+Now, copy the URL and use it to define a part in SPOKE
