@@ -424,22 +424,46 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-            <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-            <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-            <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-                -->
+    <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+        -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
             <a-mixin id="weight8" mass="8.0"></a-mixin>
             <a-mixin id="weight16" mass="16.0"></a-mixin>
             <a-mixin id="weight32" mass="32.0"></a-mixin>
+
             <a-mixin id="trigger-box" geometry="primitive:box;width:4; depth:4; height:4; color:green; opacity:1"
                      class="clickable" event-set__enter="_event: mouseenter; color: #026fc9" event-set__leave="_event: mouseleave; color: #4CC3D9"
                      static-body></a-mixin>
+            <a-mixin id="hinge-bodya" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
+            <a-mixin id="hinge-bodyb" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 1 2"
+                     constraint="type:hinge;target:#bodya;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2.5 0"
+                     dynamic-body click-impulse></a-mixin>
+            <a-mixin id="hinge-bottom-bodya" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
+            <a-mixin id="hinge-bottom-bodyb" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1"
+                     constraint="type:hinge;target:#bodyc;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2 0"
+                     dynamic-body click-impulse></a-mixin>
+            <a-mixin id="hinge-planes-bodya" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
+            <a-mixin id="hinge-planes-bodyb" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1"
+                     constraint="type:hinge;target:#bodye;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0"
+                     dynamic-body click-impulse></a-mixin>
 
+            <a-mixin id="p2p-planes-bodya" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
+            <a-mixin id="p2p-planes-bodyb" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1"
+                     constraint="type:pointTopoint;target:#bodye;axis:0 0 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0"
+                     dynamic-body click-impulse></a-mixin>
+
+
+
+            <a-mixin id="p2p-bodya" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
+            <a-mixin id="p2p-bodyb" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 2 2"
+                     constraint="type:pointTopoint;target:#bodye;axis:0 0 0;targetAxis:0 0 0;pivot:0 0 0;targetPivot:0 -2 0"
+                     dynamic-body click-impulse></a-mixin>
         </a-assets>
 
         <!--cadboxx walls, floor and lighting to 40 square-->
