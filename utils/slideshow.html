@@ -1,0 +1,48 @@
+﻿<!DOCTYPE>
+<html>
+
+<head>
+    <title>A-FRAME DEMO</title>
+    <script src="https://aframe.io/releases/0.6.0/aframe.js"></script>
+</head>
+
+<body>
+
+    <a-scene>
+
+        <a-assets>
+            <img id="button" src="icons/button.png">
+        </a-assets>
+
+        <a-camera position="0 2 0" wasd-controls-enabled="false">
+            <a-cursor color="blue" />
+        </a-camera>
+
+        <a-sky color="#FFF"></a-sky>
+
+        <a-plane id="plane1" color="#000" height="4" width="20" position="0 0 -9" transparent="true" opacity="0.5" visible="false">
+            <a-text value="Some Random Text." align="center" color="white" width="10" position="0 0 2"></a-text>
+            <a-image id="cancel_tc" src="#cancel" position="9.5 3 0"></a-image>
+        </a-plane>
+
+        <a-image id="button_click" slidehandler1 src="#button" height="1" width="1" position="0 -1.6 -7"></a-image>
+
+    </a-scene>
+
+    <script>
+
+    AFRAME.registerComponent('slidehandler1', {
+    init:function() {
+    var pln = document.querySelector("#plane1");
+    this.el.addEventListener('click', () => {
+    pln.setAttribute('visible',true);
+    //pln.setAttribute("position",{x:0,y:5,z:-9});
+    pln.setAttribute('animation', 'property: position; dur: 1000; from: 0 0 -9; to: 0 5 -9');
+    });
+    }
+    });
+
+    </script>
+
+</body>
+</html>

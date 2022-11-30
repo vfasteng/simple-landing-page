@@ -2,8 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\anime",
-    "\\exporter"
+    "\\exporter",
+    "\\exporter\\aincraft",
+    "\\utils"
   ],
-  "SelectedNode": "\\exporter\\exp-touch.html",
+  "SelectedNode": "\\exporter\\scratch.html",
   "PreviewInSolutionExplorer": false
 }

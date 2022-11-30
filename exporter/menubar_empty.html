@@ -163,30 +163,296 @@
     }
 </style>
 <body>
-    <!--<a-scene physics="" vr-mode-ui="enabled: false" drag-and-drop>--
+    <!--<a-scene physics="" vr-mode-ui="enabled: false" drag-and-drop>-->
         <div id="container">
             <button id="export-scene" class="button"><span>Export Scene</span></button>
             <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
             <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
             <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
             <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
-            <!--<button id="cmnd1" class="button"><span>CMD1</span></button>
+            <button id="cmnd1" class="button"><span>CMD1</span></button>
             <button id="cmnd2" class="button"><span>CMD2</span></button>
-            <button id="cmnd3" class="button"><span>CMD3</span></button>
-            <button id="cmnd4" class="button"><span>CMD4</span></button>
-            <button id="cmnd5" class="button"><span>CMD5</span></button>
+            <button id="calti" class="button"><span>CMD3</span></button>
+            <button id="screenshotp" class="button"><span>PERS</span></button>
+            <button id="screenshote" class="button"><span>EQUI</span></button>
             <!--
 
           <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
           <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>
-          --
-        </div>-->
+          -->
+        </div>
     <a-scene gltf-exporter
              cursor="rayOrigin: mouse"
              ground="preset: contact; ground: flat; dressingAmount: 0"
              physics="debug: false; friction: 0.1; restitution: 0.5">
 
+        
+        <script type="text/javascript">
+            var hueb = new Huebee('.color-input', {
+                // options
+                notation: 'hex',
+                saturations: 2,
+                setText: true,
+                customColors: ['#ffffff']
+            });
+            const ADD = 0;
+            const REMOVE = 1;
+            const EDIT = 2;
+            var state = ADD;
+            var cursor3D = document.querySelector('#my-cursor');
+            var scene = document.querySelector('a-scene');
+            var initialScale = 0.01;
+            var rotationYOffset = 0;
+            var selected = null;
 
+            var reader = new FileReader();
+            var colorIndex = 0;
+            var usedColor = 10;
+            hueb.on('change', function (color, hue, sat, lum) {
+                if (state == ADD && cursor3D.getAttribute('stl-model'))
+                    cursor3D.setAttribute('material', 'color', color);
+
+                if (state == EDIT && selected)
+                    selected.setAttribute('material', 'color', color);
+
+                for (var i = 0; i < hueb.options.customColors.length; i++)
+                    if (hueb.options.customColors[i] == color)
+                        return;
+
+                hueb.options.customColors[colorIndex] = color;
+                hueb.updateColors();
+                colorIndex++;
+                if (colorIndex > usedColor)
+                    colorIndex = 0;
+            })
+
+            // document.querySelector('#save').addEventListener('click', function() {
+            // TODO: save function for electron implementation
+            //   scene.flushToDOM(true);
+            //   console.log(scene);
+            // });
+            document.querySelector('#calti').addEventListener('click', function () {
+                document.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'i', 'altKey': true, 'ctrlKey': true }));
+            });
+            document.querySelector('#undo').addEventListener('click', function () {
+
+            });
+            document.querySelector('#redo').addEventListener('click', function () {
+
+            });
+            document.querySelector('#screenshotp').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+            document.querySelector('#screenshote').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#environment').addEventListener('change', function () {
+                document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
+                //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
+                //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
+                document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
+                //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
+                document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
+                var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
+                if (reducedDressing > 50)
+                    document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
+            });
+            document.querySelector('#add').addEventListener('click', function () {
+                state = ADD;
+                if (cursor3D.getAttribute('material'))
+                    hueb.setColor(cursor3D.getAttribute('material').color);
+                cursor3D.setAttribute('visible', true);
+                document.querySelector('.active').classList.toggle('active');
+                document.querySelector('#add').classList.toggle('active');
+            });
+            document.querySelector('#remove').addEventListener('click', function () {
+                state = REMOVE;
+                cursor3D.setAttribute('visible', false);
+                document.querySelector('.active').classList.toggle('active');
+                document.querySelector('#remove').classList.toggle('active');
+
+            });
+            document.querySelector('#edit').addEventListener('click', function () {
+                state = EDIT;
+                cursor3D.setAttribute('visible', false);
+                document.querySelector('.active').classList.toggle('active');
+                document.querySelector('#edit').classList.toggle('active');
+
+            });
+            var inventoryIndex = 0;
+            reader.addEventListener("load", function () {
+                if (state != ADD)
+                    return;
+                cursor3D.setAttribute('stl-model', { src: reader.result });
+                cursor3D.setAttribute('scale', { x: initialScale, y: initialScale, z: initialScale });
+                cursor3D.setAttribute('material', 'color', hueb.color);
+                var listElement = document.createElement('a-entity')
+                listElement.setAttribute('position', { x: -1.8 + (.45 * inventoryIndex), y: -1, z: -1.5 })
+
+                listElement.setAttribute('rotation', { x: -90, y: 0, z: 0 })
+                listElement.setAttribute('class', 'ignore-ray');
+                listElement.setAttribute('stl-model', { src: reader.result });
+                listElement.setAttribute('scale', { x: initialScale * .2, y: initialScale * .2, z: initialScale * .2 });
+                var shortCutText = document.createElement('a-entity');
+                shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
+                shortCutText.setAttribute('text', 'anchor: left')
+                shortCutText.setAttribute('text', 'baseline', "center")
+                shortCutText.setAttribute('scale', '1000 1000 1000')
+                //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
+                shortCutText.setAttribute('position', { x: 0, y: 0, z: -90 })
+                shortCutText.setAttribute('rotation', { x: 90, y: 0, z: 0 })
+                shortCutText.object3D.layers.set(1)
+                inventoryIndex++;
+
+                listElement.appendChild(shortCutText)
+                document.querySelector('#my-camera').appendChild(listElement)
+            }, false);
+
+
+            scene.addEventListener("drag-and-drop", function (event) {
+                var file = event.detail.file;
+                reader.readAsDataURL(file);
+            });
+            window.addEventListener("keydown", function (event) {
+                //console.log(event.key)
+                if (inventoryIndex + 1 > event.key) {
+                    //console.log()
+                    cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
+                }
+            }, true)
+
+            window.addEventListener("contextmenu", function (event) {
+                if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
+                    var el = document.createElement('a-entity');
+                    el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
+                    el.setAttribute('scale', cursor3D.getAttribute('scale'));
+                    var rotation = { x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z) };
+                    var position = cursor3D.getAttribute('position');
+                    var material = cursor3D.getAttribute('material');
+                    el.setAttribute('position', { x: position.x, y: position.y, z: position.z });
+                    el.setAttribute('rotation', { x: rotation.x, y: rotation.y, z: rotation.z });
+                    el.setAttribute('material', 'color', material.color);
+
+                    el.addEventListener('raycaster-intersected', function () {
+                        selected = el;
+
+                        if (state == EDIT)
+                            hueb.setColor(selected.getAttribute('material').color)
+                    }, true);
+                    el.addEventListener('raycaster-intersected-cleared', function () {
+                        selected = null;
+                    }, true);
+
+                    scene.appendChild(el);
+                } else if (state == REMOVE && selected) {
+                    selected.parentNode.removeChild(selected);
+                    selected = null;
+                }
+                event.preventDefault();
+            });
+            //
+            window.addEventListener("wheel", function (event) {
+                var currentlySelected;
+                if (state == ADD) {
+                    currentlySelected = cursor3D;
+                } else if (state == EDIT) {
+                    currentlySelected = selected;
+                }
+
+                if (!currentlySelected)
+                    return;
+
+                if (!event.ctrlKey) {
+                    var currentScale = currentlySelected.getAttribute('scale').x;
+                    var delta = 0.001;
+                    if (event.shiftKey)
+                        delta = 0.01;
+                    if (event.deltaY > 0) {
+                        delta = -delta;
+                    }
+                    currentScale += delta;
+                    if (currentScale <= 0)
+                        currentScale = 0.001;
+
+                    currentlySelected.setAttribute('scale', { x: currentScale, y: currentScale, z: currentScale });
+                } else {
+                    var currentRotation = currentlySelected.getAttribute('rotation');
+                    var delta = 5;
+                    if (event.shiftKey)
+                        delta = 10;
+                    if (event.deltaY > 0) {
+                        delta = -delta;
+                    }
+                    currentRotation.y += delta;
+
+                    currentlySelected.setAttribute('rotation', { x: currentRotation.x, y: currentRotation.y, z: currentRotation.z });
+                    //console.log(currentRotation.y);
+                }
+                event.preventDefault();
+                //return true;
+            }, true)
+            document.addEventListener("wheel", function () {
+                event.preventDefault();
+            })
+        </script>
+
+        <script type="text/javascript">
+
+            document.querySelector('#red').addEventListener('click', function () {
+                });
+
+            document.querySelector('#cmnd2').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#cmnd3').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+
+            document.querySelector('#cmnd4').addEventListener('click', function () {
+                window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
+            };
+            document.querySelector('#cmnd5').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#cmnd6').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+            document.querySelector('#cmnd7').addEventListener('click', function () {
+                document.querySelector('a-scene').enterVR();
+            });
+            document.querySelector('#cmnd8').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#cmnd9').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+
+            document.querySelector('#cmnd10').addEventListener('click', function () {
+                document.querySelector('a-scene').enterVR();
+            });
+            document.querySelector('#cmnd11').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#cmnd12').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+            document.querySelector('#cmnd13').addEventListener('click', function () {
+                document.querySelector('a-scene').enterVR();
+            });
+            document.querySelector('#cmnd14').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+            document.querySelector('#cmnd15').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+            document.querySelector('#screenshotp').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('perspective');
+            });
+            document.querySelector('#screenshote').addEventListener('click', function () {
+                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
+            });
+
+        </script>
         <script>
             function exportGLTF(input, options) {
                 AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
@@ -437,12 +703,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-            <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-            <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-            <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-                -->
+        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+            -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -545,80 +811,48 @@
         </a-entity>
 
         <!--
-            <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
-                <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+        <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
+            <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
 
-                </a-entity>
-                <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
-                          constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                          dynamic-body click-impulse>
-
-                </a-entity>
+            </a-entity>
+            <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                      constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                      dynamic-body click-impulse>
 
             </a-entity>
 
-        </a-entity>-->
-
-
-
-
-
-        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body click-impulse></a-entity>
-        <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
-        <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
-        <a-entity id="bbb4" gltf-model="#gear16" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
-
-        <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
-        <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
-        <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
-
-
-        <!-- freewheel working with click-impulse from mouse-->
-
-        <a-entity position="0 0 0">
-            <a-entity id="anchor"
-                      geometry="primitive: box;"
-                      material="color: yellow; flatShading: true;"
-                      position="0 4 0"
-                      static-body>
-            </a-entity>
-
-            <a-entity id="targett"
-                      geometry="primitive: box; height: 1; width: 2; depth: 2;"
-                      material="color: red; flatShading: true;"
-                      position="0 3.0 0"
-                      xxxconstraint="target: #anchor; type: distance; distance: 1.0;"
-                      constraint="type: pointToPoint; target: #anchor; axis: 0 1 0; pivot: 0 3 0; targetPivot: 0 0 0; collideConnected: false;"
-                      dynamic-body
-                      click-impulse>
-            </a-entity>
         </a-entity>
 
-        <a-box position="2 3 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse>
+    </a-entity>-->
 
-        </a-box>
-        <a-box position="-2 4 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse></a-box>
 
+
+
+
+        
         <a-entity id="rotorxx" position="-19 0 0" rotation="0 90 0" scale="10 10 10">
-            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
-            <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0">
+                <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
 
 
-            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                <a-entity id="crank-throwz" position="0 0 0" rotation="90 0 0" layout="type: circle; radius: 0.5">
+                    <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+                    <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
 
-            </a-entity>
+                </a-entity>
+
+            </a-cylinder>
+            
         </a-entity>
 
         <a-entity id="rotoryy" position="0 -19 0" rotation="90 0 0" scale="10 10 10">
@@ -665,10 +899,10 @@
             </a-entity>
         </a-entity>
         <!--
-        <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
-        <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-        <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
-        -->
+    <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
+    <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
+    <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
+    -->
 
         <a-box id="ground" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.001" color="lightblue" opacity=".1" gridhelper="size:40;divisions:20;ColoredCenterLine:yellow" static-body></a-box>
         <a-sky src="#im2" radius="50"></a-sky>
@@ -704,305 +938,7 @@
 
 
     </a-scene>
-    <div id="toolbar">
-        <select id="cameraRig">
-            <!--Supplement an id here instead of using 'text'-->
-            <option cameraRig="cam2">2</option>
-            <option cameraRig="cam3">3</option>
-            <option cameraRig="cam4">4</option>
-            <option cameraRig="cam5">5</option>
-            <option cameraRig="cam6">6</option>
-            <option cameraRig="cam7">7</option>
-            <option cameraRig="cam8">8</option>
-            <option cameraRig="cam1" selected>cam1</option>
-        </select>
-        <input class="color-input" value="#ffffff" />
-        <!--<button id="add" class="active" type="button">ADD</button>
-        <button id="remove" type="button">REMOVE</button>
-        <button id="edit" type="button">EDIT</button>-->
-        <button id="calti" type="button">ENV</button>
-        <button id="undo" type="button">UNDO</button>
-        <button id="redo" type="button">REDO</button>
-        <button id="screenshote" type="button">EQUI</button>
-        <button id="screenshotp" type="button">PERSP</button>
-
-        <!-- TODO: add save/load for electron implementation
-        <button id="save" type="button">SAVE</button>
-         -->
-    </div>
-    <script type="text/javascript">
-        var hueb = new Huebee('.color-input', {
-            // options
-            notation: 'hex',
-            saturations: 2,
-            setText: true,
-            customColors: ['#ffffff']
-        });
-        const ADD = 0;
-        const REMOVE = 1;
-        const EDIT = 2;
-        var state = ADD;
-        var cursor3D = document.querySelector('#my-cursor');
-        var scene = document.querySelector('a-scene');
-        var initialScale = 0.01;
-        var rotationYOffset = 0;
-        var selected = null;
-
-        var reader = new FileReader();
-        var colorIndex = 0;
-        var usedColor = 10;
-        hueb.on('change', function (color, hue, sat, lum) {
-            if (state == ADD && cursor3D.getAttribute('stl-model'))
-                cursor3D.setAttribute('material', 'color', color);
-
-            if (state == EDIT && selected)
-                selected.setAttribute('material', 'color', color);
-
-            for (var i = 0; i < hueb.options.customColors.length; i++)
-                if (hueb.options.customColors[i] == color)
-                    return;
-
-            hueb.options.customColors[colorIndex] = color;
-            hueb.updateColors();
-            colorIndex++;
-            if (colorIndex > usedColor)
-                colorIndex = 0;
-        })
-
-        // document.querySelector('#save').addEventListener('click', function() {
-        // TODO: save function for electron implementation
-        //   scene.flushToDOM(true);
-        //   console.log(scene);
-        // });
-        document.querySelector('#screenshotp').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-        document.querySelector('#screenshote').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#environment').addEventListener('change', function () {
-            document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
-            //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
-            //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
-            document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
-            //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
-            document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
-            var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
-            if (reducedDressing > 50)
-                document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
-        });
-        document.querySelector('#add').addEventListener('click', function () {
-            state = ADD;
-            if (cursor3D.getAttribute('material'))
-                hueb.setColor(cursor3D.getAttribute('material').color);
-            cursor3D.setAttribute('visible', true);
-            document.querySelector('.active').classList.toggle('active');
-            document.querySelector('#add').classList.toggle('active');
-        });
-        document.querySelector('#remove').addEventListener('click', function () {
-            state = REMOVE;
-            cursor3D.setAttribute('visible', false);
-            document.querySelector('.active').classList.toggle('active');
-            document.querySelector('#remove').classList.toggle('active');
-
-        });
-        document.querySelector('#edit').addEventListener('click', function () {
-            state = EDIT;
-            cursor3D.setAttribute('visible', false);
-            document.querySelector('.active').classList.toggle('active');
-            document.querySelector('#edit').classList.toggle('active');
-
-        });
-        var inventoryIndex = 0;
-        reader.addEventListener("load", function () {
-            if (state != ADD)
-                return;
-            cursor3D.setAttribute('stl-model', { src: reader.result });
-            cursor3D.setAttribute('scale', { x: initialScale, y: initialScale, z: initialScale });
-            cursor3D.setAttribute('material', 'color', hueb.color);
-            var listElement = document.createElement('a-entity')
-            listElement.setAttribute('position', { x: -1.8 + (.45 * inventoryIndex), y: -1, z: -1.5 })
-
-            listElement.setAttribute('rotation', { x: -90, y: 0, z: 0 })
-            listElement.setAttribute('class', 'ignore-ray');
-            listElement.setAttribute('stl-model', { src: reader.result });
-            listElement.setAttribute('scale', { x: initialScale * .2, y: initialScale * .2, z: initialScale * .2 });
-            var shortCutText = document.createElement('a-entity');
-            shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
-            shortCutText.setAttribute('text', 'anchor: left')
-            shortCutText.setAttribute('text', 'baseline', "center")
-            shortCutText.setAttribute('scale', '1000 1000 1000')
-            //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
-            shortCutText.setAttribute('position', { x: 0, y: 0, z: -90 })
-            shortCutText.setAttribute('rotation', { x: 90, y: 0, z: 0 })
-            shortCutText.object3D.layers.set(1)
-            inventoryIndex++;
-
-            listElement.appendChild(shortCutText)
-            document.querySelector('#my-camera').appendChild(listElement)
-        }, false);
-
-
-        scene.addEventListener("drag-and-drop", function (event) {
-            var file = event.detail.file;
-            reader.readAsDataURL(file);
-        });
-        window.addEventListener("keydown", function (event) {
-            //console.log(event.key)
-            if (inventoryIndex + 1 > event.key) {
-                //console.log()
-                cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
-            }
-        }, true)
-
-        window.addEventListener("contextmenu", function (event) {
-            if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
-                var el = document.createElement('a-entity');
-                el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
-                el.setAttribute('scale', cursor3D.getAttribute('scale'));
-                var rotation = { x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z) };
-                var position = cursor3D.getAttribute('position');
-                var material = cursor3D.getAttribute('material');
-                el.setAttribute('position', { x: position.x, y: position.y, z: position.z });
-                el.setAttribute('rotation', { x: rotation.x, y: rotation.y, z: rotation.z });
-                el.setAttribute('material', 'color', material.color);
-
-                el.addEventListener('raycaster-intersected', function () {
-                    selected = el;
-
-                    if (state == EDIT)
-                        hueb.setColor(selected.getAttribute('material').color)
-                }, true);
-                el.addEventListener('raycaster-intersected-cleared', function () {
-                    selected = null;
-                }, true);
-
-                scene.appendChild(el);
-            } else if (state == REMOVE && selected) {
-                selected.parentNode.removeChild(selected);
-                selected = null;
-            }
-            event.preventDefault();
-        });
-        //
-        window.addEventListener("wheel", function (event) {
-            var currentlySelected;
-            if (state == ADD) {
-                currentlySelected = cursor3D;
-            } else if (state == EDIT) {
-                currentlySelected = selected;
-            }
-
-            if (!currentlySelected)
-                return;
-
-            if (!event.ctrlKey) {
-                var currentScale = currentlySelected.getAttribute('scale').x;
-                var delta = 0.001;
-                if (event.shiftKey)
-                    delta = 0.01;
-                if (event.deltaY > 0) {
-                    delta = -delta;
-                }
-                currentScale += delta;
-                if (currentScale <= 0)
-                    currentScale = 0.001;
-
-                currentlySelected.setAttribute('scale', { x: currentScale, y: currentScale, z: currentScale });
-            } else {
-                var currentRotation = currentlySelected.getAttribute('rotation');
-                var delta = 5;
-                if (event.shiftKey)
-                    delta = 10;
-                if (event.deltaY > 0) {
-                    delta = -delta;
-                }
-                currentRotation.y += delta;
-
-                currentlySelected.setAttribute('rotation', { x: currentRotation.x, y: currentRotation.y, z: currentRotation.z });
-                //console.log(currentRotation.y);
-            }
-            event.preventDefault();
-            //return true;
-        }, true)
-        document.addEventListener("wheel", function () {
-            event.preventDefault();
-        })
-    </script>
-
-    <script type="text/javascript">
-
-        function() {
-            scene.components.inspector.injectInspector;
-        };
-
-        function injinsp() {
-            scene.components.inspector.injectInspector;
-        };
-
-        function evr() {
-            document.querySelector('a-scene').enterVR();
-        };
-
-        document.querySelector('#calti').addEventListener('click', function () {
-            document.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'i', 'altKey': true, 'ctrlKey': true }));
-        });
-
-        document.querySelector('#cmnd1').addEventListener('click', function () {
-            document.querySelector('a-scene').enterVR();
-        });
-        document.querySelector('#cmnd2').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#cmnd3').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-
-        document.querySelector('#cmnd4').addEventListener('click', function () {
-            window.postMessage('INJECT_AFRAME_INSPECTOR', '*');
-        };
-        document.querySelector('#cmnd5').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#cmnd6').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-        document.querySelector('#cmnd7').addEventListener('click', function () {
-            document.querySelector('a-scene').enterVR();
-        });
-        document.querySelector('#cmnd8').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#cmnd9').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-
-        document.querySelector('#cmnd10').addEventListener('click', function () {
-            document.querySelector('a-scene').enterVR();
-        });
-        document.querySelector('#cmnd11').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#cmnd12').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-        document.querySelector('#cmnd13').addEventListener('click', function () {
-            document.querySelector('a-scene').enterVR();
-        });
-        document.querySelector('#cmnd14').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-        document.querySelector('#cmnd15').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-        document.querySelector('#screenshotp').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('perspective');
-        });
-        document.querySelector('#screenshote').addEventListener('click', function () {
-            document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-        });
-
-    </script>
+    
 
 </body>
 
