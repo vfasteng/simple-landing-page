@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>CADBOXX DEMO</title>
     <meta name="description" content="Basic example for GLTF Exporter component."></meta>
-    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
     <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
@@ -62,7 +62,21 @@
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://js.upload.io/uploader/v2"></script>
+    <script src="https://js.upload.io/upload-js/v2"></script>
+    <script>
+        const upload = Upload({
 
+            // This is your API key:
+            apiKey: "public_kW15ayx7x8vJ3XvQ28zMpUPm7QaD"
+
+        })
+        const onFileSelected = async event => {
+            const file = event.target.files[0];
+            const { fileUrl } = await upload.uploadFile(file)
+            alert(`File uploaded! ${fileUrl}`);
+        };
+    </script>
     <script>
         AFRAME.registerComponent('click-impulse', {
             init: function () {
@@ -76,7 +90,7 @@
                             THREE.Math.randInt(-20, 20),
                             THREE.Math.randInt(-20, 20)
                         ),
-                                                                    /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                                                                            /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
                     );
                 });
 
@@ -144,6 +158,7 @@
         <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
         <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
         <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+        <input type="file" onchange="onFileSelected(event)" />
         <button id="upper" class="button" href="../exporter/upper.html"><span>Upload</span></button>
         <button id="uper" class="button" href="https://hubs.mozilla.com/spoke/projects" target="_blank">Spoke</button>
         <button id="cmd3" class="button"><span>Save</span></button>
@@ -174,7 +189,7 @@
 
             <a-asset-item id="bbooxx" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/bbooxx.glb?v=1665749104206"></a-asset-item>
 
-            
+
             <a-mixin id="hingeBottom1" model-center="bottomAlign:true" position="0 0 0"></a-mixin>
             <a-mixin id="sliderBottom1" gltf-model="#prt1" model-center="bottomAlign:true" position="0 0 0"></a-mixin>
             <a-mixin id="lockBottom1" gltf-model="#prt1" model-center="bottomAlign:true" position="0 0 0"></a-mixin>
@@ -305,8 +320,14 @@
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
             <a-asset-item id="cbplane" src="https://cdn.glitch.me/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fplanex1sq.glb?v=1635660167471"></a-asset-item>
+            <a-asset-item id="cbconetp" src="https"></a-asset-item>
+            <a-asset-item id="cbconetf" src="https"></a-asset-item>
+            <a-asset-item id="cbtett" src="https1"></a-asset-item>
+            <a-asset-item id="cbcylx" src="https"></a-asset-item>
+            <a-asset-item id="cbcylz" src="https"></a-asset-item>
+            <a-asset-item id="cbcyly" src="https"></a-asset-item>
 
-            <a-mixin id="assem01" scale="1 1 1"></a-mixin>
+            <a-mixin id="assem01" gltf-model="#cb1" scale="1 1 1"></a-mixin>
             <a-mixin id="assem02" scale="1 1 1"></a-mixin>
             <a-mixin id="assem03" scale="1 1 1"></a-mixin>
             <a-mixin id="assem04" scale="1 1 1"></a-mixin>
@@ -475,7 +496,7 @@
             <a-entity id="redbxx" position="0 1 0" rotation="0 0 0" scale="1 1 1">
                 <a-entity id="glbp1" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse>
                     <a-sphere id="anchor" position="0 0 0" rotation="0 0 0" radius="0.1" material="color:lightblue;wireframe:true" opacity="0.1" static-body></a-sphere>
-                        <a-entity id="prt0" gltf-model="#cb1" position="0 5 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#anchor;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2 0" dynamic-body click-impulse></a-entity>
+                    <a-entity id="prt0" gltf-model="#cb1" position="0 5 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#anchor;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2 0" dynamic-body click-impulse></a-entity>
 
 
                 </a-entity>
@@ -488,50 +509,81 @@
                 <a-entity id="glbp8" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
                 <a-entity id="glbp9" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
                     -->
-                
 
-                
+
+
             </a-entity>
+
+            <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
+            <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+            <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
+
+
             <!--
-                <a-entity id="planeboxx" position="0 0 0">
-                    <a-entity id="planebox" position="0 0 0">
+                        <a-entity id="planeboxx" position="0 0 0">
+                            <a-entity id="planebox" position="0 0 0">
 
-                        <a-entity id="prt1" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt2" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt4" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt5" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt6" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt7" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt8" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt9" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                        <a-entity id="prt0" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt1" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt2" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt4" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt5" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt6" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt7" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt8" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt9" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+                                <a-entity id="prt0" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
 
 
 
-                        <!-- Camera. --
+                                <!-- Camera. --
+                    <a-entity id="cameraWrapper" position="0 1 5">
+                        <a-entity id="camera" camera look-controls wasd-controls>
+                            <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+
+                        </a-entity>
+                    </a-entity>
+
+                    <!-- no look controls; control angle with second joystick  --
+            <a-entity id="camera" camera
+                      position="0 1.6 0"
+                      extended-wasd-controls="flyEnabled: true; inputType: joystick;">
+            </a-entity>-->
+            <!-- Camera. -->
             <a-entity id="cameraWrapper" position="0 1 5">
                 <a-entity id="camera" camera look-controls wasd-controls>
-                    <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+                    <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
                 </a-entity>
             </a-entity>
-
-            <!-- no look controls; control angle with second joystick  --
-    <a-entity id="camera" camera
-              position="0 1.6 0"
-              extended-wasd-controls="flyEnabled: true; inputType: joystick;">
-    </a-entity>-->
-                        <!-- Camera. -->
-                        <a-entity id="cameraWrapper" position="0 1 5">
-                            <a-entity id="camera" camera look-controls wasd-controls>
-                                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
-
-                            </a-entity>
-                        </a-entity>
-</a-scene>
+    </a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
+    <script>
+        // Ignore if installed via a <script> tag.
+        import { Uploader } from "uploader";
+
+        // Get production API keys from Upload.io
+        const uploader = Uploader({
+            apiKey: "free"
+        });
+
+        // Customize the file upload UI (see "customization" below):
+        const options = { multi: true }
+
+        // Display the file upload widget:
+        uploader.open(options).then(files => {
+            if (files.length === 0) {
+                console.log('No files selected.')
+            } else {
+                console.log('Files uploaded:');
+                console.log(files.map(f => f.fileUrl));
+            }
+        }).catch(err => {
+            console.error(err);
+        });
+
+    </script>
     <script>
         function exportGLTF(input, options) {
             AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
