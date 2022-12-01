@@ -4,8 +4,10 @@
     "\\anime",
     "\\exporter",
     "\\exporter\\aincraft",
-    "\\utils"
+    "\\exporter\\components\\components",
+    "\\exporter\\components\\components\\aframe-gltf-part-component",
+    "\\exporter\\components\\components\\aframe-hull-component"
   ],
-  "SelectedNode": "\\exporter\\scratch.html",
+  "SelectedNode": "\\exporter\\upper.html",
   "PreviewInSolutionExplorer": false
 }
