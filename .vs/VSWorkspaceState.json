@@ -4,10 +4,10 @@
     "\\anime",
     "\\exporter",
     "\\exporter\\aincraft",
-    "\\exporter\\components\\components",
-    "\\exporter\\components\\components\\aframe-gltf-part-component",
-    "\\exporter\\components\\components\\aframe-hull-component"
+    "\\utils",
+    "\\utils\\ff",
+    "\\utils\\ResponsiveThumbnailGallery-master"
   ],
-  "SelectedNode": "\\exporter\\upper.html",
+  "SelectedNode": "\\index.html",
   "PreviewInSolutionExplorer": false
 }
