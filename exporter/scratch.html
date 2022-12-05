@@ -239,13 +239,32 @@
                      dynamic-body shadow>
             </a-mixin>
             <a-mixin id="voxel"
-                     geometry="primitive: box; width: 0.5; height: 0.0001; depth: 0.5"
+                     gltf-model="#cb1"
                      intersection-spawn="event: click; mixin: voxel; material.color: green"
-                     snap="offset: 0.25 0.25 0.25; snap: 0.5 0.5 0.5"
+                     snap="offset: 0.5 0.5 0.5; snap: 1 1 1"
                      event-set__mouseenter="material.opacity: 0.7"
                      event-set__mouseleave="material.opacity: 1.0"
                      event-set__dragover-start="material.wireframe: true"
                      event-set__dragover-end="material.wireframe: false"></a-mixin>
+            <a-mixin id="voxel2"
+                     gltf-model="#cadball"
+                     intersection-spawn="event: click; mixin: voxel; material.color: green"
+                     snap="offset: 0.5 0.5 0.5; snap: 1 1 1"
+                     event-set__mouseenter="material.opacity: 0.7"
+                     event-set__mouseleave="material.opacity: 1.0"
+                     event-set__dragover-start="material.wireframe: true"
+                     event-set__dragover-end="material.wireframe: false"></a-mixin>
+            <a-mixin id="voxel3"
+                     gltf-model="#cbconetf"
+                     intersection-spawn="event: click; mixin: voxel; material.color: green"
+                     snap="offset: 0.5 0.5 0.5; snap: 1 1 1"
+                     event-set__mouseenter="material.opacity: 0.7"
+                     event-set__mouseleave="material.opacity: 1.0"
+                     event-set__dragover-start="material.wireframe: true"
+                     event-set__dragover-end="material.wireframe: false"></a-mixin>
+
+
+
             <a-mixin id="ch1"
                      gltf-model="#chlink1"
                      material="color: #645146"
@@ -520,16 +539,16 @@
                     <a-box id="cmnd1" class="clickable" position="-16 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
                     <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
                     <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
-                    <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
+                    <a-box id="cmnd4" class="clickable" position="-8 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
                     <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm5()" static-body></a-box>
                     <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm6()" static-body></a-box>
-                    <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" onclick="cmm7()" static-body></a-box>
+                    <a-box id="cmnd7" class="clickable" position="0 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm7()" static-body></a-box>
                     <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="green" opacity="1" onclick="cmm8()" static-body></a-box>
                     <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm9()" static-body></a-box>
-                    <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="purple" opacity="1" onclick="cmm10()" static-body></a-box>
+                    <a-box id="cmnd10" class="clickable" position="8 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm10()" static-body></a-box>
                     <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="orange" opacity="1" onclick="cmm11()" static-body></a-box>
                     <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" onclick="cmm12()" static-body></a-box>
-                    <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="crimson" opacity="1" onclick="cmm13()" static-body></a-box>
+                    <a-box id="cmnd13" class="clickable" position="16 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" onclick="cmm13()" static-body></a-box>
                     <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="green" opacity="1" onclick="cmm14()" static-body></a-box>
                     <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" onclick="cmm15()" static-body></a-box>
 
@@ -591,7 +610,10 @@
             <a-entity id="prt8" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
             <a-entity id="prt9" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
             <a-entity id="prt0" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-
+                -->
+            <!-- Hands. -->
+            <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
+            <a-entity id="blockHand" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel"></a-entity>
 
 
             <!-- Camera. -->
@@ -610,10 +632,6 @@
                     <a-cursor intersection-spawn="event: click; mixin: voxel3"></a-cursor>
                 </a-entity>
             </a-camera>
-
-
-
-
 </a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
@@ -679,21 +697,36 @@
 
     <script>
         function cmm1() {//set position relative to object plane
-            var secondCameraEl = document.querySelector('#cam2');
-            secondCameraEl.setAttribute('camera', 'active', true);
+            var mainCameraEl = document.querySelector('#cam1');
+            mainCameraEl.setAttribute('camera', 'active', true);
 
+
+            var secondCameraEl = document.querySelector('#cam2');
+            secondCameraEl.setAttribute('camera', 'active', false);
+            var thirdCameraEl = document.querySelector('#cam3');
+            thirdCameraEl.setAttribute('camera', 'active', false);
         };
 
         function cmm2() {//load
-            var thirdCameraEl = document.querySelector('#cam3');
-            thirdCameraEl.setAttribute('camera', 'active', true);
+            var mainCameraEl = document.querySelector('#cam1');
+            mainCameraEl.setAttribute('camera', 'active', false);
 
+
+            var secondCameraEl = document.querySelector('#cam2');
+            secondCameraEl.setAttribute('camera', 'active', true);
+            var thirdCameraEl = document.querySelector('#cam3');
+            thirdCameraEl.setAttribute('camera', 'active', false);
         };
 
         function cmm3() {
             var mainCameraEl = document.querySelector('#cam1');
-            mainCameraEl.setAttribute('camera', 'active', true);
+            mainCameraEl.setAttribute('camera', 'active', false);
 
+
+            var secondCameraEl = document.querySelector('#cam2');
+            secondCameraEl.setAttribute('camera', 'active', false);
+            var thirdCameraEl = document.querySelector('#cam3');
+            thirdCameraEl.setAttribute('camera', 'active', true);
         };
 
         function cmm4() {

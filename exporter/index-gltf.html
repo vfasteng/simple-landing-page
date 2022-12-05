@@ -355,32 +355,7 @@
 
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
-            <!--
-            <a-entity id="redbxx" position="-2 2 0">
-                <a-entity id="bottom-square" gltf-model="#bb043" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body click-impulse>
-
-                </a-entity>
-                <a-entity id="top-hex" gltf-model="#bb054" position="0 0 1" rotation="0 0 0" scale="10 10 10"
-                          constraint="type:hinge;target:#bottom-square;axis:0 0 1;targetAxis:0 0 1;pivot:0 0 0;targetPivot:0 0 0.2"
-                          static-body click-impulse>
-
-                </a-entity>
-            </a-entity>
-
-
-
-            <!--
-        <a-entity id="redbxyz" position="-2 2 0">
-            <a-entity id="whsupt" gltf-model="#bb043" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body click-impulse>
-
-            </a-entity>
-            <a-entity id="weel" gltf-model="#wheel" position="0 0 1" rotation="0 0 0" scale="10 10 10"
-                      constraint="type:hinge;target:#whsupt;axis:0 0 1;targetAxis:0 0 1;pivot:0 0 0;targetPivot:0 0 0.2"
-                      dynamic-body click-impulse>
-
-            </a-entity>
-        </a-entity>
-            --
+            
         <a-entity id="cb4-series-assy"  position="0 -2 5" rotation="0 0 0" scale="1 1 1" >
             <a-entity id="cb1" gltf-model="#cb1" position="-5 1 0" rotation="0 0 0" scale="1 1 1" dynamic-body>
                 <a-entity id="cb2" gltf-model="#cb1" position="-4 1 0" rotation="0 0 0" scale="1 1 1" dynamic-body>
@@ -391,7 +366,7 @@
                     </a-entity>
                 </a-entity>
             </a-entity>
-        </a-entity>-->
+        </a-entity>
 
             <a-entity id="cb4-parralel-assy" position="0 0 0" rotation="0 0 0" scale="1 1 1">
                 <a-entity id="cbb1" gltf-model="#cb1" width="4" height="2" depth="6" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body>
@@ -412,7 +387,7 @@
 
             <!-- Hands. -->
             <a-entity id="teleHand" hand-controls="left" teleport-controls="type: parabolic; collisionEntities: [mixin='voxel'], #ground"></a-entity>
-            <a-entity id="blockHand" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel3"></a-entity>
+            <a-entity id="blockHand" hand-controls="right" controller-cursor intersection-spawn="event: click; mixin: voxel"></a-entity>
 
             <!-- Camera. --
             <a-camera id="cam1" position="0 1.6 4">
@@ -425,11 +400,11 @@
                     <a-cursor intersection-spawn="event: click; mixin: voxel2"></a-cursor>
                 </a-entity>
             </a-camera>-->
-            <a-camera id="cam3" position="0 1.6 4">
+            <a-entity id="cam3" camera="look-controls wasd-controls" position="0 1.6 4">
                 <a-entity cursor="fuse: false; rayOrigin: mouse;">
-                    <a-cursor intersection-spawn="event: click; mixin: voxel3"></a-cursor>
+                    <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
                 </a-entity>
-            </a-camera>
+            </a-entity>
             <a-sky id="background" color="yellow" radius="30"></a-sky>
 
     </a-scene>
