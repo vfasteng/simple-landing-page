@@ -314,18 +314,52 @@
             <a-mixin id="zgreen-n" dynamic-body constraint="type:pointTopoint;axis:0 1 0;targetAxis:0 1 0;pivot:0 1.5 0;targetPivot:0 1.5 0; "></a-mixin>
             <a-mixin id="zgreen-s" dynamic-body constraint="type:pointTopoint;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0; "></a-mixin>
 
+            <a-mixin id="shands-controller"
+                     super-hands="colliderEvent: raycaster-intersection;
+                     colliderEventProperty: els;
+                     colliderEndEvent: raycaster-intersection-cleared;
+                     colliderEndEventProperty: clearedEls"></a-mixin><!--use with raycaster and laser controls-->
+            <a-mixin id="all-interactions"
+                     hoverable grabbable stretchable draggable
+                     event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                     event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                     dynamic-body></a-mixin>
+
+            <a-mixin id="grab-move"
+                     hoverable grabbable draggable
+                     event-set__hoveron="_event: hover-start; material.opacity: 0.7; transparent: true"
+                     event-set__hoveroff="_event: hover-end; material.opacity: 1; transparent: false"
+                     dynamic-body></a-mixin>
+
+            <a-mixin id="physics-hands"
+                     physics-collider phase-shift
+                     collision-filter="collisionForces: false"
+                     static-body="shape: sphere; sphereRadius: 0.02"
+                     super-hands="colliderEvent: collisions;
+                              colliderEventProperty: els;
+                              colliderEndEvent: collisions;
+                              colliderEndEventProperty: clearedEls;"></a-mixin>
+
 
             <a-asset-item id="wheel" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wasscol.glb?v=1645270261858"></a-asset-item>
 
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
             <a-asset-item id="cbplane" src="https://cdn.glitch.me/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fplanex1sq.glb?v=1635660167471"></a-asset-item>
-            <a-asset-item id="cbconetp" src="#"></a-asset-item>
+            <a-asset-item id="cbconetp" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cone_x_rad_1_x_1_high.glb?v=1670057296222"></a-asset-item>
+            <a-asset-item id="cbconetf" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cone_x_r_0.5_x_1_to_r_0.25.glb?v=1670057298138"></a-asset-item>
+            <a-asset-item id="cbtett" src="#"></a-asset-item>
+            <a-asset-item id="cbcylx" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder_1_x_1_x-axis.glb?v=1670057375084"></a-asset-item>
+            <a-asset-item id="cbcylz" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder.glb?v=1670057310593"></a-asset-item>
+            <a-asset-item id="cbcyly" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder_dia_1_x_1.glb?v=1670058296060"></a-asset-item>
+            <a-asset-item id="cadball" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadball.glb?v=1670056408681"></a-asset-item>
             <a-asset-item id="cbconetf" src="#"></a-asset-item>
             <a-asset-item id="cbtett" src="#"></a-asset-item>
             <a-asset-item id="cbcylx" src="#"></a-asset-item>
             <a-asset-item id="cbcylz" src="#"></a-asset-item>
             <a-asset-item id="cbcyly" src="#"></a-asset-item>
+
+
 
             <a-mixin id="assem01" gltf-model="#cb1" scale="1 1 1"></a-mixin>
             <a-mixin id="assem02" scale="1 1 1"></a-mixin>
@@ -431,13 +465,13 @@
             <a-asset-item id="spring_blocks" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/spring-blocks%20v7.glb?v=1667222828439"></a-asset-item>
             <a-asset-item id="buggy-wheel-chrome" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/Buggy-wheel-chrome.glb?v=1661360545183"></a-asset-item>
 
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-            <a-asset-item id="ppp" src="https"></a-asset-item>
-
+            <!--<a-asset-item id="cadball" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadball.glb?v=1670056408681"></a-asset-item>
+    <a-asset-item id="ppp" src="https"></a-asset-item>
+    <a-asset-item id="ppp" src="https"></a-asset-item>
+    <a-asset-item id="ppp" src="https"></a-asset-item>
+    <a-asset-item id="ppp" src="https"></a-asset-item>
+    <a-asset-item id="ppp" src="https"></a-asset-item>
+        -->
 
             <a-mixin id="hinge-bodya" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
             <a-mixin id="hinge-bodyb" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 1 2"
@@ -483,7 +517,7 @@
 
                 <!--panel hosts-->
                 <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
-                    <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
+                    <a-box id="cmnd1" class="clickable" position="-16 .2 0" rotation="0 0 0" width="4" depth="4" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
                     <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
                     <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" onclick="cmm3()" static-body></a-box>
                     <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" onclick="cmm4()" static-body></a-box>
@@ -506,89 +540,80 @@
 
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
+            <!--
+        <a-entity id="car_template" position="0 2.5 0" rotation="0 0 0" scale="1 1 1">
+            <a-entity id="body" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse></a-entity>
+            <a-entity id="fraxle" gltf-model="#cb1" rotation="0 0 0" scale="2 1 1" constraint="type:hinge;target:#body;axis:0 0 1;targetAxis:0 0 1;pivot:0 0 0;targetPivot:0 0 2" static-body click-impulse></a-entity>
+            <a-entity id="flw" gltf-model="#cbcylx" rotation="0 0 0" scale=".5 1.5 1.5" constraint="type:hinge;target:#fraxle;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="frw" gltf-model="#cbcylx" rotation="0 0 0" scale=".5 1.5 1.5" constraint="type:hinge;target:#fraxle;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:2 0 0" dynamic-body click-impulse></a-entity>
 
-            <a-entity id="car_template" position="0 1 0" rotation="0 0 0" scale="1 1 1">
-                <a-entity id="chassis" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="body" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse>
-                    <a-entity id="bodyf" gltf-model="#cb1" position="0 0 1" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                    <a-entity id="bodyf" gltf-model="#cb1" position="0 0 -1" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        </a-entity>
 
-                </a-entity>
-                <a-entity id="fraxle" gltf-model="#cb1" position="0 0 1" rotation="0 0 0" scale="2 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="baxle" gltf-model="#cb1" position="0 0 -1" rotation="0 0 0" scale="2 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="flw" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="frw" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="blw" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                <a-entity id="brw" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-    
+        <a-entity id="baxle" gltf-model="#cb1" rotation="0 0 0" scale="2 1 1" constraint="type:hinge;target:#body;axis:0 0 0;targetAxis:0 0 1;pivot:0 0 0;targetPivot:0 0 -2" static-body click-impulse>
+            <a-entity id="blw" gltf-model="#cbcylx" rotation="0 0 0" scale=".5 1.5 1.5" constraint="type:hinge;target:#baxle;axis:0 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="brw" gltf-model="#cbcylx" rotation="0 0 0" scale=".5 1.5 1.5" constraint="type:hinge;target:#baxle;axis:0 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:2 0 0" dynamic-body click-impulse></a-entity>
+        </a-entity>
+
+
+        <a-entity id="redbxx" position="3 1 0" rotation="0 0 0" scale="1 1 1">
+            <a-entity id="glbp1" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" static-body click-impulse>
+                <a-sphere id="anchor" position="0 0 0" rotation="0 0 0" radius="0.1" material="color:lightblue;wireframe:true" opacity="0.1" static-body></a-sphere>
+                <a-entity id="prt0" gltf-model="#cb1" position="0 5 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#anchor;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2 0" dynamic-body click-impulse></a-entity>
             </a-entity>
 
+            <!--<a-entity id="glbp2" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp3" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp4" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp5" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp6" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp7" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp8" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+        <a-entity id="glbp9" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
+            --
+        </a-entity>
+
+        <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
+        <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
+
+
+        <!--
+    <a-entity id="planeboxx" position="0 0 0">
+        <a-entity id="planebox" position="0 0 0">
+
+            <a-entity id="prt1" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt2" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt4" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt5" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt6" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt7" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt8" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt9" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
+            <a-entity id="prt0" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
 
 
 
-                <a-entity id="redbxx" position="0 1 0" rotation="0 0 0" scale="1 1 1">
-                    <a-entity id="glbp1" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse>
-                        <a-sphere id="anchor" position="0 0 0" rotation="0 0 0" radius="0.1" material="color:lightblue;wireframe:true" opacity="0.1" static-body></a-sphere>
-                        <a-entity id="prt0" gltf-model="#cb1" position="0 5 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#anchor;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 2 0" dynamic-body click-impulse></a-entity>
-
-
-                    </a-entity>
-                    <!--<a-entity id="glbp2" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp3" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp4" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp5" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp6" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp7" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp8" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-            <a-entity id="glbp9" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" constraint="type:hinge;target:#prt0;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0" dynamic-body click-impulse></a-entity>
-                -->
-
-
-
+            <!-- Camera. -->
+            <a-camera id="cam1" position="0 1.6 4">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;">
+                    <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
                 </a-entity>
-
-                <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
-                <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
-                <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
-
-
-                <!--
-                    <a-entity id="planeboxx" position="0 0 0">
-                        <a-entity id="planebox" position="0 0 0">
-
-                            <a-entity id="prt1" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt2" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt4" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt5" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt6" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt7" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt8" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt9" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-                            <a-entity id="prt0" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" constraint="type:hinge;target:#anchor;axis:1 0 0;targetAxis:1 0 0;pivot:0 0 0;targetPivot:-2 0 0" dynamic-body click-impulse></a-entity>
-
-
-
-                            <!-- Camera. --
-                <a-entity id="cameraWrapper" position="0 1 5">
-                    <a-entity id="camera" camera look-controls wasd-controls>
-                        <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
-
-                    </a-entity>
+            </a-camera>
+            <a-camera id="cam2" position="0 1.6 4">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;">
+                    <a-cursor intersection-spawn="event: click; mixin: voxel2"></a-cursor>
                 </a-entity>
-
-                <!-- no look controls; control angle with second joystick  --
-        <a-entity id="camera" camera
-                  position="0 1.6 0"
-                  extended-wasd-controls="flyEnabled: true; inputType: joystick;">
-        </a-entity>-->
-                <!-- Camera. -->
-                <a-entity id="cameraWrapper" position="0 1 5">
-                    <a-entity id="camera" camera look-controls wasd-controls>
-                        <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
-
-                    </a-entity>
+            </a-camera>
+            <a-camera id="cam3" position="0 1.6 4">
+                <a-entity cursor="fuse: false; rayOrigin: mouse;">
+                    <a-cursor intersection-spawn="event: click; mixin: voxel3"></a-cursor>
                 </a-entity>
+            </a-camera>
+
+
+
+
 </a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
@@ -654,142 +679,58 @@
 
     <script>
         function cmm1() {//set position relative to object plane
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
+            var secondCameraEl = document.querySelector('#cam2');
+            secondCameraEl.setAttribute('camera', 'active', true);
 
-            }
         };
 
         function cmm2() {//load
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
+            var thirdCameraEl = document.querySelector('#cam3');
+            thirdCameraEl.setAttribute('camera', 'active', true);
 
-            }
         };
 
         function cmm3() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
+            var mainCameraEl = document.querySelector('#cam1');
+            mainCameraEl.setAttribute('camera', 'active', true);
 
-            }
         };
 
         function cmm4() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm5() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm6() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm7() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm8() {//
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm9() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm10() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm11() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm12() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm13() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm14() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
         function cmm15() {
-            console.log(document.querySelector("a-sphere").getAttribute("color"))
-            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                document.querySelector("a-sphere").setAttribute("color", "blue");
-            } else {
-                document.querySelector("a-sphere").setAttribute("color", "green");
-
-            }
+            
         };
 
     </script>

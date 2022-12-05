@@ -486,7 +486,7 @@
         </a-entity>
 
     </a-entity>
-    <!--p2p-mixin-->
+    <!--p2p-mixin--
             <a-entity id="ptp-mixin-2p5" position="3 0 -1" rotation="0 0 0">
                 <a-entity id="bodya" mixin="ptp-bodya">
 
@@ -508,12 +508,12 @@
 
             </a-entity>
             <!---->
-            <a-entity id="hinge-mixin-planes">
+            <a-entity id="hinge-mixin-planes1" position="0 2 3" rotation="0 0 0">
                 <a-entity id="bodye" mixin="hinge-planes-bodya">
-
+                    
                 </a-entity>
                 <a-entity id="bodyf" mixin="hinge-planes-bodyb">
-
+                    <a-cylinder id="cc1" position="0 1 0" rotation="0 0 0" scale=".5 .5 .5" color="green"></a-cylinder>
                 </a-entity>
 
             </a-entity>
@@ -577,11 +577,7 @@
 						   targetAxis: 0 1 0;
 						   pivot: 0 0 0;
 					   	targetPivot: 0 2 0;">
-                    <a-entity src="#116" position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
-                        <a-entity src="#116" position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
-
-                        </a-entity>
-                    </a-entity>
+                    
                 </a-entity>
             </a-entity>
 
@@ -604,7 +600,6 @@
                           dynamic-body click-impulse>
 
                 </a-entity>
-
             </a-entity>
 
             <a-entity id="p2" position="-5 3 0" rotation="0 0 0">
@@ -616,15 +611,12 @@
                           dynamic-body click-impulse>
 
                 </a-entity>
-
-
-
             </a-entity>
 
             <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body></a-entity>
-            <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
-            <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
-            <a-entity id="bbb4" gltf-model="#cb1" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+            <a-entity id="bbb2" gltf-model="#cb1" mixin="#hinge-mixin"  position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+            <a-entity id="bbb3" gltf-model="#cb1" mixin="#hinge-mixin" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
+            <a-entity id="bbb4" gltf-model="#cb1" mixin="#hinge-mixin"  position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
 
 
 

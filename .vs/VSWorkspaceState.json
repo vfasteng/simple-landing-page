@@ -2,12 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\anime",
+    "\\anime\\assets",
     "\\exporter",
-    "\\exporter\\aincraft",
-    "\\utils",
-    "\\utils\\ff",
-    "\\utils\\ResponsiveThumbnailGallery-master"
+    "\\exporter\\aincraft"
   ],
-  "SelectedNode": "\\index.html",
   "PreviewInSolutionExplorer": false
 }

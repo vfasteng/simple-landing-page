@@ -1,17 +1,4 @@
 ﻿<!DOCTYPE html>
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
-
-<!--working code menubar2-->
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -165,16 +152,16 @@
 <body>
     <!--<a-scene physics="" vr-mode-ui="enabled: false" drag-and-drop>-->
         <div id="container">
-            <button id="export-scene" class="button"><span>Export Scene</span></button>
-            <button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
-            <button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
-            <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
-            <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
+            <button id="exscene" class="button"><span>ExScene</span></button>
+            <button id="exbin" class="button"><span>ExBin</span></button>
+            <button id="exbxx" class="button"><span>ExBxx</span></button>
+            <button id="exbyy" class="button"><span>ExByy</span></button>
+            <button id="exbzz" class="button"><span>ExBzz</span></button>
             <button id="cmnd1" class="button"><span>CMD1</span></button>
             <button id="cmnd2" class="button"><span>CMD2</span></button>
             <button id="calti" class="button"><span>CMD3</span></button>
-            <button id="screenshotp" class="button"><span>PERS</span></button>
-            <button id="screenshote" class="button"><span>EQUI</span></button>
+            <button id="screenp" class="button"><span>PERS</span></button>
+            <button id="screene" class="button"><span>EQUI</span></button>
             <!--
 
           <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
@@ -458,23 +445,23 @@
                 AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
             }
 
-            document.getElementById('export-scene').addEventListener('click', function () {
+            document.getElementById('exscene').addEventListener('click', function () {
                 exportGLTF();
             });
 
-            document.getElementById('export-scene-bin').addEventListener('click', function () {
+            document.getElementById('exbin').addEventListener('click', function () {
                 exportGLTF(undefined, { binary: true });
             });
 
-            document.getElementById('export-redbxx').addEventListener('click', function () {
+            document.getElementById('exbxx').addEventListener('click', function () {
                 exportGLTF(document.getElementById('redbxx'), { binary: true });
             });
 
-            document.getElementById('export-redbyy').addEventListener('click', function () {
+            document.getElementById('exbyy').addEventListener('click', function () {
                 exportGLTF(document.getElementById('redbyy'), { binary: true });
             });
 
-            document.getElementById('export-redbzz').addEventListener('click', function () {
+            document.getElementById('exbzz').addEventListener('click', function () {
                 exportGLTF(document.getElementById('redbzz'), { binary: true });
             });
 
@@ -652,15 +639,15 @@
                      dynamic-body shadow>
             </a-mixin>
 
-            <a-asset-item id="prt1" src="#bb021"></a-asset-item>
-            <a-asset-item id="prt2" src="#prt02"></a-asset-item>
-            <a-asset-item id="prt3" src="#prt03"></a-asset-item>
-            <a-asset-item id="prt4" src="#prt04"></a-asset-item>
-            <a-asset-item id="prt5" src="#prt05"></a-asset-item>
-            <a-asset-item id="prt6" src="#prt06"></a-asset-item>
-            <a-asset-item id="prt7" src="#prt07"></a-asset-item>
-            <a-asset-item id="prt8" src="#prt08"></a-asset-item>
-            <a-asset-item id="prt9" src="#prt09"></a-asset-item>
+            <a-asset-item id="prt1" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt2" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt3" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt4" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt5" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt6" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt7" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt8" src="#bb030"></a-asset-item>
+            <a-asset-item id="prt9" src="#bb030"></a-asset-item>
 
             <a-mixin id="constraint_hinge" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
             <a-mixin id="constraint_distance" constraint="type: distance;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
@@ -703,12 +690,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-            -->
+    <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+        -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -743,6 +730,16 @@
             <a-mixin id="p2p-bodyb" gltf-model="#ccyl1" position="0 2.5 0" rotation="0 0 0" scale="2 2 2"
                      constraint="type:pointTopoint;target:#bodye;axis:0 0 0;targetAxis:0 0 0;pivot:0 0 0;targetPivot:0 -2 0"
                      dynamic-body click-impulse></a-mixin>
+
+
+            <a-mixin id="full_rot_xx" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 360 0 0"></a-mixin>
+            <a-mixin id="full_rot_yy" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 360 0"></a-mixin>
+            <a-mixin id="full_rot_zz" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 0 360"></a-mixin>
+
+
+
+
+
         </a-assets>
 
         <!--cadboxx walls, floor and lighting to 40 square-->
@@ -786,7 +783,17 @@
             </a-entity>
         </a-entity>
 
-        <a-entity id="redbxx" position="3 0 0" rotation="0 11 0">
+
+
+
+
+
+
+
+
+
+        <!--
+        <a-entity id="redbxx" position="3 0 0" rotation="0 0 0">
             <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
             </a-entity>
@@ -830,8 +837,8 @@
 
 
         
-        <a-entity id="rotorxx" position="-19 0 0" rotation="0 90 0" scale="10 10 10">
-            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0">
+        <a-entity id="rotorxx" mixin="full_rot_xx" position="-19 0 0" rotation="0 90 0" scale="10 10 10">
+            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
                 <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
 
 
@@ -851,7 +858,7 @@
 
                 </a-entity>
 
-            </a-cylinder>
+            
             
         </a-entity>
 
@@ -904,7 +911,10 @@
     <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
     -->
 
-        <a-box id="ground" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.001" color="lightblue" opacity=".1" gridhelper="size:40;divisions:20;ColoredCenterLine:yellow" static-body></a-box>
+
+
+
+        <a-box id="ground" position="0 0 0" rotation="0 0 0" width="40" depth="40" height="0.001" color="lightblue" opacity=".1" gridhelper="size:36;divisions:18;ColoredCenterLine:yellow" static-body></a-box>
         <a-sky src="#im2" radius="50"></a-sky>
 
         <a-entity id="cam7">
@@ -948,8 +958,8 @@
                         animation__rotation="property: rotation; dir: forward; dur: 100000;
                              repeat: indefinite; easing: linear; loop: true; to: 0 360 0"></a-cylinder>
 
-    <a-mixin id="" animation__rotation="property: rotation; dir: forward; dur: 100000;
-                             repeat: indefinite; easing: linear; loop: true; to: 0 360 0"></a-mixin>
+    <a-mixin id="full_rot_xx" animation__rotation="property: rotation; dir: forward; dur: 5000;
+                             repeat: indefinite; easing: linear; loop: true; to: 360 0 0"></a-mixin>
 
     <script>
         function setpartOrigin(target) {
