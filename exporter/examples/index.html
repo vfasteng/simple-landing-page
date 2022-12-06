@@ -1,0 +1,112 @@
+<html>
+  <head>
+    <title>cad-boxx.com</title>
+    <style>
+      html {
+        background: #33425B;
+        color: #FAFAFA;
+        font-family: sans-serif;
+        font-size: 20px;
+        padding: 10px 20px;
+        max-width: 41em;
+        margin: 0 auto;
+      }
+      h1,h2 {
+        font-weight: 300;
+        font-family: serif;
+      }
+      a {
+        color: #FAFAFA;
+      }
+      a.example {
+        padding: 15px 0;
+        font-size: 24px;
+        display: block;
+      }
+      code, pre {
+        font-family: monospace;
+        background-color: #3f506d;
+        color: #BBB;
+      }
+      .unemph {
+        font-size: smaller;
+        color: #BBB;
+      }
+      .preview {
+        width: 192px;
+        height: 96px;
+        display: block;
+        margin: 3px 0px;
+        float: left;
+      }
+      .bonus {
+        color: #f4f4a1;
+        background-color: #3f506d7e;
+        font-size: 18px;
+        width: 93px;
+        height: 96px;
+        float: left;
+        margin: 3px 0px;
+        padding: 0 0 0 5px;
+        position: absolute;
+        overflow: hidden;
+      }
+      .bonus::after {
+        content: 'Motion-Captured Preview Available'
+      }
+      .bonus+p, .preview+p, .example + p {
+        clear: both;
+      }
+     </style>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.1/showdown.min.js"></script>
+  </head>
+  <body>
+    <h1>A cadboxx loads, manipulates and assembles 3D Models</h1>
+    <p>This App connects all models from ANY 3D System!
+      <a href="http://github.com/wmurphyrd/aframe-super-hands-component">
+        Also works with a mouse, touchscreen, Game & VR controlllers.
+      </a>
+      Enjoy easy assembly with a fully interactive experience.
+    </p>
+    <a id="physics" class="example" href="physics/">Hand controls
+      with physics<br />
+      <img class="preview" src="./assets/physics.jpg"/>
+      <!-- <div class="bonus"></div> -->
+    </a>
+    <p><a href="physics/index-mouse.html">Mouse cursor based version for desktop</a></p>
+    <p><ul>
+      <li>Grabbed boxes lock position and rotation to controller</li>
+      <li><code>color-randomizer</code> changes the color of entities dropped inside of the color changer box</li>
+      <li>Boxes can be stretched with two hands to change size, updating their physics bodies</li>
+    </ul></p>
+    <p>Example of super-hands interactivity with roomscale tracked controllers
+       and <code>aframe-physics-system</code>. Also showcases creating a simple
+       custom reaction component.</p>
+    
+    <a id="mouse" class="example" href="mouse/">
+      
+    </a>
+    <p><a href="mouse/index-mouse.html">Mouse cursor based version for desktop</a></p>
+    <p><ul>
+      <li>Grabbed entities move by controller position and rotation</li>
+      <li>Drag-drop targets and their hovering entity appear in wireframe</li>
+      <li>Entities change to spheres upon completing drag-drop interaction via the
+        <code>event-set</code> component listening for the 'drag-drop' event</li>
+    </ul></p>
+    <p><code>super-hands</code> can also be use with other types of input
+      including 3DOF controllers, mouse, and touch. In these cases, a
+      raycasting can be used intead of collision detection.
+      The confugration below works with the A-Frame <code>raycaster</code>
+      component.
+      <pre>
+super-hands="colliderEvent: raycaster-intersection;
+             colliderEventProperty: els;
+             colliderEndEvent: raycaster-intersection-cleared;
+             colliderEndEventProperty: clearedEls"</pre>
+    <p>This scene also shows the fallback movement that occurs when physics
+      is not available.</p>
+  
+    
+  </body>
+  
+</html>

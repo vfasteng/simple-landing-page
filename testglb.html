@@ -159,9 +159,9 @@
         <button id="exbzz" class="button"><span>ExBzz</span></button>
         <button id="cmnd1" class="button"><span>CMD1</span></button>
         <button id="cmnd2" class="button"><span>CMD2</span></button>
-        <button id="calti" class="button"><span>CMD3</span></button>
-        <button id="screenp" class="button"><span>PERS</span></button>
-        <button id="screene" class="button"><span>EQUI</span></button>
+        <button id="cmnd3" class="button"><span>CMD3</span></button>
+        <button id="screenshotp" class="button"><span>PERS</span></button>
+        <button id="screenshote" class="button"><span>EQUI</span></button>
         <!--
 
         <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
@@ -218,21 +218,7 @@
             //   scene.flushToDOM(true);
             //   console.log(scene);
             // });
-            document.querySelector('#calti').addEventListener('click', function () {
-                document.dispatchEvent(new KeyboardEvent('keydown', { 'key': 'i', 'altKey': true, 'ctrlKey': true }));
-            });
-            document.querySelector('#undo').addEventListener('click', function () {
-
-            });
-            document.querySelector('#redo').addEventListener('click', function () {
-
-            });
-            document.querySelector('#screenp').addEventListener('click', function () {
-                document.querySelector('a-scene').components.screenshot.capture('perspective');
-            });
-            document.querySelector('#screene').addEventListener('click', function () {
-                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-            });
+            
             document.querySelector('#environment').addEventListener('change', function () {
                 document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
                 //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
@@ -394,7 +380,7 @@
                 thirdCameraEl.setAttribute('camera', 'active', true);
             });
             
-            document.querySelector('#cmnd1').addEventListener('click', function () {
+            document.querySelector('#cmnd3').addEventListener('click', function () {
                 var fourthCameraEl = document.querySelector('#cam4');
                 fourthCameraEl.setAttribute('camera', 'active', true);
             });
@@ -736,9 +722,9 @@
                      dynamic-body click-impulse></a-mixin>
 
 
-            <a-mixin id="full_rot_xx" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 360 0 0"></a-mixin>
-            <a-mixin id="full_rot_yy" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 360 0"></a-mixin>
-            <a-mixin id="full_rot_zz" animation__rotation="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 0 360"></a-mixin>
+            <a-mixin id="full_rot_xx" animation__rotation__xx="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 360 0 0"></a-mixin>
+            <a-mixin id="full_rot_yy" animation__rotation__yy="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 360 0"></a-mixin>
+            <a-mixin id="full_rot_zz" animation__rotation__zz="property: rotation; dir: forward; dur: 5000; repeat: indefinite; easing: linear; loop: true; to: 0 0 360"></a-mixin>
 
 
 
@@ -841,78 +827,9 @@
 
 
 
-        <a-entity id="rotorxx" mixin="full_rot_xx" position="-19 0 0" rotation="0 90 0" scale="10 10 10">
-            <a-cylinder id="flywheelx" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
-            <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
+        
 
-
-            <a-entity id="crank-throwz" position="0 0 0" rotation="90 0 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-
-            </a-entity>
-
-
-
-        </a-entity>
-
-        <a-entity id="rotoryy" position="0 -19 0" rotation="90 0 0" scale="10 10 10">
-            <a-cylinder id="flywheely" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="0 0 0"
-                        mixin="full_rot_yy"
-                        >
-                <a-cylinder id="centery" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
-
-
-                <a-entity id="crank-throwy" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
-                    <a-cylinder id="poys-one" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-two" radius="0.05" height="0.1" color="red" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-three" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-four" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-five" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-six" radius="0.05" height="0.1" color="red" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-seven" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-eight" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-nine" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-ten" radius="0.05" height="0.1" color="red" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-eleven" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-                    <a-cylinder id="poys-twelve" radius="0.05" height="0.1" color="blue" rotation="0 0 0"></a-cylinder>
-
-                </a-entity>
-            </a-cylinder>
-            
-        </a-entity>
-
-        <a-entity id="rotorzz" position="0 0 19" rotation="0 0 90" scale="10 10 10">
-            <a-cylinder id="flywheelz" radius="1.0" height="0.05" color="yellow" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
-            <a-cylinder id="centerz" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
-
-
-            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="pozs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-
-            </a-entity>
-        </a-entity>
+        
         <!--
         <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
         <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
