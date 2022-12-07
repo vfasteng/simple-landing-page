@@ -1,10 +1,12 @@
 {
   "ExpandedNodes": [
     "",
-    "\\anime",
-    "\\anime\\assets",
     "\\exporter",
-    "\\exporter\\aincraft"
+    "\\exporter\\examples",
+    "\\exporter\\examples\\mouse",
+    "\\exporter\\examples\\physics",
+    "\\superhands\\examples"
   ],
+  "SelectedNode": "\\exporter\\finally.html",
   "PreviewInSolutionExplorer": false
 }

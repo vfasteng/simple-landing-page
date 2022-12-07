@@ -138,7 +138,7 @@
             }
         })
     </script>
-    <link rel="stylesheet" type="text/css" href="../assets/examples.css">
+    <link rel="stylesheet" type="text/css" href="assets/examples.css">
 </head>
   <body>
       <a-scene physics environment="preset: tron; shadow: true">
@@ -517,7 +517,7 @@
                              colliderEndEvent:raycaster-intersection-cleared;
                              colliderEndEventProperty: clearedEls;">
               </a-entity>
-              <a-entity class="transformer" position="0 1.6 -1"
+              <!--<a-entity class="transformer" position="0 1.6 -1"
                         color-randomizer droppable body="type: static; shape: none"
                         shape="shape: box; halfExtents: 0.25 0.25 0.25"
                         geometry="primitive: box; width: 0.5; height: 0.5; depth: 0.5"
@@ -528,7 +528,7 @@
                         width: 0.5; wrapCount: 12; align: center"
                             position="0 0 0.25">
                   </a-entity>
-              </a-entity>
+              </a-entity>-->
 
               <a-entity class="cube" mixin="cube" position="0 0.265 -1" material="color: red"></a-entity>
               <a-entity class="cube" mixin="cube" position="0 0.265 -0.5" material="color: red"></a-entity>
@@ -705,34 +705,6 @@
           };
 
       </script>
-      <style>
-          .github-corner:hover .octo-arm {
-              animation: octocat-wave 560ms ease-in-out
-          }
-
-          @keyframes octocat-wave {
-              0%,100% {
-                  transform: rotate(0)
-              }
-
-              20%,60% {
-                  transform: rotate(-25deg)
-              }
-
-              40%,80% {
-                  transform: rotate(10deg)
-              }
-          }
-
-          @media (max-width:500px) {
-              .github-corner:hover .octo-arm {
-                  animation: none
-              }
-
-              .github-corner .octo-arm {
-                  animation: octocat-wave 560ms ease-in-out
-              }
-          }
-      </style>
+      
   </body>
 </html>
