@@ -148,7 +148,7 @@
 
 
     </div>
-    
+
     <a-scene gltf-exporter
              cursor="rayOrigin: mouse"
              ground="preset: contact; ground: flat; dressingAmount: 0"
@@ -381,12 +381,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+            <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+            <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-            -->
+            <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+                -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -505,19 +505,19 @@
             </a-entity>
 
             <!--
-            <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
-                <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+                <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
+                    <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+
+                    </a-entity>
+                    <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                              constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                              dynamic-body click-impulse>
+
+                    </a-entity>
 
                 </a-entity>
-                <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
-                          constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                          dynamic-body click-impulse>
 
-                </a-entity>
-
-            </a-entity>
-
-        </a-entity>-->
+            </a-entity>-->
 
 
 
@@ -635,10 +635,10 @@
                 </a-entity>
             </a-entity>
             <!--
-        <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
-        <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-        <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
-        -->
+            <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
+            <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
+            <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
+            -->
 
             <a-box id="ground" position="0 0 0" rotation="0 0 0" width="30" depth="30" height="0.001" color="lightblue" opacity=".1" gridhelper="size:30;divisions:15;ColoredCenterLine:yellow" static-body></a-box>
             <a-sky src="#im2" radius="50"></a-sky>
@@ -665,457 +665,185 @@
                 </a-entity>
             </a-camera>
     </a-scene>
-        <script src="aframe-physics-system.min.js"></script>
-        <script src="aframe-animation-component.min.js"></script>
-        <script>
-            // Ignore if installed via a <script> tag.
-            import { Uploader } from "uploader";
+    <script src="aframe-physics-system.min.js"></script>
+    <script src="aframe-animation-component.min.js"></script>
+    <script>
+        function exportGLTF(input, options) {
+            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        }
 
-            // Get production API keys from Upload.io
-            const uploader = Uploader({
-                apiKey: "free"
-            });
+        document.getElementById('export-scene').addEventListener('click', function () {
+            exportGLTF();
+        });
 
-            // Customize the file upload UI (see "customization" below):
-            const options = { multi: true }
+        document.getElementById('export-scene-bin').addEventListener('click', function () {
+            exportGLTF(undefined, { binary: true });
+        });
 
-            // Display the file upload widget:
-            uploader.open(options).then(files => {
-                if (files.length === 0) {
-                    console.log('No files selected.')
-                } else {
-                    console.log('Files uploaded:');
-                    console.log(files.map(f => f.fileUrl));
-                }
-            }).catch(err => {
-                console.error(err);
-            });
+        document.getElementById('export-redbxx').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbxx'), { binary: true });
+        });
 
-        </script>
-        <script>
-            function exportGLTF(input, options) {
-                AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        document.getElementById('export-redbyy').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbyy'), { binary: true });
+        });
+
+        document.getElementById('export-redbzz').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbzz'), { binary: true });
+        });
+
+        document.getElementById('export-two').addEventListener('click', function () {
+            exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
+        });
+
+        document.getElementById('export-selector').addEventListener('click', function () {
+            exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
+        });
+
+    </script>
+
+    <script>
+        function cmm1() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
             }
-
-            document.getElementById('export-scene').addEventListener('click', function () {
-                exportGLTF();
-            });
-
-            document.getElementById('export-scene-bin').addEventListener('click', function () {
-                exportGLTF(undefined, { binary: true });
-            });
-
-            document.getElementById('export-redbxx').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbxx'), { binary: true });
-            });
-
-            document.getElementById('export-redbyy').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbyy'), { binary: true });
-            });
-
-            document.getElementById('export-redbzz').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbzz'), { binary: true });
-            });
-
-            document.getElementById('export-two').addEventListener('click', function () {
-                exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
-            });
-
-            document.getElementById('export-selector').addEventListener('click', function () {
-                exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
-            });
-
-        </script>
-
-        <script>
-            function cmm1() {//set position relative to object plane
-                var mainCameraEl = document.querySelector('#cam1');
-                mainCameraEl.setAttribute('camera', 'active', true);
-
-
-                var secondCameraEl = document.querySelector('#cam2');
-                secondCameraEl.setAttribute('camera', 'active', false);
-                var thirdCameraEl = document.querySelector('#cam3');
-                thirdCameraEl.setAttribute('camera', 'active', false);
-            };
-
-            function cmm2() {//load
-                var mainCameraEl = document.querySelector('#cam1');
-                mainCameraEl.setAttribute('camera', 'active', false);
-
-
-                var secondCameraEl = document.querySelector('#cam2');
-                secondCameraEl.setAttribute('camera', 'active', true);
-                var thirdCameraEl = document.querySelector('#cam3');
-                thirdCameraEl.setAttribute('camera', 'active', false);
-            };
-
-            function cmm3() {
-                var mainCameraEl = document.querySelector('#cam1');
-                mainCameraEl.setAttribute('camera', 'active', false);
-
-
-                var secondCameraEl = document.querySelector('#cam2');
-                secondCameraEl.setAttribute('camera', 'active', false);
-                var thirdCameraEl = document.querySelector('#cam3');
-                thirdCameraEl.setAttribute('camera', 'active', true);
-            };
-
-            function cmm4() {
-
-            };
-            function cmm5() {
-
-            };
-            function cmm6() {
-
-            };
-            function cmm7() {
-
-            };
-            function cmm8() {//
-
-            };
-            function cmm9() {
-
-            };
-            function cmm10() {
-
-            };
-            function cmm11() {
-
-            };
-            function cmm12() {
-
-            };
-            function cmm13() {
-
-            };
-            function cmm14() {
-
-            };
-            function cmm15() {
-
-            };
-
-        </script>
-
-        <div id="toolbar">
-            <select id="cameraRig">
-                <!--Supplement an id here instead of using 'text'-->
-                <option cameraRig="cam2">2</option>
-                <option cameraRig="cam3">3</option>
-                <option cameraRig="cam4">4</option>
-                <option cameraRig="cam5">5</option>
-                <option cameraRig="cam6">6</option>
-                <option cameraRig="cam7">7</option>
-                <option cameraRig="cam8">8</option>
-                <option cameraRig="cam1" selected>cam1</option>
-            </select>
-            <input class="color-input" value="#ffffff" />
-            <!--<button id="add" class="active" type="button">ADD</button>
-            <button id="remove" type="button">REMOVE</button>
-            <button id="edit" type="button">EDIT</button>-->
-            <button id="calti" type="button">ENV</button>
-            <button id="undo" type="button">UNDO</button>
-            <button id="redo" type="button">REDO</button>
-            <button id="screenshote" type="button">EQUI</button>
-            <button id="screenshotp" type="button">PERSP</button>
-
-            <!-- TODO: add save/load for electron implementation
-            <button id="save" type="button">SAVE</button>
-             -->
-        </div>
-        <script type="text/javascript">
-            var hueb = new Huebee('.color-input', {
-                // options
-                notation: 'hex',
-                saturations: 2,
-                setText: true,
-                customColors: ['#ffffff']
-            });
-            const ADD = 0;
-            const REMOVE = 1;
-            const EDIT = 2;
-            var state = ADD;
-            var cursor3D = document.querySelector('#my-cursor');
-            var scene = document.querySelector('a-scene');
-            var initialScale = 0.01;
-            var rotationYOffset = 0;
-            var selected = null;
-
-            var reader = new FileReader();
-            var colorIndex = 0;
-            var usedColor = 10;
-            hueb.on('change', function (color, hue, sat, lum) {
-                if (state == ADD && cursor3D.getAttribute('stl-model'))
-                    cursor3D.setAttribute('material', 'color', color);
-
-                if (state == EDIT && selected)
-                    selected.setAttribute('material', 'color', color);
-
-                for (var i = 0; i < hueb.options.customColors.length; i++)
-                    if (hueb.options.customColors[i] == color)
-                        return;
-
-                hueb.options.customColors[colorIndex] = color;
-                hueb.updateColors();
-                colorIndex++;
-                if (colorIndex > usedColor)
-                    colorIndex = 0;
-            })
-
-            // document.querySelector('#save').addEventListener('click', function() {
-            // TODO: save function for electron implementation
-            //   scene.flushToDOM(true);
-            //   console.log(scene);
-            // });
-            document.querySelector('#screenshotp').addEventListener('click', function () {
-                document.querySelector('a-scene').components.screenshot.capture('perspective');
-            });
-            document.querySelector('#screenshote').addEventListener('click', function () {
-                document.querySelector('a-scene').components.screenshot.capture('equirectangular');
-            });
-            document.querySelector('#environment').addEventListener('change', function () {
-                document.querySelector('#env').setAttribute('environment', 'preset', event.target.value)
-                //document.querySelector('#env').setAttribute('environment', 'ground', 'flat');
-                //document.querySelector('#env').setAttribute('environment', 'groundYScale', document.querySelector('#env').getAttribute('environment').groundYScale / 2);
-                document.querySelector('#env').setAttribute('environment', 'playArea', 1.5);
-                //document.querySelector('#env').setAttribute('environment', 'shadow', 'true');
-                document.querySelector('#env').setAttribute('environment', 'flatShading', 'true');
-                var reducedDressing = document.querySelector('#env').getAttribute('environment').dressingAmount;
-                if (reducedDressing > 50)
-                    document.querySelector('#env').setAttribute('environment', 'dressingAmount', reducedDressing / 2);
-            });
-            document.querySelector('#add').addEventListener('click', function () {
-                state = ADD;
-                if (cursor3D.getAttribute('material'))
-                    hueb.setColor(cursor3D.getAttribute('material').color);
-                cursor3D.setAttribute('visible', true);
-                document.querySelector('.active').classList.toggle('active');
-                document.querySelector('#add').classList.toggle('active');
-            });
-            document.querySelector('#remove').addEventListener('click', function () {
-                state = REMOVE;
-                cursor3D.setAttribute('visible', false);
-                document.querySelector('.active').classList.toggle('active');
-                document.querySelector('#remove').classList.toggle('active');
-
-            });
-            document.querySelector('#edit').addEventListener('click', function () {
-                state = EDIT;
-                cursor3D.setAttribute('visible', false);
-                document.querySelector('.active').classList.toggle('active');
-                document.querySelector('#edit').classList.toggle('active');
-
-            });
-            var inventoryIndex = 0;
-            reader.addEventListener("load", function () {
-                if (state != ADD)
-                    return;
-                cursor3D.setAttribute('stl-model', { src: reader.result });
-                cursor3D.setAttribute('scale', { x: initialScale, y: initialScale, z: initialScale });
-                cursor3D.setAttribute('material', 'color', hueb.color);
-                var listElement = document.createElement('a-entity')
-                listElement.setAttribute('position', { x: -1.8 + (.45 * inventoryIndex), y: -1, z: -1.5 })
-
-                listElement.setAttribute('rotation', { x: -90, y: 0, z: 0 })
-                listElement.setAttribute('class', 'ignore-ray');
-                listElement.setAttribute('stl-model', { src: reader.result });
-                listElement.setAttribute('scale', { x: initialScale * .2, y: initialScale * .2, z: initialScale * .2 });
-                var shortCutText = document.createElement('a-entity');
-                shortCutText.setAttribute('text', 'value: ' + (inventoryIndex + 1))
-                shortCutText.setAttribute('text', 'anchor: left')
-                shortCutText.setAttribute('text', 'baseline', "center")
-                shortCutText.setAttribute('scale', '1000 1000 1000')
-                //shortCutText.setAttribute('position', {x:-2 + (.45 * inventoryIndex), y:-1.15, z: -1.5})
-                shortCutText.setAttribute('position', { x: 0, y: 0, z: -90 })
-                shortCutText.setAttribute('rotation', { x: 90, y: 0, z: 0 })
-                shortCutText.object3D.layers.set(1)
-                inventoryIndex++;
-
-                listElement.appendChild(shortCutText)
-                document.querySelector('#my-camera').appendChild(listElement)
-            }, false);
-
-
-            scene.addEventListener("drag-and-drop", function (event) {
-                var file = event.detail.file;
-                reader.readAsDataURL(file);
-            });
-            window.addEventListener("keydown", function (event) {
-                //console.log(event.key)
-                if (inventoryIndex + 1 > event.key) {
-                    //console.log()
-                    cursor3D.setAttribute('stl-model', document.querySelector('#my-camera').children[event.key].getAttribute('stl-model'))
-                }
-            }, true)
-
-            window.addEventListener("contextmenu", function (event) {
-                if (state == ADD && cursor3D.getAttribute('stl-model') != null) {
-                    var el = document.createElement('a-entity');
-                    el.setAttribute('stl-model', cursor3D.getAttribute('stl-model'));
-                    el.setAttribute('scale', cursor3D.getAttribute('scale'));
-                    var rotation = { x: THREE.Math.radToDeg(cursor3D.object3D.rotation.x), y: THREE.Math.radToDeg(cursor3D.object3D.rotation.y), z: THREE.Math.radToDeg(cursor3D.object3D.rotation.z) };
-                    var position = cursor3D.getAttribute('position');
-                    var material = cursor3D.getAttribute('material');
-                    el.setAttribute('position', { x: position.x, y: position.y, z: position.z });
-                    el.setAttribute('rotation', { x: rotation.x, y: rotation.y, z: rotation.z });
-                    el.setAttribute('material', 'color', material.color);
-
-                    el.addEventListener('raycaster-intersected', function () {
-                        selected = el;
-
-                        if (state == EDIT)
-                            hueb.setColor(selected.getAttribute('material').color)
-                    }, true);
-                    el.addEventListener('raycaster-intersected-cleared', function () {
-                        selected = null;
-                    }, true);
-
-                    scene.appendChild(el);
-                } else if (state == REMOVE && selected) {
-                    selected.parentNode.removeChild(selected);
-                    selected = null;
-                }
-                event.preventDefault();
-            });
-            //
-            window.addEventListener("wheel", function (event) {
-                var currentlySelected;
-                if (state == ADD) {
-                    currentlySelected = cursor3D;
-                } else if (state == EDIT) {
-                    currentlySelected = selected;
-                }
-
-                if (!currentlySelected)
-                    return;
-
-                if (!event.ctrlKey) {
-                    var currentScale = currentlySelected.getAttribute('scale').x;
-                    var delta = 0.001;
-                    if (event.shiftKey)
-                        delta = 0.01;
-                    if (event.deltaY > 0) {
-                        delta = -delta;
-                    }
-                    currentScale += delta;
-                    if (currentScale <= 0)
-                        currentScale = 0.001;
-
-                    currentlySelected.setAttribute('scale', { x: currentScale, y: currentScale, z: currentScale });
-                } else {
-                    var currentRotation = currentlySelected.getAttribute('rotation');
-                    var delta = 5;
-                    if (event.shiftKey)
-                        delta = 10;
-                    if (event.deltaY > 0) {
-                        delta = -delta;
-                    }
-                    currentRotation.y += delta;
-
-                    currentlySelected.setAttribute('rotation', { x: currentRotation.x, y: currentRotation.y, z: currentRotation.z });
-                    //console.log(currentRotation.y);
-                }
-                event.preventDefault();
-                //return true;
-            }, true)
-            document.addEventListener("wheel", function () {
-                event.preventDefault();
-            })
-        </script>
-
-        <script>
-            function cmm1() {
-                console.log(document.querySelector("a-sphere").getAttribute("color"))
-                if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
-                    document.querySelector("a-sphere").setAttribute("color", "blue");
-                } else {
-                    document.querySelector("a-sphere").setAttribute("color", "green");
-
-                }
-            };
-
-            function cmm2() {
-                console.log(document.querySelector("a-cylinder").getAttribute("color"))
-                if (document.querySelector("a-cylinder").getAttribute("color") !== "blue") {
-                    document.querySelector("a-cylinder").setAttribute("color", "blue");
-                } else {
-                    document.querySelector("a-cylinder").setAttribute("color", "green");
-
-                }
-            };
-
-            function cmm3(target) {//was setpartOrigin
-                target.setAttribute('position', 'rotation', x, y, z, w);
-
-            };
-
-            //function cmm4() {was appendObject (adds object at runtime)
-            function cmm4(id, file, scale, position, rotation, scale) {
-                $('<a-obj-model />', {
-                    id: id,
-                    class: 'active object children',
-                    position: position,  // doesn't seem to do anything, known issue
-                    scale: scale,
-                    rotation: rotation,
-                    file: file,
-                    src: '#' + file + '-obj',
-                    mtl: '#' + file + '-mtl',
-                    appendTo: $('#active')
-                });
-                document.getElementById(id).setAttribute("position", position); // this does set position as a workaround
-            };
-
-            //function cmm5() {//
-            //onMenuDown:
-            function cmm5() {
-                previousObject = document.querySelector("#object" + (objectCount - 1));
-                previousObject.parentNode.removeChild(previousObject);
-                objectCount -= 1;
-                if (objectCount == -1) { objectCount = 0 };
-
-            };
-
-            function cmm6() {//
-                //var camera = document.querySelector('a-entity[camera]').components.camera.camera;(for eg)
-                //var material = document.querySelector('a-entity[material]').components.material.material;(for eg)
-
-
-            };
-            function cmm7() {//
-
-            };
-            function cmm8() {//
-
-            };
-            function cmm9() {//
-
-            };
-            function cmm10() {//
-
-            };
-            function cmm11() {//
-
-            };
-            function cmm12() {//
-
-            };
-            function cmm13() {//
-
-            };
-            function cmm14() {//
-
-            };
-            function cmm15() {//
-
-            };
-
-        </script>
-
-
-    </body>
+        };
+
+        function cmm2() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+
+        function cmm3() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+
+        function cmm4() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm5() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm6() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm7() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm8() {//
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm9() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm10() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm11() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm12() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm13() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm14() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+        function cmm15() {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        };
+
+    </script>
+</body>
 
 </html>
 <!--
