@@ -2,11 +2,13 @@
   "ExpandedNodes": [
     "",
     "\\exporter",
+    "\\exporter\\assets\\glb_primitives",
     "\\exporter\\examples",
     "\\exporter\\examples\\mouse",
     "\\exporter\\examples\\physics",
-    "\\superhands\\examples"
+    "\\exporter\\png2jpg",
+    "\\exporter\\reaction_components"
   ],
-  "SelectedNode": "\\exporter\\finally.html",
+  "SelectedNode": "\\exporter\\assembler.html",
   "PreviewInSolutionExplorer": false
 }
