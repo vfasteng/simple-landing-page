@@ -111,7 +111,24 @@
             }
         })
     </script>
+    <script>
+        jQuery(function ($) {
+            $('#btnClick').click(function (e) {
+                var c = $.Event("keypress");
+                c.keyCode = 161;
+                c.ctrlKey = true;
+                c.altKey = true;
+                $(document).trigger(c);
+            });
 
+            // to view keypress on console use below:
+            $(document).keypress(function (x) {
+                console.log(x);
+            });
+        });
+
+
+    </script>
     <style>
         .button:hover {
             background-color: #fff;
@@ -145,12 +162,12 @@
 </head>
 <body>
     <div id="container">
-        <button id="upload-model" class="button" href="../upper.html" target="_blank"   ><span>Load Model</span></button>
+        <button id="upload-model" class="button" href="https://3d-assembly.com/upper.html" target="_blank"   ><span>Load Model</span></button>
         <button id="export-scene-bin" class="button"><span>Export Binary</span></button>
         <button id="export-redbxx" class="button"><span>Export part1</span></button>
         <button id="export-redbyy" class="button"><span>Export part2</span></button>
         <button id="export-redbzz" class="button"><span>Export part3</span></button>
-        <button id="cmd1" class="button" ><span>Place Tool</span></button>
+        <button id="BtnClick" class="button" ><span>ctrlalti</span></button>
         <button id="cmd2" class="button"><span>Group</span></button>
         <button id="cmd3" class="button"><span>Axis Point</span></button>
         <button id="cmd4" class="button"><span>Slider</span></button>
