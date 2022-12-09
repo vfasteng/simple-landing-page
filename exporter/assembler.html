@@ -68,7 +68,7 @@
 
     <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
     <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    
     <script>
         AFRAME.registerComponent('click-impulse', {
             init: function () {
@@ -640,24 +640,7 @@
         });
 
     </script>
-    <script>
-        jQuery(function ($) {
-            $('#btnClick').click(function (e) {
-                var c = $.Event("keypress");
-                c.keyCode = 161;
-                c.ctrlKey = true;
-                c.altKey = true;
-                $(document).trigger(c);
-            });
-
-            // to view keypress on console use below:
-            $(document).keypress(function (x) {
-                console.log(x);
-            });
-        });
-
-
-    </script>
+    
     <script>
         function cmm1() {
             console.log(document.querySelector("a-sphere").getAttribute("color"))
