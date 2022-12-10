@@ -41,8 +41,9 @@
     <script src="js/aframe-stl-model-component.min.js"></script>
     <script src="js/aframe-drag-and-drop-component.min.js"></script>
     <script src="js/aframe-physics-system.min.js"></script>
-    <script src="js/aframe-gui.js"></script>
-    <script src="js/gui-env.js"></script>
+    <script src="../dist/aframe-gui.js"></script>
+    <script src="../exporter/js/gui-env.js"></script>
+    <script src="../dist/aframe-gui.min.js"></script>
 
     <!--reaction components-->
     <script src="reaction_components/clickable.js"></script>
@@ -77,7 +78,7 @@
                             THREE.Math.randInt(-20, 20),
                             THREE.Math.randInt(-20, 20)
                         ),
-                                                                            /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                                                                                /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
                     );
                 });
 
