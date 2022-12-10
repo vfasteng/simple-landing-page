@@ -559,30 +559,32 @@
             </a-entity>
 
             <!--<a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
-                <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+        <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-                </a-entity>
-                <a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
-                          constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                          dynamic-body click-impulse>
+        </a-entity>
+        <a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
+                  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                  dynamic-body click-impulse>
 
-                </a-entity>
+        </a-entity>
 
+    </a-entity>
+
+    <a-entity id="redbyxy" position="0 0 3" rotation="0 0 0">
+        <a-entity id="botyy" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+        </a-entity>
+        <a-entity id="topyy" gltf-model="#glbgeo05" rotation="0 0 0" scale="0.05 0.05 0.05"
+                  constraint="type:hinge;target:#botyy;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                  dynamic-body click-impulse>
+
+        </a-entity>
+
+    </a-entity>-->
+
+            <a-entity id="ytplane" position="19 10 0" rotation="0 0 0" >
+                <a-plane id="ytp"  position="0 0 0" rotation="0 0 0" scale="1 1 1" width="16" height="9" color="blue" static-body></a-plane>
             </a-entity>
-
-            <a-entity id="redbyxy" position="0 0 3" rotation="0 0 0">
-                <a-entity id="botyy" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
-
-                </a-entity>
-                <a-entity id="topyy" gltf-model="#glbgeo05" rotation="0 0 0" scale="0.05 0.05 0.05"
-                          constraint="type:hinge;target:#botyy;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                          dynamic-body click-impulse>
-
-                </a-entity>
-
-            </a-entity>-->
-
-
 
 
 
@@ -592,13 +594,13 @@
 
 
             <!-- Camera. -->
-            <a-entity id="cameraWrapper" >
+            <a-entity id="cameraWrapper">
                 <a-entity id="camera" position="0 3 5" camera look-controls wasd-controls>
                     <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
                 </a-entity>
             </a-entity>
-    </a-scene>
+</a-scene>
     <script src="aframe-physics-system.min.js"></script><!--
     <script src="aframe-animation-component.min.js"></script>-->
     <script>
