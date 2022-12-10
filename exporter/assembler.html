@@ -4,140 +4,142 @@
     <meta charset="utf-8">
     <title>ASSEMBLER</title>
     <meta name="description" content="Basic example for GLTF Exporter component."></meta>
-    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5.1/dat.gui.min.js" type="text/javascript"></script>
-    <script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
-    <script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <!--<script src="../../dist/aframe-websurfaces.umd.js"></script>-->
+    <script src="https://unpkg.com/aframe-websurfaces@1.4.0/dist/aframe-websurfaces.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5.1/dat.gui.min.js" type="text/javascript"></script>
+<script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
+<script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
+<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
 
-    <!--<script src="aframe-master.min.js"></script-->
-    <script src="aframe-gltf-exporter-component.min.js"></script>
-    <script src="aframe-animation-component.min.js"></script>
-    <!--<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>-->
-    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+<!--<script src="aframe-master.min.js"></script-->
+<script src="aframe-gltf-exporter-component.min.js"></script>
+<script src="aframe-animation-component.min.js"></script>
+<!--<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+<!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>-->
+<script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+<script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
 
-    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
-    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
-    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
-    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
-    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
-    <script src="../gltf-exporter/examples/basic/components/aframe-layout-component.min.js"></script>
+<script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+<script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+<script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+<script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+<script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+<script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+<script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+<script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+<script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+<script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+<script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+<script src="../gltf-exporter/examples/basic/components/aframe-layout-component.min.js"></script>
 
-    <script src="js/aframe-extras.min.js"></script>
-    <script src="js/aframe-extras.controls.min1.js"></script>
-    <script src="js/aframe-extras.misc.js"></script>
-    <script src="js/aframe-extras.loaders.js"></script>
-    <script src="js/aframe-extras.pathfinding.js"></script>
-    <script src="js/aframe-extras.primitives.js "></script>
-    <script src="js/aframe-stl-model-component.min.js"></script>
-    <script src="js/aframe-drag-and-drop-component.min.js"></script>
-    <script src="js/aframe-physics-system.min.js"></script>
-    <script src="../dist/aframe-gui.js"></script>
-    <script src="../exporter/js/gui-env.js"></script>
-    <script src="../dist/aframe-gui.min.js"></script>
+<script src="js/aframe-extras.min.js"></script>
+<script src="js/aframe-extras.controls.min1.js"></script>
+<script src="js/aframe-extras.misc.js"></script>
+<script src="js/aframe-extras.loaders.js"></script>
+<script src="js/aframe-extras.pathfinding.js"></script>
+<script src="js/aframe-extras.primitives.js "></script>
+<script src="js/aframe-stl-model-component.min.js"></script>
+<script src="js/aframe-drag-and-drop-component.min.js"></script>
+<script src="js/aframe-physics-system.min.js"></script>
+<script src="../dist/aframe-gui.js"></script>
+<script src="../exporter/js/gui-env.js"></script>
+<script src="../dist/aframe-gui.min.js"></script>
 
-    <!--reaction components-->
-    <script src="reaction_components/clickable.js"></script>
-    <script src="reaction_components/draggable.js"></script>
-    <script src="reaction_components/drag-droppable.js"></script>
-    <script src="reaction_components/hoverable.js"></script>
-    <script src="reaction_components/stretchable.js"></script>
-    <script src="reaction_components/droppable.js"></script>
-    <script src="reaction_components/grabbable.js"></script>
+<!--reaction components-->
+<script src="reaction_components/clickable.js"></script>
+<script src="reaction_components/draggable.js"></script>
+<script src="reaction_components/drag-droppable.js"></script>
+<script src="reaction_components/hoverable.js"></script>
+<script src="reaction_components/stretchable.js"></script>
+<script src="reaction_components/droppable.js"></script>
+<script src="reaction_components/grabbable.js"></script>
 
-    <link rel="stylesheet" type="text/css" href="aframe.css">
-    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
-    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
-    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
-    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
-    <script src="~/js/play-all-model-animations.js"></script>
+<link rel="stylesheet" type="text/css" href="aframe.css">
+<script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+<script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+<script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+<script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
+<script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+<script src="~/js/play-all-model-animations.js"></script>
 
-    <script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
-    <script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
-    <script src="https://unpkg.com/aframe-websurfaces@1.4.0/dist/aframe-websurfaces.min.js"></script>
-    <script>
-        AFRAME.registerComponent('click-impulse', {
-            init: function () {
-                var el = this.el;
+<script src="https://rawgit.com/andreasplesch/aframe-faceset-component/master/dist/aframe-faceset-component.min.js"></script>
+<script src="https://rawgit.com/andreasplesch/aframe-polygon-primitive/master/dist/aframe-polygon-primitive.min.js"></script>
 
-                el.addEventListener('click', function () {
-                    el.body.applyImpulse(
-                        /* impulse */
-                        new CANNON.Vec3(
-                            THREE.Math.randInt(-20, 20),
-                            THREE.Math.randInt(-20, 20),
-                            THREE.Math.randInt(-20, 20)
-                        ),
+<script>
+    AFRAME.registerComponent('click-impulse', {
+        init: function () {
+            var el = this.el;
+
+            el.addEventListener('click', function () {
+                el.body.applyImpulse(
+                    /* impulse */
+                    new CANNON.Vec3(
+                        THREE.Math.randInt(-20, 20),
+                        THREE.Math.randInt(-20, 20),
+                        THREE.Math.randInt(-20, 20)
+                    ),
                                                                                 /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
-                    );
-                });
+                );
+            });
 
+        }
+    });
+
+    // forward mouse and touch events to the super-hands entity
+    AFRAME.registerComponent('capture-mouse', {
+        init: function () {
+            this.eventRepeater = this.eventRepeater.bind(this)
+            this.el.sceneEl.addEventListener('loaded', () => {
+                this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+            }, { once: true })
+        },
+        eventRepeater: function (evt) {
+            if (evt.type.startsWith('touch')) {
+                evt.preventDefault()
+                // avoid repeating touchmove because it interferes with look-controls
+                if (evt.type === 'touchmove') { return }
             }
-        });
-
-        // forward mouse and touch events to the super-hands entity
-        AFRAME.registerComponent('capture-mouse', {
-            init: function () {
-                this.eventRepeater = this.eventRepeater.bind(this)
-                this.el.sceneEl.addEventListener('loaded', () => {
-                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
-                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
-                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
-                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
-                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
-                }, { once: true })
-            },
-            eventRepeater: function (evt) {
-                if (evt.type.startsWith('touch')) {
-                    evt.preventDefault()
-                    // avoid repeating touchmove because it interferes with look-controls
-                    if (evt.type === 'touchmove') { return }
-                }
-                this.el.emit(evt.type, evt.detail)
-            }
-        })
-    </script>
-
-    <style>
-        .button:hover {
-            background-color: #fff;
-            color: blue;
+            this.el.emit(evt.type, evt.detail)
         }
+    })
+</script>
 
-        .button {
-            background-color: blue;
-            border-radius: 8px;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 12px;
-            height: 34px;
-            margin-top: 5px;
-            margin-left: 5px;
-            outline: none;
-            position: relative;
-            width: 190px;
-            z-index: 999;
-        }
+<style>
+    .button:hover {
+        background-color: #fff;
+        color: blue;
+    }
 
-        #container {
-            position: absolute;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-    </style>
+    .button {
+        background-color: blue;
+        border-radius: 8px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 12px;
+        height: 34px;
+        margin-top: 5px;
+        margin-left: 5px;
+        outline: none;
+        position: relative;
+        width: 190px;
+        z-index: 999;
+    }
+
+    #container {
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+</style>
 </head>
 <body>
     <div id="container">
@@ -154,7 +156,7 @@
 
 
     </div>
-    <a-scene gltf-exporter physics="gravity:-9.81;friction:0;restitution:" ground="preset: contact; ground: flat; dressingAmount: 0">
+    <a-scene gltf-exporter physics="gravity:-9.81;friction:0;restitution:" websurfaces ground="preset: contact; ground: flat; dressingAmount: 0">
         <a-assets>
             <a-mixin id="mycursor" position="0 0 -0.5" raycaster geometry="primitive: ring; radiusOuter: 0.008; radiusInner: 0.005; segmentsTheta: 32" material="color: white; shader: flat" static-body="shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;colliderEventProperty: els;colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;colliderState:"></a-mixin>
             <a-mixin id="mytouch" physics-collider phase-shift collision-filter="collisionForces: false" static-body="shape: sphere; sphereRadius: 0.02" super-hands="colliderEvent: collisions; colliderEventProperty: els; colliderEndEvent: collisions; colliderEndEventProperty: clearedEls;colliderState:"></a-mixin>
@@ -492,21 +494,21 @@
 
             <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="3.5" height="4.5" panel-color="#072B73" panel-rounded="0.2" position="-4 2.5 -6" rotation="" rounded="height: 4.5; width: 3.5; opacity: 0.7; color: #072B73; radius: 0.2; depthWrite: false; polygonOffset: true; polygonOffsetFactor: 1" gui-flex-container="" id="five-buttons">
                 <!--<a-gui-button
-        id="btn1"
-        width="2.5"
-        height="0.7"
-        base-depth="0.05"
-        depth="0.2"
-        gap="0.1"
-        radius="0"
-        onclick="testButtonAction1"
-        value="test button"
-        font-family="assets/fonts/PermanentMarker-Regular.ttf"
-        font-size="0.35"
-        margin="0 0 0.05 0"
-        toggle="true"
-    >
-    </a-gui-button>-->
+                    id="btn1"
+                    width="2.5"
+                    height="0.7"
+                    base-depth="0.05"
+                    depth="0.2"
+                    gap="0.1"
+                    radius="0"
+                    onclick="testButtonAction1"
+                    value="test button"
+                    font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                    font-size="0.35"
+                    margin="0 0 0.05 0"
+                    toggle="true"
+                >
+                </a-gui-button>-->
 
 
                 <a-gui-button width="2.5" height="0.7" base-depth="0.025" depth="0.1" gap="0.1" radius="0" onclick="testButtonAction2" value="Another button" font-family="assets/fonts/PermanentMarker-Regular.ttf" font-size="0.275" margin="0 0 0.05 0" font-color="black" active-color="red" hover-color="yellow" border-color="white" focus-color="black" background-color="orange" geometry="primitive: plane; height: 0.7; width: 2.5" material="shader: flat; transparent: true; opacity: 0.5; side: double; color: orange" role="button" tabindex="0" aria-label="Another button" gui-button="" position="0 1.525 0.01">
@@ -530,41 +532,41 @@
                 </a-gui-button>
 
                 <!--<a-gui-button
-        width="2.75"
-        height="1"
-        base-depth="0.1"
-        depth="0.3"
-        gap="0.1"
-        radius="0"
-        onclick="testButtonAction3"
-        value="Example Bevel"
-        font-family="assets/fonts/DiplomataSC-Regular.ttf"
-        font-size="0.25"
-        margin="0 0 0.05 0"
+                    width="2.75"
+                    height="1"
+                    base-depth="0.1"
+                    depth="0.3"
+                    gap="0.1"
+                    radius="0"
+                    onclick="testButtonAction3"
+                    value="Example Bevel"
+                    font-family="assets/fonts/DiplomataSC-Regular.ttf"
+                    font-size="0.25"
+                    margin="0 0 0.05 0"
 
-        bevel="true"
-    >
-    </a-gui-button>
+                    bevel="true"
+                >
+                </a-gui-button>
 
-    <a-gui-button
-        width="2.5"
-        height="0.7"
-        gap="0.2"
-        onclick="testButtonAction4"
-        value="Example 4"
-        font-family="assets/fonts/Plaster-Regular.ttf"
-        font-size="0.275"
-        margin="0 0 0.05 0"
-    >
-    </a-gui-button>
+                <a-gui-button
+                    width="2.5"
+                    height="0.7"
+                    gap="0.2"
+                    onclick="testButtonAction4"
+                    value="Example 4"
+                    font-family="assets/fonts/Plaster-Regular.ttf"
+                    font-size="0.275"
+                    margin="0 0 0.05 0"
+                >
+                </a-gui-button>
 
-    <a-gui-button
-        width="2.5"
-        height="0.7"
-        onclick="testButtonAction5"
-        value="Example 5"
-    >
-    </a-gui-button>-->
+                <a-gui-button
+                    width="2.5"
+                    height="0.7"
+                    onclick="testButtonAction5"
+                    value="Example 5"
+                >
+                </a-gui-button>-->
 
 
             </a-gui-flex-container>
@@ -618,7 +620,7 @@
                 <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
 
 
-                <a-entity id="crank-throwy" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
+                <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
                     <a-gltf-model id="poxs-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                     <a-gltf-model id="poxs-two" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                     <a-gltf-model id="poxs-three" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -681,28 +683,28 @@
             </a-entity>
 
             <!--<a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
-        <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+                <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-        </a-entity>
-        <a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
-                  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                  dynamic-body click-impulse>
+                </a-entity>
+                <a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
 
-        </a-entity>
+                </a-entity>
 
-    </a-entity>
+            </a-entity>
 
-    <a-entity id="redbyxy" position="0 0 3" rotation="0 0 0">
-        <a-entity id="botyy" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+            <a-entity id="redbyxy" position="0 0 3" rotation="0 0 0">
+                <a-entity id="botyy" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-        </a-entity>
-        <a-entity id="topyy" gltf-model="#glbgeo05" rotation="0 0 0" scale="0.05 0.05 0.05"
-                  constraint="type:hinge;target:#botyy;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                  dynamic-body click-impulse>
+                </a-entity>
+                <a-entity id="topyy" gltf-model="#glbgeo05" rotation="0 0 0" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#botyy;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
 
-        </a-entity>
+                </a-entity>
 
-    </a-entity>-->
+            </a-entity>-->
 
 
 
@@ -724,13 +726,13 @@
             </a-entity>
 
             <!-- Camera. --
-    <a-entity id="cameraWrapper">
-        <a-entity id="camera" position="0 3 5" camera look-controls wasd-controls>
-            <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+            <a-entity id="cameraWrapper">
+                <a-entity id="camera" position="0 3 5" camera look-controls wasd-controls>
+                    <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
-        </a-entity>
-    </a-entity>-->
-</a-scene>
+                </a-entity>
+            </a-entity>-->
+    </a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <!--
     <script src="aframe-animation-component.min.js"></script>-->

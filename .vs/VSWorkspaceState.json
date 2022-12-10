@@ -2,10 +2,8 @@
   "ExpandedNodes": [
     "",
     "\\assets",
-    "\\assets\\assets",
-    "\\assets\\visualizer",
-    "\\exporter"
+    "\\exporter",
+    "\\exporter\\js"
   ],
-  "SelectedNode": "\\exporter\\menubar_empty.html",
   "PreviewInSolutionExplorer": false
 }
