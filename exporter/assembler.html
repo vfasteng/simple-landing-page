@@ -145,12 +145,12 @@
         <button id="export-redbxx" class="button"><span>Export part1</span></button>
         <button id="export-redbyy" class="button"><span>Export part2</span></button>
         <button id="export-redbzz" class="button"><span>Export part3</span></button>
-        <button id="BtnClick" class="button" ><span>ctrlalti</span></button>
+        <button id="BtnClick" class="button"><span>ctrlalti</span></button>
         <button id="cmd2" class="button"><span>Group</span></button>
         <button id="cmd3" class="button"><span>Axis Point</span></button>
         <button id="cmd4" class="button"><span>Slider</span></button>
         <button id="cmd5" class="button"><span>As Child</span></button>
-        
+
 
     </div>
     <a-scene gltf-exporter physics="gravity:-9.81;friction:0;restitution:" ground="preset: contact; ground: flat; dressingAmount: 0">
@@ -490,6 +490,50 @@
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
 
+
+            <a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="3.0" height="8.5"
+                                  panel-color="#072B73"
+                                  panel-rounded="0.2"
+                                  position="19 10 0" rotation="0 90 0">
+                <a-gui-toggle width="2.5" height="0.75"
+                              onclick="testToggleAction"
+                              value="toggle label"
+                              font-family="assets/fonts/Plaster-Regular.ttf"
+                              font-size="0.2"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+
+                <a-gui-toggle width="2.5" height="0.75"
+                              onclick="testToggleAction"
+                              value="toggle label"
+                              font-family="assets/fonts/Plaster-Regular.ttf"
+                              font-size="0.2"
+                              margin="0 0 0.05 0">
+                </a-gui-toggle>
+
+                <a-gui-slider width="2.5" height="0.75"
+                              onclick="testSliderAction"
+                              percent="0.29"
+                              margin="0 0 0.05 0">
+                </a-gui-slider>
+
+                <a-gui-input width="2.5" height="0.75"
+                             onclick="testInputAction"
+                             font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                             font-size="0.2"
+                             value="Hello Wor_"
+                             margin="0 0 0.05 0">
+                </a-gui-input>
+
+                <a-gui-progressbar width="2.5" height="0.25"
+                                   margin="0 0 0.1 0">
+                </a-gui-progressbar>
+
+            </a-gui-flex-container>
+
+           
+
+
             <a-entity id="rotorxx" position="-19 0 0" rotation="0 0 0" scale="10 10 10"
                       animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
@@ -582,25 +626,169 @@
 
     </a-entity>-->
 
-            
-
-    <a-entity id="ytp" websurface="url:https://www.youtube.com/channel/UCgCxkb0Jmnt-PUdDRFZbOYA; width:32; height:18;"  position="19 10 0" rotation="0 90 0" ></a-entity>
 
 
+            <a-entity id="ytp" websurface="url:https://www.youtube.com/channel/UCgCxkb0Jmnt-PUdDRFZbOYA; width:32; height:18;" position="19 10 0" rotation="0 90 0"></a-entity>
 
 
 
 
-            <!-- Camera. -->
-            <a-entity id="cameraWrapper">
-                <a-entity id="camera" position="0 3 5" camera look-controls wasd-controls>
-                    <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
-                </a-entity>
+            <!-- Mouse cursor so we can click on the scene with mouse or touch. -->
+            <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+            <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
+            <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
+
+            <!-- Camera + cursor. -->
+            <a-entity id="cameraRig" position="0 1.6 0">
+                <a-camera look-controls wasd-controls position="0 0 0">
+                </a-camera> <!-- /camera -->
             </a-entity>
+
+            <!-- Camera. --
+    <a-entity id="cameraWrapper">
+        <a-entity id="camera" position="0 3 5" camera look-controls wasd-controls>
+            <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+
+        </a-entity>
+    </a-entity>-->
 </a-scene>
-    <script src="aframe-physics-system.min.js"></script><!--
+    <script src="aframe-physics-system.min.js"></script>
+    <!--
     <script src="aframe-animation-component.min.js"></script>-->
+    <script type="text/javascript">
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.setAttribute('count-down', seconds);
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var countDownEntity = document.getElementById("timer"),
+                duration = countDownEntity.getAttribute('count-down');
+            startTimer(duration, countDownEntity);
+        };
+
+        window.timedout = function () {
+            console.log("GUI timer timed out");
+        }
+
+        window.testButtonAction1 = function () {
+            console.log("clicked GUI");
+        }
+
+
+
+        window.testButtonAction2 = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testButtonAction3 = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testButtonAction4 = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testButtonAction5 = function () {
+            console.log("clicked GUI");
+        }
+
+
+
+        window.testButtonAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testToggleAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testSliderAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testInputAction = function () {
+            console.log("clicked GUI");
+        }
+
+
+
+
+        var data = document.querySelector("#btn1");
+        var controls;
+
+        var initControls = function () {
+            this.value = "sample";
+            this.fontColor = "#F2BB16";
+            this.backgroundColor = "#011C40";
+            this.borderColor = "#F2BB16";
+            this.focusColor = "#ff0000";
+            this.hoverColor = "#2a5b7a";
+            this.activeColor = "#5687A6";
+            this.fontSize = 0.3;
+            this.toggle = true;
+            this.fontFamily = "PressStart2P";
+            // this.width=2.75;
+            // this.height=0.7;
+            // this.baseDepth=0.05;
+            // this.depth=0.2;
+            // this.gap=0.1;
+            // this.radius=0;
+        };
+
+        window.onload = function () {
+            controls = new initControls();
+            setValue();
+            var gui = new dat.GUI();
+            gui.add(controls, 'value').onChange(setValue);
+            gui.addColor(controls, 'fontColor').onChange(setValue);
+            gui.addColor(controls, 'hoverColor').onChange(setValue);
+            gui.addColor(controls, 'activeColor').onChange(setValue);
+            gui.addColor(controls, 'borderColor').onChange(setValue);
+            gui.addColor(controls, 'focusColor').onChange(setValue);
+            gui.addColor(controls, 'backgroundColor').onChange(setValue);
+            gui.add(controls, 'fontSize', 0, 1).onChange(setValue);
+            gui.add(controls, 'toggle').onChange(setValue);
+            gui.add(controls, 'fontFamily', ["PermanentMarker", "PressStart2P", "Plaster", "DiplomataSC"]).onChange(setValue);
+            // gui.add(controls, 'width', 0, 5).onChange(setValue);
+            // gui.add(controls, 'height', 0, 5).onChange(setValue);
+            // gui.add(controls, 'baseDepth', 0, 1).onChange(setValue);
+            // gui.add(controls, 'depth', 0, 1).onChange(setValue);
+            // gui.add(controls, 'gap', 0, 1).onChange(setValue);
+            // gui.add(controls, 'radius', 0, 1).onChange(setValue);
+        };
+
+        function setValue() {
+            data.setAttribute('value', controls.value);
+            data.setAttribute('font-family', "assets/fonts/" + controls.fontFamily + "-Regular.ttf");
+            data.setAttribute('font-size', controls.fontSize);
+            data.setAttribute('font-color', controls.fontColor);
+            data.setAttribute('active-color', controls.activeColor);
+            data.setAttribute('hover-color', controls.hoverColor);
+            data.setAttribute('border-color', controls.borderColor);
+            data.setAttribute('focus-color', controls.focusColor);
+            data.setAttribute('background-color', controls.backgroundColor);
+            data.setAttribute('toggle', controls.toggle);
+            // data.setAttribute('width',controls.width);
+            // data.setAttribute('height',controls.height);
+            // data.setAttribute('base-depth',controls.baseDepth);
+            // data.setAttribute('depth',controls.depth);
+            // data.setAttribute('gap',controls.gap);
+            // data.setAttribute('radius',controls.radius);
+        }
+
+
+    </script>
+
     <script>
         function exportGLTF(input, options) {
             AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
@@ -635,7 +823,7 @@
         });
 
     </script>
-    
+
     <script>
         function cmm1() {
             console.log(document.querySelector("a-sphere").getAttribute("color"))
