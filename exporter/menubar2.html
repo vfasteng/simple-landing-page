@@ -475,10 +475,13 @@
                 </a-box>
 
                 <a-box id="ground" position="0 -0.0001 0" rotation="0 0 0" width="30" depth="30" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 30;divisions:15" static-body></a-box>
-                <a-sphere id="sspphh" position="2 2 2" rotation="0 0 0" radius="1" color="lightblue" opacity="1" static-body></a-sphere>
 
                 <a-light type="hemisphere" intensity="2.0"></a-light>
             </a-entity>
+
+            <a-sphere id="sspphh" position="2 2 2" rotation="0 0 0" radius="1" color="lightblue" opacity="1" dynamic-body></a-sphere>
+
+
             <a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
                 <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
@@ -504,20 +507,20 @@
 
             </a-entity>
 
-            
-                <a-entity id="steering" position="0 0 0" rotation="0 0 0" scale="100 100 100">
-                    <a-entity id="bot13" gltf-model="#steer-ring" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
 
-                    </a-entity>
-                    <a-entity id="top13" gltf-model="#wheel-spinner" scale="0.05 0.05 0.05"
-                              constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                              dynamic-body click-impulse>
+            <a-entity id="steering" position="0 0 0" rotation="0 0 0" scale="100 100 100">
+                <a-entity id="bot13" gltf-model="#steer-ring" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
 
-                    </a-entity>
+                </a-entity>
+                <a-entity id="top13" gltf-model="#wheel-spinner" scale="0.05 0.05 0.05"
+                          constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                          dynamic-body click-impulse>
 
                 </a-entity>
 
-            
+            </a-entity>
+
+
 
 
 
@@ -635,10 +638,10 @@
                 </a-entity>
             </a-entity>
             <!--
-            <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
-            <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-            <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
-            -->
+    <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
+    <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
+    <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
+    -->
 
             <a-box id="ground" position="0 0 0" rotation="0 0 0" width="30" depth="30" height="0.001" color="lightblue" opacity=".1" gridhelper="size:30;divisions:15;ColoredCenterLine:yellow" static-body></a-box>
             <a-sky src="#im2" radius="50"></a-sky>
@@ -664,7 +667,7 @@
                     <a-cursor intersection-spawn="event: click; mixin: voxel3"></a-cursor>
                 </a-entity>
             </a-camera>
-    </a-scene>
+</a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
     <script>
