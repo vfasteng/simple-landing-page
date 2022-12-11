@@ -65,11 +65,11 @@
         
         <a-light type="hemisphere" color="white" position="0 0 0" intensity="2.0"></a-light><!--animation="property: light.intensity; from: 0; to: 2; delay: 750; dur: 500"-->
 
-        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321103__nsstudios__blip1.wav"></a-entity>
-        <a-entity sound="autoplay: true; src: anime-UI/assets/audio/321104__nsstudios__blip2.wav"></a-entity>
+        <a-entity sound="autoplay: true; src: anime/audio/321103__nsstudios__blip1.wav"></a-entity>
+        <a-entity sound="autoplay: true; src: anime/audio/321104__nsstudios__blip2.wav"></a-entity>
 
         <!--a-entity id="seenmodel" gltf-model="#engine" position="0 0 0"></a-entity-->
-        <a-box id="ground" static-body width="40" height="0.001" depth="40" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:10;divisions:20"></a-box>
+        <a-box id="ground" static-body width="40" height="0.001" depth="40" position="0 -0.0005 0" visible="true" opacity="0.01" color="lightblue" gridhelper="size:20;divisions:20"></a-box>
         <a-sky color="blue" radius="50"></a-sky>
         <a-entity>
             <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 0 0 7.5">
