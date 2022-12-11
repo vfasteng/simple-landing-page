@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Example 1</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="dist/aframe-websurfaces.umd.js"></script>
+    <!--<script src="https://unpkg.com/aframe-websurfaces@1.4.0/dist/aframe-websurfaces.umd.js"></script>-->
+  </head>
+  <body>
+    <a-scene>
+      <!--Camera-->
+      <a-entity
+        wasd-controls="acceleration: 20;"
+        camera="active: true"
+        look-controls="pointerLockEnabled: false"
+        position="0 1.6 0"
+      >
+        <a-cursor position="0 0 -.05" scale=".04 .04 1"></a-cursor>
+      </a-entity>
+
+      <!--Environment-->
+      <a-sky color="#aff"></a-sky>
+      <a-plane rotation="-90 0 0" width="20" height="20" color="#3fa841"></a-plane>
+
+      <!--Websurface-->
+      <a-entity websurface="url:https://aframe.io/; width:4; height:2;" position="2.25 1.5 -4"></a-entity>
+     
+   
+    </a-scene>
+  </body>
+</html>

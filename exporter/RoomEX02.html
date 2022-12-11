@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Room ex 0</title>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@090b5f8f0abe949ddcfdbbc14c75822322a2dd53/dist/aframe-master.min.js"></script>
+    <script src="aframe-gltf-exporter-component.min.js"></script>
+    <script src="aframe-animation-component.min.js"></script>
+
+    <!--<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    -->
+    <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="aframe.css">
+
+
+    <style>
+        .button:hover {
+            background-color: #fff;
+            color: blue;
+        }
+
+        .button {
+            background-color: blue;
+            border-radius: 2px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 12px;
+            height: 20px;
+            margin-top: 5px;
+            margin-left: 5px;
+            outline: none;
+            position: relative;
+            width: 80px;
+            z-index: 999;
+        }
+
+        #container {
+            position: absolute;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <button id="export-scene" class="button"><span>Export GLTF</span></button>
+        <button id="export-scene-bin" class="button"><span>Export GLB</span></button>
+        <button id="export-redbxx" class="button"><span>Export PRT1</span></button>
+        <button id="export-redbyy" class="button"><span>Export PRT2</span></button>
+        <button id="export-redbzz" class="button"><span>Export PRT3</span></button>
+        <!-- <button id="export-spherxx" class="button"><span>Export Sphere</span></button>
+              <!--<button id="export-selector" class="button"><span>Export boxes (Selector)</span></button>-->
+    </div>
+
+    <script>
+        function setpartOrigin(target) {
+            target.setAttribute('position', 'rotation', x, y, z, w);
+            // color randomizer credit: http://stackoverflow.com/a/7638362
+        }
+    </script>
+    <script>
+        var changesphere = function () {
+            console.log(document.querySelector("a-sphere").getAttribute("color"))
+            if (document.querySelector("a-sphere").getAttribute("color") !== "blue") {
+                document.querySelector("a-sphere").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-sphere").setAttribute("color", "green");
+
+            }
+        }
+        var changecylinder = function () {
+            console.log(document.querySelector("a-cylinder").getAttribute("color"))
+            if (document.querySelector("a-cylinder").getAttribute("color") !== "blue") {
+                document.querySelector("a-cylinder").setAttribute("color", "blue");
+            } else {
+                document.querySelector("a-cylinder").setAttribute("color", "green");
+
+            }
+        }
+
+
+
+    </script>
+
+    <a-scene gltf-exporter gridhelper="size:30;divisions:30;colorGrid:white;colorCenterLine:red">
+
+        <a-assets>
+
+        </a-assets>
+
+        <a-entity id="planeboxx" position="0 0 0" rotation="0 0 0">
+            <a-entity id="planebox" position="0 0 0">
+                <a-plane side="double" color="green" position="0 -10 0" rotation="-90 0 0" height="20" width="20" material="" static-body></a-plane>
+                <a-plane side="double" color="green" position="0 10 0" rotation="-90 0 0" height="20" width="20" material="" static-body></a-plane>
+                <a-plane side="double" color="blue" position="0 0 10" rotation="0 0 0" height="20" width="20" material="" static-body></a-plane>
+                <a-plane side="double" color="blue" position="0 0 -10" rotation="0 0 0" height="20" width="20" material="" satic-body></a-plane>
+                <a-plane side="double" color="red" position="10 0 0" rotation="0 -90 0" height="20" width="20" material="" static-body></a-plane>
+                <a-plane side="double" color="red" position="-10 0 0" rotation="0 90 0" height="20" width="20" material="" static-body></a-plane>
+            </a-entity>
+            <!--mesh overlay for walls-->
+            <a-box position="0 -10.0 0" rotation="0 0 0" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="0 10.0 0" rotation="0 0 0" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="0 0 -10.0" rotation="90 0 0" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="0 0 10.0" rotation="90 0 0" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="-10.0 0 0" rotation="0 0 90" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <a-box position="10.0 0 0" rotation="0 0 90" width="20" depth="20" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 20;divisions:5" static-body></a-box>
+            <!--ground for box with drop-off-->
+            <a-box position="0 -0.0001 0" rotation="0 0 0" width="15" depth="15" height="0.0002" color="lightblue" opacity=".25" gridhelper="size: 15;divisions:15" static-body visible="true"></a-box>
+
+            <a-light type="hemisphere" intensity="2.0"></a-light>
+        </a-entity>
+
+
+        <!--
+        <a-entity id="redbxx" geometry="primitive: box" material="color:#f00" position="-2 1 0">
+            <a-animation attribute="rotation" to="360 0 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+        <a-entity id="redbyy" geometry="primitive: box" material="color:#f00" position="-4 1 0">
+            <a-animation attribute="rotation" to="0 360 0" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+        <a-entity id="redbzz" geometry="primitive: box" material="color:#f00" position="-6 1 0">
+            <a-animation attribute="rotation" to="0 0 360" repeat="indefinite" easing="linear" dur="9600"></a-animation>
+        </a-entity>
+
+        <a-box id="b1" position="0 2 1" rotation="45 45 45" scale="1 1 1" color="blue" static-body></a-box>
+        -->
+
+
+
+        <a-entity camera look-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 10; initialPosition: 0 2 7"></a-entity>
+
+
+        <a-light type="hemisphere" intensity="2.0"></a-light>
+        <a-sky color="lightblue" radius="30"></a-sky>
+        <a-cylinder id="ground" radius="32" height="0.01" position="0 -0.005 0" color="blue" opacity="0" static-body></a-cylinder>
+    </a-scene>
+    <script>
+        function exportGLTF(input, options) {
+            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        }
+
+        document.getElementById('export-scene').addEventListener('click', function () {
+            exportGLTF();
+        });
+
+        document.getElementById('export-scene-bin').addEventListener('click', function () {
+            exportGLTF(undefined, { binary: true });
+        });
+
+        document.getElementById('export-redbxx').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbxx'), { binary: true });
+        });
+
+        document.getElementById('export-redbyy').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbyy'), { binary: true });
+        });
+
+        document.getElementById('export-redbzz').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbzz'), { binary: true });
+        });
+
+        document.getElementById('export-two').addEventListener('click', function () {
+            exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
+        });
+
+        document.getElementById('export-selector').addEventListener('click', function () {
+            exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
+        });
+
+    </script>
+    <!--<script type="text/javascript">
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+                display.setAttribute('count-down', seconds);
+                if (--timer < 0) {
+                    timer = duration;
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            var countDownEntity = document.getElementById("timer"),
+                duration = countDownEntity.getAttribute('count-down');
+            startTimer(duration, countDownEntity);
+        };
+
+        window.timedout = function () {
+            console.log("GUI timer timed out");
+        }
+
+        window.testButtonAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testToggleAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testSliderAction = function () {
+            console.log("clicked GUI");
+        }
+
+        window.testInputAction = function () {
+            console.log("clicked GUI");
+        }
+
+
+
+        var data = document.querySelector("#cursor");
+        var controls;
+
+        var initControls = function () {
+            this.color = "#011C40";
+            this.hoverColor = "#F2BB16";
+            this.activeColor = "#2a5b7a";
+            this.design = "ring";
+        };
+
+        window.onload = function () {
+            controls = new initControls();
+            setValue();
+            var gui = new dat.GUI();
+            gui.addColor(controls, 'color').onChange(setValue);
+            gui.addColor(controls, 'hoverColor').onChange(setValue);
+            gui.addColor(controls, 'activeColor').onChange(setValue);
+            gui.add(controls, 'design', ["dot", "ring", "reticle", "cross"]).onChange(setValue);
+        };
+
+        function setValue() {
+            data.setAttribute('color', controls.color);
+            data.setAttribute('hover-color', controls.hoverColor);
+            data.setAttribute('active-color', controls.activeColor);
+            data.setAttribute('design', controls.design);
+        }
+
+
+
+    </script>-->
+</body>
+</html>
+
+
+
