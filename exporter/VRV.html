@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>My A-Frame Scene</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+
+    <!-- Include component script into your project along with A-Frame. -->
+    <script src="https://rawgit.com/caseyyee/aframe-ui-widgets/master/dist/aframe-ui-widgets.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <!-- Adds hand controls -->
+        <a-entity hand-controls="left"></a-entity>
+        <a-entity hand-controls="right"></a-entity>
+
+        <!-- Can also be controlled used with cursor -->
+        <a-camera>
+            <a-cursor></a-cursor>
+        </a-camera>
+
+        <!-- Adds UI button widget -->
+        <a-entity id="button-block" position="0 0 0" rotation="90 0 0" geometry="primitive:box;width:5;height:.25;depth:8;color:black">
+            <a-entity id="button-rail-1" position="0 0.25 2.4" rotation="0 0 0" geometry="primitive:box;width:3;height:.25;depth:1;color:blue">
+                <a-entity id="mybutton51" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton52" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton53" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+            </a-entity>
+            <a-entity id="button-rail-2" position="0 0.25 1.2" rotation="0 0 0" geometry="primitive:box;width:3;height:.25;depth:1;color:blue">
+                <a-entity id="mybutton54" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton55" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton56" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+            </a-entity>
+            <a-entity id="button-rail-3" position="0 0.25 0" rotation="0 0 0" geometry="primitive:box;width:3;height:.25;depth:1;color:blue">
+                <a-entity id="mybutton57" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton58" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton59" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+            </a-entity>
+            <a-entity id="button-rail-4" position="0 0.25 -1.2" rotation="0 0 0" geometry="primitive:box;width:3;height:.25;depth:1;color:blue">
+                <a-entity id="mybutton60" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton61" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton62" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+            </a-entity>
+            <a-entity id="button-rail-5" position="0 0.25 -2.4" rotation="0 0 0" geometry="primitive:box;width:3;height:.25;depth:1;color:blue">
+                <a-entity id="mybutton63" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton64" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+                <a-entity id="mybutton65" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+            </a-entity>
+
+
+        </a-entity>
+
+        
+
+        <a-entity id="mybutton" ui-button="color:red" position="-1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+        <a-entity id="mybutton2" ui-button="color:yellow" position="0 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+        <a-entity id="mybutton3" ui-button="color:green" position="1 0.15 0" rotation="0 0 0" scale="2.0"></a-entity>
+
+    </a-scene>
+    <script>
+      var mybutton = document.querySelector('#mybutton');
+      mybutton.addEventListener('pressed', function () {
+        // do stuff here.
+      });
+    </script>
+    <script>
+      var mybutton2 = document.querySelector('#mybutton2');
+      mybutton2.addEventListener('pressed', function () {
+        // do stuff here.
+      });
+    </script>
+    <script>
+      var mybutton3 = document.querySelector('#mybutton3');
+      mybutton3.addEventListener('pressed', function () {
+        // do stuff here.
+      });   
+    </script>
+
+</body>
+</html>
