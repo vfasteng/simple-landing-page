@@ -3,9 +3,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Room ex 0</title><!--
+    <title>Room ex 0</title>
+    <!--
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@090b5f8f0abe949ddcfdbbc14c75822322a2dd53/dist/aframe-master.min.js"></script>
-    --><script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    -->
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
     <!-- Include component script into your project along with A-Frame. -->
     <script src="https://rawgit.com/caseyyee/aframe-ui-widgets/master/dist/aframe-ui-widgets.min.js"></script>
@@ -13,46 +15,102 @@
 
     <script src="aframe-gltf-exporter-component.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
-
-    <!--<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-    -->
+    <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
     <script src="https://unpkg.com/aframe-orbit-controls@1.2.0/dist/aframe-orbit-controls.min.js"></script>
+
+    <script src="https://unpkg.com/super-hands/dist/super-hands.min.js"></script>
+    <script src="https://rawgit.com/feiss/aframe-environment-component/master/dist/aframe-environment-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-datgui-component/dist/aframe-datgui-component.min.js"></script>
+    <script src="https://cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-physics-extras@0.1.2/dist/aframe-physics-extras.min.js"></script>
+    <script src="https://cdn.rawgit.com/gftruj/aframe-physics-spring/master/dist/aframe-spring.min.js"></script>
+    <script src="https://unpkg.com/aframe-spherical-controls-component/dist/aframe-spherical-controls-component.min.js"></script>
+    <script src="https://rawgit.com/chenzlabs/auto-detect-controllers/master/dist/aframe-auto-detect-controllers-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-helpers@0.0.2/dist/aframe-gltf-helpers.min.js"></script>
     <script src="https://rawgit.com/dbradleyfl/aframe-gridhelper/master/dist/aframe-gridhelper-component.min.js"></script>
+    <script src="https://rawgit.com/dbradleyfl/aframe-selectable-light-component/master/dist/aframe-selectable-light-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
+
+    <!--extras--
+    <script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE-->
+    <script src="js/aframe-extras.min.js"></script>
+    <script src="js/aframe-extras.controls.mih.js"></script>
+    <script src="js/aframe-extras.misc.js"></script>
+    <script src="js/aframe-extras.loaders.js"></script>
+    <script src="js/aframe-extras.pathfinding.js"></script>
+    <script src="js/aframe-extras.primitives.js"></script>
+    <script src="js/aframe-stl-model-component.min.js"></script>
+    <script src="js/aframe-drag-and-drop-component.min.js"></script>
+    <script src="js/aframe-crawling-cursor.min.js"></script>
+    <script src="js/aframe-ui-modal-component.min.js"></script>
+    <script src="js/mouse-dnd-component.js"></script>
+
+    <!--reaction components-->
+    <script src="js/clickable.js"></script>
+    <script src="js/draggable.js"></script>
+    <script src="js/drag-droppable.js"></script>
+    <script src="js/hoverable.js"></script>
+    <script src="js/stretchable.js"></script>
+    <script src="js/droppable.js"></script>
+    <script src="js/grabbable.js"></script>
 
     <link rel="stylesheet" type="text/css" href="aframe.css">
 
+    <!-- controls for placing models--see gltf-helpers:bottomAlign: true-->
+    <script src="~/js/aframe-tool-component.js"></script>
+    <script src="~/js/snap.js"></script>
+    <script src="~/js/grab-lock.js"></script>
+    <script src="~/js/PhysicsGrab.js"></script>
+    <script src="~/js/createConstraint.js"></script>
+    <script src="~/js/aframe-dev-components.min.js"></script>
+    <script src="~/js/gltfLoader.js"></script>
+    <script src="~/js/GLTFPart.js"></script>
+
+    <script src="https://rawgit.com/rdub80/aframe-gui/master/dist/aframe-gui.min.js"></script>
+    <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
+
 
     <style>
-        .button:hover {
-            background-color: #fff;
-            color: blue;
-        }
-
-        .button {
-            background-color: blue;
-            border-radius: 2px;
-            border: none;
-            color: #fff;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 12px;
-            height: 20px;
-            margin-top: 5px;
-            margin-left: 5px;
-            outline: none;
-            position: relative;
+        button {
             width: 80px;
-            z-index: 999;
+            height: 25px;
+            position: relative;
+            top: 1px;
+            z-index: 2;
         }
 
+            button c {
+                width: 20px;
+                height: 20px;
+                position: relative;
+                top: 1px;
+                z-index: 2;
+            }
+    </style>
+    <style>
         #container {
             position: absolute;
-            width: 100%;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+        }
+
+        #menny {
+            position: absolute;
+            width: 10%;
+            margin: auto;
+            height: 50%;
             display: flex;
             justify-content: center;
         }
     </style>
+
 </head>
+
+
+
 <body>
     <div id="container">
         <button id="export-scene" class="button"><span>Export GLTF</span></button>
