@@ -306,10 +306,7 @@
             <a-asset-item id="wheel-spinner" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/wheel-spinner.glb?v=1661754959348"></a-asset-item>
 
             <a-asset-item id="glbsphere" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fsphere-r1-p010.glb?v=1615396331056"></a-asset-item>
-            <a-asset-item id="central-link" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/central-link.glb?v=1661445167231"></a-asset-item>
-
-
-
+            <a-asset-item id="spoke-engine" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/place2b.glb?v=1671112463727"></a-asset-item>
 
 
             <a-mixin id="cube" geometry="primitive: box; width: 1.0; height: 1.0; depth: 1.0"
@@ -325,7 +322,7 @@
                      dynamic-body shadow>
             </a-mixin>
             <a-mixin id="octt" geometry="primitive: octahedron; radius: 0.5"
-                     hoverable grabbable stretchable draggable droppable
+                     hoverable grabbable stretchable draggable droppable clickable
                      dynamic-body shadow>
             </a-mixin>
             <a-mixin id="dodd" geometry="primitive: dodecahedron; radius: 0.5"
@@ -424,12 +421,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-            <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-            <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-            <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-                -->
+        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+            -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -455,7 +452,7 @@
 
             <a-mixin id="p2p-planes-bodya" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse></a-mixin>
             <a-mixin id="p2p-planes-bodyb" gltf-model="#cbplane" position="0 0 0" rotation="0 0 0" scale="1 1 1"
-                     constraint="type:pointTopoint;target:#bodye;axis:0 0 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0"
+                     constraint="type:pointTopoint;target:#p2p-planes-bodya;axis:0 0 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1 0"
                      dynamic-body click-impulse></a-mixin>
 
 
@@ -512,10 +509,10 @@
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
             <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
 
-            <a-gltf-model id="centerx" src="#ccyl1" scale=".2 .1 .2" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="poxs-center" src="#ccyl1" scale=".1 .2 .2" rotation="0 0 0"></a-gltf-model>
 
 
-            <a-entity id="crank-throwy" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
+            <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="poxs-one" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="poxs-two" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="poxs-three" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
@@ -536,7 +533,7 @@
                   animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
             <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
-            <a-gltf-model id="poys-twelve" src="#ccyl1" scale=".2 .1 .2" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="poys-center" src="#ccyl1" scale=".2 .1 .2" rotation="0 0 0"></a-gltf-model>
 
 
             <a-entity id="crank-throwy" position="0 0 0" rotation="-90 0 0" layout="type: circle; radius: 0.5">
@@ -560,7 +557,7 @@
                   animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
             <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
-            <a-gltf-model id="pozs-twelve" src="#ccyl1" scale=".2 .1 .2" rotation="-90 0 0"></a-gltf-model>
+            <a-gltf-model id="pozs-center" src="#ccyl1" scale=".2 .2 .1" rotation="-90 0 0"></a-gltf-model>
 
             <a-entity id="crank-throwz" position="0 0 0" rotation="90 180 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="pozs-one" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
@@ -603,20 +600,29 @@
 
         </a-entity>
 
+        <a-entity id="spke-engine" gltf-model="#spoke-engine" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
+
+        </a-entity>
+        <a-entity id="sixaxes" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+        </a-entity>
+        <a-gltf-model id="poxs-twelve" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
+
+
         <!--
-            <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
-                <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
+        <a-entity id="redbx3" position="5 0 -5.5" rotation="0 0 0">
+            <a-entity id="bot13" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body click-impulse>
 
-                </a-entity>
-                <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
-                          constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-                          dynamic-body click-impulse>
-
-                </a-entity>
+            </a-entity>
+            <a-entity id="top13" gltf-model="#gear16" scale="0.05 0.05 0.05"
+                      constraint="type:hinge;target:#bot13;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+                      dynamic-body click-impulse>
 
             </a-entity>
 
-        </a-entity>-->
+        </a-entity>
+
+    </a-entity>-->
 
 
 
@@ -634,109 +640,109 @@
 
         <!-- freewheel working with click-impulse from mouse--
 
-        <a-entity position="0 0 0">
-            <a-entity id="anchor"
-                      geometry="primitive: box;"
-                      material="color: yellow; flatShading: true;"
-                      position="0 4 0"
-                      static-body>
-            </a-entity>
-
-            <a-entity id="targett"
-                      geometry="primitive: box; height: 1; width: 2; depth: 2;"
-                      material="color: red; flatShading: true;"
-                      position="0 3.0 0"
-                      xxxconstraint="target: #anchor; type: distance; distance: 1.0;"
-                      constraint="type: pointToPoint; target: #anchor; axis: 0 1 0; pivot: 0 3 0; targetPivot: 0 0 0; collideConnected: false;"
-                      dynamic-body
-                      click-impulse>
-            </a-entity>
+    <a-entity position="0 0 0">
+        <a-entity id="anchor"
+                  geometry="primitive: box;"
+                  material="color: yellow; flatShading: true;"
+                  position="0 4 0"
+                  static-body>
         </a-entity>
 
-        <a-box id="redbxx" src="#" position="2 3 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse>
-
-        </a-box>
-        <a-box position="-2 4 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse></a-box>
-
-
-
-        <a-entity id="rotorxx" position="-19 0 0" rotation="0 0 0" scale="10 10 10"
-                  animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
-            repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
-            <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
-
-            <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 90"></a-cylinder>
-
-
-            <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-
-            </a-entity>
+        <a-entity id="targett"
+                  geometry="primitive: box; height: 1; width: 2; depth: 2;"
+                  material="color: red; flatShading: true;"
+                  position="0 3.0 0"
+                  xxxconstraint="target: #anchor; type: distance; distance: 1.0;"
+                  constraint="type: pointToPoint; target: #anchor; axis: 0 1 0; pivot: 0 3 0; targetPivot: 0 0 0; collideConnected: false;"
+                  dynamic-body
+                  click-impulse>
         </a-entity>
+    </a-entity>
 
-        <a-entity id="rotoryy" static-body position="0 -19 0" rotation="0 0 0" scale="10 10 10"
-                  animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
-            repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
-            <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
-            <a-cylinder id="centery" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
+    <a-box id="redbxx" src="#" position="2 3 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse>
+
+    </a-box>
+    <a-box position="-2 4 0" rotation="0 0 0" width="2" depth="2" height="2.5" color="yellow" opacity="1" dynamic-body click-impulse></a-box>
 
 
-            <a-entity id="crank-throwy" position="0 0 0" rotation="90 0 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="poys-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="poys-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
 
-            </a-entity>
+    <a-entity id="rotorxx" position="-19 0 0" rotation="0 0 0" scale="10 10 10"
+              animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
+        repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
+        <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
+
+        <a-cylinder id="centerx" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 90"></a-cylinder>
+
+
+        <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
+            <a-cylinder id="poxs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poxs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+
         </a-entity>
+    </a-entity>
 
-        <a-entity id="rotorzz" static-body position="0 0 19" rotation="0 0 0" scale="10 10 10"
-                  animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
-            repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
-            <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
-            <a-cylinder id="centerz" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+    <a-entity id="rotoryy" static-body position="0 -19 0" rotation="0 0 0" scale="10 10 10"
+              animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
+        repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
+        <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
+        <a-cylinder id="centery" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="0 0 0"></a-cylinder>
 
 
-            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
-                <a-cylinder id="pozs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
-                <a-cylinder id="pozs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+        <a-entity id="crank-throwy" position="0 0 0" rotation="90 0 0" layout="type: circle; radius: 0.5">
+            <a-cylinder id="poys-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="poys-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
 
-            </a-entity>
         </a-entity>
-        <!--
-        <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
-        <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
-        <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
-        -->
+    </a-entity>
+
+    <a-entity id="rotorzz" static-body position="0 0 19" rotation="0 0 0" scale="10 10 10"
+              animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
+        repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
+        <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
+        <a-cylinder id="centerz" radius="0.1" height="0.1" color="green" material="wireframe:false" position="0 0 0" rotation="90 0 0"></a-cylinder>
+
+
+        <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
+            <a-cylinder id="pozs-one" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-two" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-three" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-four" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-five" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-six" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-seven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-eight" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-nine" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-ten" radius="0.05" height="0.1" color="red" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-eleven" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+            <a-cylinder id="pozs-twelve" radius="0.05" height="0.1" color="blue" rotation="90 0 0"></a-cylinder>
+
+        </a-entity>
+    </a-entity>
+    <!--
+    <a-entity id="my-camera" look-controls wasd-controls="fly: true; acceleration:100" camera="userHeight: 3" raycaster="far: 3; near: 2" crawling-cursor="target: #my-cursor"><a-cursor></a-cursor></a-entity>
+    <a-entity id="my-cursor" rotation="-90 0 0"></a-entity>
+    <a-entity id="geo" geometry="gltf-model:#ccyl1"></a-entity><!--//select mixins from list var modmix = ""
+    -->
 
         <a-box id="ground" position="0 0 0" rotation="0 0 0" width="30" depth="30" height="0.001" color="lightblue" opacity=".1" gridhelper="size:30;divisions:15;ColoredCenterLine:yellow" static-body></a-box>
         <a-sky src="#im2" radius="50"></a-sky>
