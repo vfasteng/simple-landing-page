@@ -76,22 +76,22 @@
                                   value="Material-2">
                     </a-gui-button>
                     <a-gui-button width="2.5" height="0.75"
-                                  onclick="green"
+                                  onclick="matl3"
                                   font-family="assets/fonts/PermanentMarker-Regular.ttf"
                                   font-size="0.3"
-                                  value="Green">
+                                  value="Material-3">
                     </a-gui-button>
                     <a-gui-button width="2.5" height="0.75"
-                                  onclick="black"
+                                  onclick="matl4"
                                   font-family="assets/fonts/PermanentMarker-Regular.ttf"
                                   font-size="0.3"
-                                  value="black">
+                                  value="Material-4">
                     </a-gui-button>
                     <a-gui-button width="2.5" height="0.75"
-                                  onclick="orange"
+                                  onclick="matl5"
                                   font-family="assets/fonts/PermanentMarker-Regular.ttf"
                                   font-size="0.3"
-                                  value="Orange">
+                                  value="Material-5">
                     </a-gui-button>
                     <a-gui-icon-button height="0.5"
                                        onclick="closeDropdown"
@@ -144,17 +144,21 @@
 			var knot = document.getElementById("b11");
 			knot.setAttribute('material', 'src', '#m02');
 		}
-		window.blue = function() {
-			var knot = document.getElementById("knot");
-			knot.setAttribute('material', 'color', '#1FA4E9');
-		}
-        window.orange = function () {
-            var knot = document.getElementById("knot");
-            knot.setAttribute('material', 'color', '#FFA500');
+        window.matl3 = function () {
+            var knot = document.getElementById("b11");
+            knot.setAttribute('material', 'src', '#m03');
         }
-        window.black = function () {
-            var knot = document.getElementById("knot");
-            knot.setAttribute('material', 'color', '#000000');
+        window.matl4 = function () {
+            var knot = document.getElementById("b11");
+            knot.setAttribute('material', 'src', '#m04');
+        }
+        window.matl5 = function () {
+            var knot = document.getElementById("b11");
+            knot.setAttribute('material', 'src', '#m05');
+        }
+        window.matl6 = function () {
+            var knot = document.getElementById("b11");
+            knot.setAttribute('material', 'src', '#m06');
         }
 
 
