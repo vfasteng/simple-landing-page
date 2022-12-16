@@ -14,17 +14,21 @@
             <a-asset-item id="iconfontsolid" src="assets/fonts/fa-solid-900.ttf"></a-asset-item>
             <a-asset-item id="textfont" src="assets/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
             <a-asset-item id="partone" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fcalliper.glb?v=1613374860972"></a-asset-item>
-            <img id="mone" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/AdobeStock_278782232_Preview.jpeg?v=1671176578295" />
+            <img id="m01" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-btgl-%E2%99%A1-3894157.jpg?v=1671179871926" />
+            <img id="m02" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-saifullah-hafeel-10876455.jpg?v=1671180370500" />
+            <img id="m03" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-piyapong-sayduang-4541011.jpg?v=1671180304280" />
+            <img id="m04" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80-%D0%BD%D0%B5%D1%87%D1%83%D0%BD%D0%B0%D0%B5%D0%B2-9888046.jpg?v=1671180798380" />
+            <img id="m05" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-hakan-erenler-1427292.jpg?v=1671180006921" />
 
 
         </a-assets>
 
-        <a-box id="b11" src="#mone" scale="3 2 1" position="2 2 2" ></a-box>
+        <a-box id="b11" src="#m01" scale="3 2 1" position="2 2 2"></a-box>
 
-        <a-gltf-model id="prt1" src="#partone"
-                      material="#mone"position="-1.5 2 -7" rotation="90 0 0"
+        <a-entity id="prt1" gltf-model="#partone"
+                      material="src:#m01" position="-1.5 2 -7" rotation="90 0 0"
                       animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
-        </a-gltf-model>
+        </a-entity>
 
         <a-entity position="2 1.5 -4" rotation="0 0 0">
             <a-entity id="dropdownContainer" position="0 0 -1">
@@ -60,16 +64,16 @@
                                       animation__scaleOut="property: scale; to: 1 0.001 0.001; dur: 1000; startEvents:closedropdown"
                                       animation__visibleOut="property: visible; to: false; dur: 100; delay: 500; startEvents:closedropdown">
                     <a-gui-button width="2.5" height="0.75"
-                                  onclick="red"
+                                  onclick="matl1"
                                   font-family="assets/fonts/PermanentMarker-Regular.ttf"
                                   font-size="0.3"
-                                  value="Red">
+                                  value="Material-1">
                     </a-gui-button>
                     <a-gui-button width="2.5" height="0.75"
-                                  onclick="blue"
+                                  onclick="matl2"
                                   font-family="assets/fonts/PermanentMarker-Regular.ttf"
                                   font-size="0.3"
-                                  value="Blue">
+                                  value="Material-2">
                     </a-gui-button>
                     <a-gui-button width="2.5" height="0.75"
                                   onclick="green"
@@ -132,13 +136,13 @@
 
 		}
 
-		window.red = function() {
+		window.matl1 = function() {
 			var knot = document.getElementById("knot");
-			knot.setAttribute('material', 'color', '#DC2531');
+			knot.setAttribute('material', 'src', '#m01');
 		}
-		window.green = function() {
+		window.matl2 = function() {
 			var knot = document.getElementById("knot");
-			knot.setAttribute('material', 'color', '#69FFD2');
+			knot.setAttribute('material', 'src', '#m02');
 		}
 		window.blue = function() {
 			var knot = document.getElementById("knot");
