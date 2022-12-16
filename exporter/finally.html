@@ -214,9 +214,27 @@
         <a-assets>
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
+            <a-asset-item id="cbcyly" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder_dia_1_x_1.glb?v=1670058296060"></a-asset-item>
+            <a-asset-item id="cbcylx" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder_1_x_1_x-axis.glb?v=1670057375084"></a-asset-item>
+            <a-asset-item id="cbcylz" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cylinder.glb?v=1670057310593"></a-asset-item>
+            <a-asset-item id="cadball" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadball.glb?v=1670056408681"></a-asset-item>
+            <a-asset-item id="conetp" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glb_cone_x_rad_1_x_1_high.glb?v=1670057296222"></a-asset-item>
+            <a-asset-item id="conetf" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cone_x_r_0.5_x_1_to_r_0.25.glb?v=1670057298138"></a-asset-item>
+            <a-asset-item id="cadplane" src="#"></a-asset-item>
+            <a-asset-item id="cadtube" src="#"></a-asset-item>
+            <a-asset-item id="cadsemitube" src="#"></a-asset-item>
+            <a-asset-item id="cadquatertube" src="#"></a-asset-item>
+            <a-asset-item id="caddodd" src="#"></a-asset-item>
+
+
+
             <a-asset-item id="gear16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273" position="0 2.5 0" rotation="0 0 0" scale="1 1 1" "></a-asset-item>
 
+
+            
             <a-asset-item id="waddler" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/waddler.glb?v=1668021723166"></a-asset-item>
+
+
 
             <img id="galaxy" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/780593/galaxy.jpg">
             <img id="moon" src="https://raw.githubusercontent.com/aframevr/sample-assets/master/assets/images/space/moon_1024.jpg">
@@ -421,12 +439,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+    <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-            -->
+    <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+        -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -509,7 +527,7 @@
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
             <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
 
-            <a-gltf-model id="poxs-center" src="#ccyl1" scale=".1 .2 .2" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="poxs-center" src="#cbcylx" scale=".1 .2 .2" rotation="0 0 0"></a-gltf-model>
 
 
             <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
@@ -533,7 +551,7 @@
                   animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
             <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
-            <a-gltf-model id="poys-center" src="#ccyl1" scale=".2 .1 .2" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="poys-center" src="#cbcyly" scale=".2 .1 .2" rotation="0 0 0"></a-gltf-model>
 
 
             <a-entity id="crank-throwy" position="0 0 0" rotation="-90 0 0" layout="type: circle; radius: 0.5">
@@ -557,7 +575,7 @@
                   animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
             <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
-            <a-gltf-model id="pozs-center" src="#ccyl1" scale=".2 .2 .1" rotation="-90 0 0"></a-gltf-model>
+            <a-gltf-model id="pozs-center" src="#cbcylz" scale=".2 .2 .1" rotation="-90 0 0"></a-gltf-model>
 
             <a-entity id="crank-throwz" position="0 0 0" rotation="90 180 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="pozs-one" src="#ccyl1" scale=".1 .2 .1" rotation="90 0 0"></a-gltf-model>
@@ -575,7 +593,7 @@
 
             </a-entity>
         </a-entity>
-
+        <!--
         <a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
             <a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
@@ -622,7 +640,7 @@
 
         </a-entity>
 
-    </a-entity>-->
+    </a-entity>--
 
 
 
@@ -777,10 +795,9 @@
         </a-entity>
 
 
-    </a-scene>
+    </a-scene><!--
     <div id="toolbar">
         <select id="cameraRig">
-            <!--Supplement an id here instead of using 'text'-->
             <option cameraRig="cam2">2</option>
             <option cameraRig="cam3">3</option>
             <option cameraRig="cam4">4</option>
@@ -793,7 +810,7 @@
         <input class="color-input" value="#ffffff" />
         <!--<button id="add" class="active" type="button">ADD</button>
         <button id="remove" type="button">REMOVE</button>
-        <button id="edit" type="button">EDIT</button>-->
+        <button id="edit" type="button">EDIT</button>--
         <button id="calti" type="button">Load</button>
         <button id="undo" type="button">Export</button>
         <button id="redo" type="button">Save</button>
@@ -802,7 +819,7 @@
 
         <!-- TODO: add save/load for electron implementation
         <button id="save" type="button">SAVE</button>
-         -->
+         --
     </div>
     <script type="text/javascript">
         var hueb = new Huebee('.color-input', {
@@ -1299,4 +1316,3 @@ AFRAME.registerComponent('remove-on-tick', {
 });
 
     <!--end-->
--->
