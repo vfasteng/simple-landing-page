@@ -574,10 +574,10 @@
         <a-entity id="rotorzz" static-body position="0 0 19" rotation="0 0 0" scale="10 10 10"
                   animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
-            <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
-            <a-gltf-model id="pozs-center" src="#cbcylz" scale=".2 .2 .1" position="0 0 0" rotation="-90 0 0"></a-gltf-model>
-
-            <a-entity id="crank-throwz" position="0 0 0" rotation="0 0 0" layout="type: circle; radius: 0.5">
+            <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 ">
+                <a-gltf-model id="pozs-center" src="#cbcylz" scale=".2 .2 .1" position="0 0 0" rotation="-90 0 0"></a-gltf-model>
+            </a-entity>
+            <a-entity id="crank-throwz" position="0 0 0" rotation="0 180 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="pozs-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="pozs-two" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="pozs-three" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
