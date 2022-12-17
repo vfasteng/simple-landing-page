@@ -40,13 +40,13 @@
 
 
             </a-assets>
-
+            <!--
             <a-box id="b11" src="#m01" scale="3 2 1" position="2 2 2"></a-box>
             <a-entity id="b12" stl-model="src: #modelfile" scale="1 1 1" rotation="0 0 0" position="0 0 0" material="src: #m03"></a-entity>
             
             <a-gltf-model id="b14" stl-model="src: #glbfile" scale="1 1 1" rotation="0 0 0" position="0 2 3" material="src: #m03"></a-gltf-model>
             
-
+            -->
             <a-box id="b13" src="#m01" scale="1 1 1" position="-2 2 2"></a-box>
 
             <a-gltf-model id="prt1" src="#glbfile"
@@ -54,7 +54,7 @@
                           animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
             </a-gltf-model>
 
-            <a-entity id="prt1" gltf-model="#partone"
+            <a-entity id="prt11" gltf-model="#partone"
                       material="src:https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-hakan-erenler-1427292.jpg?v=1671180006921" position="-1.5 2 -7" rotation="90 0 0"
                       animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
             </a-entity>
@@ -166,23 +166,23 @@
             }
 
             window.matl1 = function () {
-                var knot = document.getElementById("b13");
+                var knot = document.getElementById("prt1");
                 knot.setAttribute('material', 'src', '#m01');
             }
             window.matl2 = function () {
-                var knot = document.getElementById("b13");
+                var knot = document.getElementById("prt1");
                 knot.setAttribute('material', 'src', '#m02');
             }
             window.matl3 = function () {
-                var knot = document.getElementById("b13");
+                var knot = document.getElementById("prt1");
                 knot.setAttribute('material', 'src', '#m03');
             }
             window.matl4 = function () {
-                var knot = document.getElementById("b13");
+                var knot = document.getElementById("prt1");
                 knot.setAttribute('material', 'src', '#m04');
             }
             window.matl5 = function () {
-                var knot = document.getElementById("b13");
+                var knot = document.getElementById("prt1");
                 knot.setAttribute('material', 'src', '#m05');
             }
             window.matl6 = function () {
