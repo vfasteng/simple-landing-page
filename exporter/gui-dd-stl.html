@@ -1,0 +1,177 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <title>A-Frame GUI Dropdown</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    <script src="https://rawgit.com/darkwave/aframe-stl-model-component/master/dist/aframe-stl-model-component.min.js"></script>
+
+    <script src="js/aframe-gui.js"></script>
+    <script src="js/gui-env.js"></script>
+
+</head>
+
+
+        
+
+
+    <body>
+        <a-scene gui-env>
+            <a-assets>
+                <a-asset-item id="iconfontsolid" src="assets/fonts/fa-solid-900.ttf"></a-asset-item>
+                <a-asset-item id="textfont" src="assets/fonts/PermanentMarker-Regular.ttf"></a-asset-item>
+                <a-asset-item id="partone" src="https://cdn.glitch.com/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538%2Fcalliper.glb?v=1613374860972"></a-asset-item>
+                <img id="m01" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-btgl-%E2%99%A1-3894157.jpg?v=1671179871926" />
+                <img id="m02" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-saifullah-hafeel-10876455.jpg?v=1671180370500" />
+                <img id="m03" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-piyapong-sayduang-4541011.jpg?v=1671180304280" />
+                <img id="m04" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-%D0%B0%D0%BB%D0%B5%D0%BA%D1%81%D0%B0%D0%BD%D0%B4%D1%80-%D0%BD%D0%B5%D1%87%D1%83%D0%BD%D0%B0%D0%B5%D0%B2-9888046.jpg?v=1671180798380" />
+                <img id="m05" src="https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-hakan-erenler-1427292.jpg?v=1671180006921" />
+
+
+                <a-asset-item response-type="arraybuffer" id="modelfile" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/DDW_OV8H07_Oil_Pump.stl?v=1671267316551"></a-asset-item>
+            </a-assets>
+                <a-entity stl-model="src: #house" scale="1 1 1" rotation="0 0 0" position="0 0 0" material="src: #m03"></a-entity>
+
+                <a-box id="b11" src="#m01" scale="3 2 1" position="2 2 2"></a-box>
+
+                <a-entity id="prt1" gltf-model="#partone"
+                          material="src:#m01" position="-1.5 2 -7" rotation="90 0 0"
+                          animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
+                </a-entity>
+
+                <a-entity position="2 1.5 -4" rotation="0 0 0">
+                    <a-entity id="dropdownContainer" position="0 0 -1">
+
+                        <a-gui-flex-container flex-direction="row" justify-content="center" align-items="normal" component-padding="0.1"
+                                              opacity="0" width="2.5" height="0.75"
+                                              position="0 0.375 0" rotation="0 0 0">
+                            <a-gui-icon-label-button id="mydropdown"
+                                                     width="2.5" height="0.75"
+                                                     onclick="openDropdown"
+                                                     icon="f0c9"
+                                                     icon-font="assets/fonts/fa-solid-900.ttf"
+                                                     value="dropdown"
+                                                     font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                                     font-size="0.25"
+                                                     visible="true"
+                                                     animation__rotateIn="property: rotation; to: 180 0 0; dur: 1000; startEvents:opendropdown"
+                                                     animation__visibleIn="property: visible; to: false; delay: 500; startEvents:opendropdown"
+                                                     animation__rotateOut="property: rotation; to: 0 0 0; dur: 1000; startEvents:closedropdown"
+                                                     animation__visibleOut="property: visible; to: true; delay: 500; startEvents:closedropdown">
+                            </a-gui-icon-label-button>
+                        </a-gui-flex-container>
+
+                        <a-gui-flex-container id="myoptions"
+                                              flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1"
+                                              opacity="0" width="2.5" height="0.75"
+                                              position="0 0 -0.15" rotation="0 0 0" scale="1 0.001 0.001"
+                                              visible="false"
+                                              animation__positionIn="property: position; to: 0 0.375 0.15; dur: 1000; startEvents:opendropdown"
+                                              animation__scaleIn="property: scale; to: 1 1 1; dur: 1000; startEvents:opendropdown"
+                                              animation__visibleIn="property: visible; to: true; dur: 100; startEvents:opendropdown"
+                                              animation__positionOut="property: position; to: 0 0 -0.15; dur: 1000; startEvents:closedropdown"
+                                              animation__scaleOut="property: scale; to: 1 0.001 0.001; dur: 1000; startEvents:closedropdown"
+                                              animation__visibleOut="property: visible; to: false; dur: 100; delay: 500; startEvents:closedropdown">
+                            <a-gui-button width="2.5" height="0.75"
+                                          onclick="matl1"
+                                          font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                          font-size="0.3"
+                                          value="Material-1">
+                            </a-gui-button>
+                            <a-gui-button width="2.5" height="0.75"
+                                          onclick="matl2"
+                                          font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                          font-size="0.3"
+                                          value="Material-2">
+                            </a-gui-button>
+                            <a-gui-button width="2.5" height="0.75"
+                                          onclick="matl3"
+                                          font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                          font-size="0.3"
+                                          value="Material-3">
+                            </a-gui-button>
+                            <a-gui-button width="2.5" height="0.75"
+                                          onclick="matl4"
+                                          font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                          font-size="0.3"
+                                          value="Material-4">
+                            </a-gui-button>
+                            <a-gui-button width="2.5" height="0.75"
+                                          onclick="matl5"
+                                          font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                          font-size="0.3"
+                                          value="Material-5">
+                            </a-gui-button>
+                            <a-gui-icon-button height="0.5"
+                                               onclick="closeDropdown"
+                                               icon="f00d"
+                                               icon-font="assets/fonts/fa-solid-900.ttf">
+                            </a-gui-icon-button>
+
+                        </a-gui-flex-container>
+
+
+                    </a-entity>
+                </a-entity>
+
+                <!-- Camera + cursor. -->
+                <a-entity id="cameraRig" position="0 1.6 0">
+                    <a-camera look-controls wasd-controls position="0 0 0">
+                        <a-gui-cursor id="cursor"
+                                      raycaster="objects: [gui-interactable]"
+                                      fuse="true" fuse-timeout="2000"
+                                      design="ring">
+                        </a-gui-cursor> <!-- /cursor -->
+                    </a-camera> <!-- /camera -->
+                </a-entity>
+
+</a-scene>
+
+        <script>
+            window.closeDropdown = function () {
+                console.log("closedropdown");
+                var mydropdown = document.getElementById("mydropdown");
+                mydropdown.emit('closedropdown');
+                var myoptions = document.getElementById("myoptions");
+                myoptions.emit('closedropdown');
+
+            }
+            window.openDropdown = function () {
+                console.log("opendropdown");
+                var mydropdown = document.getElementById("mydropdown");
+                mydropdown.emit('opendropdown');
+                var myoptions = document.getElementById("myoptions");
+                myoptions.emit('opendropdown');
+
+            }
+
+            window.matl1 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m01');
+            }
+            window.matl2 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m02');
+            }
+            window.matl3 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m03');
+            }
+            window.matl4 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m04');
+            }
+            window.matl5 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m05');
+            }
+            window.matl6 = function () {
+                var knot = document.getElementById("b11");
+                knot.setAttribute('material', 'src', '#m06');
+            }
+
+
+        </script>
+
+    </body>
+</html>
