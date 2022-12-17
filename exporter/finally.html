@@ -231,7 +231,7 @@
             <a-asset-item id="gear16" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/gear16.glb?v=1666794960273" position="0 2.5 0" rotation="0 0 0" scale="1 1 1" "></a-asset-item>
 
 
-            
+
             <a-asset-item id="waddler" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/waddler.glb?v=1668021723166"></a-asset-item>
 
 
@@ -439,12 +439,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-    <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-    <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-    <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-        -->
+        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+            -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -492,9 +492,6 @@
                     <a-plane side="double" color="red" position="20 0 0" rotation="0 -90 0" height="40" width="40" material="" static-body></a-plane>
                     <a-plane side="double" color="red" position="-20 0 0" rotation="0 90 0" height="40" width="40" material="" static-body></a-plane>
 
-                    <a-gltf-model id="poxs-center" src="#cbcylx" scale=".1 .2 .2" position="0 0 0" rotation="0 0 0"></a-gltf-model>
-                    <a-gltf-model id="poys-center" src="#cbcyly" scale=".2 .1 .2" position="0 0 0" rotation="0 0 0"></a-gltf-model>
-                    <a-gltf-model id="pozs-center" src="#cbcylz" scale=".2 .2 .1" position="0 0 0" rotation="-90 0 0"></a-gltf-model>
 
                 </a-entity>
                 <!--mesh overlay for walls-->
@@ -531,7 +528,7 @@
                   animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
             <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
-            
+
             <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="poxs-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="poxs-two" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -553,7 +550,7 @@
                   animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
             <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
-            
+
             <a-entity id="crank-throwy" position="0 0 0" rotation="-90 0 0" layout="type: circle; radius: 0.5">
                 <a-gltf-model id="poys-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
                 <a-gltf-model id="poys-two" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -570,6 +567,14 @@
 
             </a-entity>
         </a-entity>
+        
+        <a-entity id="cebassy" position="0 0 0" rotation="0 0 0" scale="1 1 1">
+            <a-gltf-model id="poxs-center" src="#cbcylx" scale=".1 .2 .2" position="0 0 0" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="poys-center" src="#cbcyly" scale=".2 .1 .2" position="0 0 0" rotation="0 0 0"></a-gltf-model>
+            <a-gltf-model id="pozs-center" src="#cbcylz" scale=".2 .2 .1" position="0 0 0" rotation="0 0 0"></a-gltf-model>
+
+        </a-entity>
+        
 
         <a-entity id="rotorzz" static-body position="0 0 19" rotation="0 0 0" scale="10 10 10"
                   animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
