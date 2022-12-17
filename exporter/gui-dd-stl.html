@@ -34,6 +34,7 @@
 
 
                 <a-asset-item response-type="arraybuffer" id="modelfile" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/DDW_OV8H07_Oil_Pump.stl?v=1671267316551"></a-asset-item>
+                <a-asset-item id="glbfile" src="https://cdn.glitch.me/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/oilpump.glb?v=1671289250886"></a-asset-item>
 
 
 
@@ -43,12 +44,12 @@
             <a-box id="b11" src="#m01" scale="3 2 1" position="2 2 2"></a-box>
             <a-entity id="b12" stl-model="src: #modelfile" scale="1 1 1" rotation="0 0 0" position="0 0 0" material="src: #m03"></a-entity>
             
-            <a-gltf-model id="b14" stl-model="src: #modelfile" scale="1 1 1" rotation="0 0 0" position="0 2 0" material="src: #m03"></a-gltf-model>
-
+            <a-gltf-model id="b14" stl-model="src: #glbfile" scale="1 1 1" rotation="0 0 0" position="0 2 3" material="src: #m03"></a-gltf-model>
+            
 
             <a-box id="b13" src="#m01" scale="1 1 1" position="-2 2 2"></a-box>
 
-            <a-gltf-model id="prt1" src="#partone"
+            <a-gltf-model id="prt1" src="#glbfile"
                           material="src:https://cdn.glitch.global/9b88d7be-d0c9-485f-a6f9-677367608e30/pexels-hakan-erenler-1427292.jpg?v=1671180006921" position="-1.5 2 -7" rotation="90 0 0"
                           animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
             </a-gltf-model>
