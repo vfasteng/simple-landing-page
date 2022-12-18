@@ -25,20 +25,20 @@
 
         <a-box id="b10" scale="1 1 1" position="-2 2 2"></a-box>
 
-        <a-entity id="glb10" gltf-model="#b10glb" src="#m04" position="0 2 -2" ></a-entity>
+        <a-entity id="glb10" gltf-model="#b10glb" material="src:#m04" position="0 2 -2" ></a-entity>
 
         <a-box id="b11" src="#m01" scale="3 2 1" position="2 2 2"></a-box>
 
-        <a-entity id="prt1" gltf-model="#partone"
-                  material="src:#m01" position="-1.5 2 -7" rotation="90 0 0"
-                  animation="property: rotation; to: 90 360 0; dur: 10000; easing:linear; loop:true;">
+        <a-entity id="prt1" gltf-model="#b10glb"
+                  material="src:#m01" position="-1.5 2 -2" rotation="90 0 0"
+                  >
         </a-entity>
 
         <a-entity position="2 1.5 -4" rotation="0 0 0">
             <a-entity id="dropdownContainer" position="0 0 -1">
 
                 <a-gui-flex-container flex-direction="row" justify-content="center" align-items="normal" component-padding="0.1"
-                                      opacity="0" width="2.5" height="0.75"
+                                      opacity="0" width="2.5" heihgt="0.75"
                                       position="0 0.375 0" rotation="0 0 0">
                     <a-gui-icon-label-button id="mydropdown"
                                              width="2.5" height="0.75"
