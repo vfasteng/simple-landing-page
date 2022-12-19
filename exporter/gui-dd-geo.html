@@ -97,6 +97,12 @@
                                   font-size="0.3"
                                   value="Material-5">
                     </a-gui-button>
+                    <a-gui-button width="2.5" height="0.75"
+                                  onclick="matl6"
+                                  font-family="assets/fonts/PermanentMarker-Regular.ttf"
+                                  font-size="0.3"
+                                  value="Material-6">
+                    </a-gui-button>
                     <a-gui-icon-button height="0.5"
                                        onclick="closeDropdown"
                                        icon="f00d"
@@ -161,12 +167,35 @@
             knot.setAttribute('material', 'src', '#m05');
         }
         window.matl6 = function () {
+            var mat001 = new THREE.MeshPhysicalMaterial();
+            mat001.color = new THREE.Color("gold");
+            mat001.reflectivity = 1.0;
+            mat001.roughness = 0.0;
+            mat001.envMapIntensity = 1.0;
             var knot = document.getElementById("b11");
-            knot.setAttribute('material', 'src', '#m06');
+            knot.setAttribute('material', 'src', '#mat001');
         }
 
-
     </script>
+    <script>
+        //Material
 
+        var mat001 = new THREE.MeshPhysicalMaterial();
+        mat001.color = new THREE.Color("gold");
+        mat001.reflectivity = 1.0;
+        mat001.roughness = 0.0;
+        mat001.envMapIntensity = 1.0;
+
+        //MODEL from loader
+        var mesh01;
+        loader.scene.traverse(function (child) {
+            if (child.isMesh) {
+                mesh01 = child;
+                child.material = mat001; // This is
+                scene.add(mesh01);
+                mesh01.scale.set(1, 1, 1);
+            }
+        });
+    </script>
 </body>
 </html>
