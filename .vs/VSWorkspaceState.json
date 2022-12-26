@@ -1,11 +1,15 @@
 {
   "ExpandedNodes": [
     "",
-    "\\assets",
-    "\\assets\\src",
     "\\exporter",
-    "\\exporter\\js"
+    "\\exporter\\aincraft",
+    "\\exporter\\examples",
+    "\\exporter\\examples\\physics",
+    "\\exporter\\examples\\super-basic",
+    "\\exporter\\gui",
+    "\\exporter\\js\\aframe",
+    "\\exporter\\models"
   ],
-  "SelectedNode": "\\assets\\src",
+  "SelectedNode": "\\exporter\\aincraft\\index.html",
   "PreviewInSolutionExplorer": false
 }
