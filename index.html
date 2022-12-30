@@ -513,21 +513,21 @@
 
 			<a-gui-flex-container flex-direction="column" justify-content="center" align-items="normal" component-padding="0.1" opacity="0.7" width="3.5" height="4.5" panel-color="#072B73" panel-rounded="0.2" position="-5 5 0" rotation="" rounded="height: 4.5; width: 3.5; opacity: 0.7; color: #072B73; radius: 0.2; depthWrite: false; polygonOffset: true; polygonOffsetFactor: 1" gui-flex-container="" id="five-buttons">
 				<!--<a-gui-button
-					id="btn1"
-					width="2.5"
-					height="0.7"
-					base-depth="0.05"
-					depth="0.2"
-					gap="0.1"
-					radius="0"
-					onclick="testButtonAction1"
-					value="test button"
-					font-family="assets/fonts/PermanentMarker-Regular.ttf"
-					font-size="0.35"
-					margin="0 0 0.05 0"
-					toggle="true"
-				>
-				</a-gui-button>-->
+				id="btn1"
+				width="2.5"
+				height="0.7"
+				base-depth="0.05"
+				depth="0.2"
+				gap="0.1"
+				radius="0"
+				onclick="testButtonAction1"
+				value="test button"
+				font-family="assets/fonts/PermanentMarker-Regular.ttf"
+				font-size="0.35"
+				margin="0 0 0.05 0"
+				toggle="true"
+			>
+			</a-gui-button>-->
 
 
 				<a-gui-button width="2.5" height="0.7" base-depth="0.025" depth="0.1" gap="0.1" radius="0" onclick="testButtonAction2" value="Another button" font-family="assets/fonts/PermanentMarker-Regular.ttf" font-size="0.275" margin="0 0 0.05 0" font-color="black" active-color="red" hover-color="yellow" border-color="white" focus-color="black" background-color="orange" geometry="primitive: plane; height: 0.7; width: 2.5" material="shader: flat; transparent: true; opacity: 0.5; side: double; color: orange" role="button" tabindex="0" aria-label="Another button" gui-button="" position="0 1.525 0.01">
@@ -551,41 +551,41 @@
 				</a-gui-button>
 
 				<!--<a-gui-button
-					width="2.75"
-					height="1"
-					base-depth="0.1"
-					depth="0.3"
-					gap="0.1"
-					radius="0"
-					onclick="testButtonAction3"
-					value="Example Bevel"
-					font-family="assets/fonts/DiplomataSC-Regular.ttf"
-					font-size="0.25"
-					margin="0 0 0.05 0"
+				width="2.75"
+				height="1"
+				base-depth="0.1"
+				depth="0.3"
+				gap="0.1"
+				radius="0"
+				onclick="testButtonAction3"
+				value="Example Bevel"
+				font-family="assets/fonts/DiplomataSC-Regular.ttf"
+				font-size="0.25"
+				margin="0 0 0.05 0"
 
-					bevel="true"
-				>
-				</a-gui-button>
+				bevel="true"
+			>
+			</a-gui-button>
 
-				<a-gui-button
-					width="2.5"
-					height="0.7"
-					gap="0.2"
-					onclick="testButtonAction4"
-					value="Example 4"
-					font-family="assets/fonts/Plaster-Regular.ttf"
-					font-size="0.275"
-					margin="0 0 0.05 0"
-				>
-				</a-gui-button>
+			<a-gui-button
+				width="2.5"
+				height="0.7"
+				gap="0.2"
+				onclick="testButtonAction4"
+				value="Example 4"
+				font-family="assets/fonts/Plaster-Regular.ttf"
+				font-size="0.275"
+				margin="0 0 0.05 0"
+			>
+			</a-gui-button>
 
-				<a-gui-button
-					width="2.5"
-					height="0.7"
-					onclick="testButtonAction5"
-					value="Example 5"
-				>
-				</a-gui-button>-->
+			<a-gui-button
+				width="2.5"
+				height="0.7"
+				onclick="testButtonAction5"
+				value="Example 5"
+			>
+			</a-gui-button>-->
 
 
 			</a-gui-flex-container>
@@ -717,32 +717,32 @@
 
 
 			<!--<a-gltf-model id="4cylassy" src="#4cylmotorglbassy" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
-				<a-light type="hemisphere" intensity="2.0"></a-light>
-			</a-gltf-model>
-				--
-						<a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
-							<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+			<a-light type="hemisphere" intensity="2.0"></a-light>
+		</a-gltf-model>
+			--
+					<a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
+						<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-							</a-entity>
-							<a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
-									  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-									  dynamic-body click-impulse>
-
-							</a-entity>
+						</a-entity>
+						<a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
+								  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+								  dynamic-body click-impulse>
 
 						</a-entity>
 
-						<a-entity id="redbbbx" position="3 0 0" rotation="0 11 0">
-							<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+					</a-entity>
 
-							</a-entity>
-							<a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
-									  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
-									  dynamic-body click-impulse>
+					<a-entity id="redbbbx" position="3 0 0" rotation="0 11 0">
+						<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
-							</a-entity>
+						</a-entity>
+						<a-entity id="topxx" gltf-model="#cb1" rotation="0 0 0" scale="0.05 0.05 0.05"
+								  constraint="type:hinge;target:#botxx;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0.5 0"
+								  dynamic-body click-impulse>
 
-						</a-entity>-->
+						</a-entity>
+
+					</a-entity>-->
 
 
 			<a-gltf-model id="bert" src="#bb030" position="0 1 0" rotation="0 0 0" scale="1 1 1" static-body>
@@ -759,24 +759,30 @@
 
 		<a-entity id="ytp" websurface="url:https://aframe.io/;" position="19 10 0" rotation="0 -90 0" width="32" height="18"></a-entity>
 
+		<a-entity id="cylxyz" position="0 0 0" >
+			<a-cylinder id="cylx1" mixin="#cyll" position="0 0 0" rotation="0 0 90" scale="1 1 1" color="red" static-body></a-cylinder>
+			<a-cylinder id="cyly1" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="1 1 1" color="green" static-body></a-cylinder>
+			<a-cylinder id="cylz1" mixin="#cyll" position="0 0 0" rotation="90 0 0" scale="1 1 1" color="blue" static-body></a-cylinder>
 
-		<a-box id="ert" position="0 3 -2" color="red" dynamic-body click-impulse></a-box>
+		</a-entity>
+		
+
 		<a-box position="-3 5 0" color="red" dynamic-body click-impulse></a-box>
 		<a-sphere id="sph" position="3 7 0" radius="1" color="red" dynamic-body click-impulse></a-sphere>
 
 
 		<!-- Mouse cursor so we can click on the scene with mouse or touch. --
-		<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
-		-->
+	<a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+	-->
 		<a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
 		<a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
 
 		<!-- Camera + recorder. --
-		<a-entity id="cameraRig" position="0 1.6 0">
-			<a-entity camera camera-recorder="positionTo: -1 1.6 -7; lookAt: -8 5 8" position="5 1.6 0"></a-entity>
-		</a-entity>
+	<a-entity id="cameraRig" position="0 1.6 0">
+		<a-entity camera camera-recorder="positionTo: -1 1.6 -7; lookAt: -8 5 8" position="5 1.6 0"></a-entity>
+	</a-entity>
 
-		<!-- Camera. -->
+	<!-- Camera. -->
 		<a-entity id="cameraWrapper">
 			<a-entity id="camera" camera look-controls wasd-controls orbit-controls="target:0 0 0;initialPosition:5 5 5">
 				<a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
