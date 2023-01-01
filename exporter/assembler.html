@@ -219,7 +219,7 @@
             </a-mixin>
             <a-mixin id="cyll" geometry="primitive: cylinder; radius: 0.5; height: 1.0"
                      clickable hoverable grabbable stretchable draggable droppable
-                     dynamic-body shadow>
+                     static-body>
             </a-mixin>
             <a-mixin id="sphh" geometry="primitive: sphere; radius: 0.5"
                      clickable hoverable grabbable stretchable draggable droppable
@@ -466,7 +466,22 @@
                      dynamic-body click-impulse></a-mixin>
 
         </a-assets>
+        <!--
+        <a-mixin id="cyll" geometry="primitive: cylinder; radius: 0.5; height: 1.0"
+                 clickable hoverable grabbable stretchable draggable droppable
+                 dynamic-body shadow>
+        </a-mixin>
 
+        <a-entity id="botxx" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
+
+        </a-entity>
+        <a-entity id="botyy" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
+
+        </a-entity>
+        <a-entity id="botzz" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
+
+        </a-entity>
+            -->
         <!--cadboxx walls, floor and lighting to 40 square-->
         <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
             <a-entity id="planeboxx" position="0 0 0">
@@ -637,7 +652,7 @@
                       animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
                 <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
-                <a-cylinder id="centerx" src="#ccyl1" position="0 0 0" radius=".1" height="0.175" rotation="0 0 90"></a-cylinder>
+                <a-cylinder id="centerx" mixin="cyll" src="pik6" position="0 0 0" rotation="0 0 90"></a-cylinder>
 
 
                 <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
@@ -743,21 +758,50 @@
                     </a-entity>
 
                 </a-entity>-->
+            <a-entity id="redbbbx" position="0 0 0" rotation="0 0 0">
+                <a-entity id="botxx" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
 
+                </a-entity>
+                <a-entity id="botyy" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
 
-            <a-gltf-model id="bert" src="#bb030" position="0 1 0" rotation="0 0 0" scale="1 1 1" static-body>
+                </a-entity>
+                <a-entity id="botzz" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
 
-            </a-gltf-model>
-            <a-gltf-model id="toppyy" class="clickable" src="#cbb1" gltf-part-plus model-center="bottomAlign:true" position="0 1 0" rotation="0 0 0" scale=".05 .05 .05"
-                          constraint="type:hinge;target:#bert;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 1.5 0"
+                </a-entity>
+            </a-entity>
+
+            <a-entity id="redbccx" position="-5 0 0" rotation="0 0 0">
+                <a-gltf-model id="bott" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+                </a-gltf-model>
+                <a-entity id="topxx" gltf-model="#cb1" gltf-part-plus model-center="bottomAlign:true" rotation="0 0 0" scale="1 1 1"
+                          constraint="type:hinge;target:#bott;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"
                           dynamic-body click-impulse>
 
-            </a-gltf-model>
+                </a-entity>
+            </a-entity>
 
-        </a-entity>
+            <a-entity id="redddbx" position="5 0 0" rotation="0 0 0">
+                <a-gltf-model id="bert" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
+
+                </a-gltf-model>
+                <a-gltf-model id="toppyy" class="clickable" src="#cbb1" gltf-part-plus model-center="bottomAlign:true" position="0 1 0" rotation="0 0 0" scale=".1 .1 .1"
+                              constraint="type:hinge;target:#bert;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"
+                              dynamic-body click-impulse>
+
+                </a-gltf-model>
+
+            </a-entity>
+
+            
 
 
-            <a-entity id="ytp" websurface="url:https://aframe.io/;" position="19 10 0" rotation="0 -90 0" width="32" height="18"></a-entity>
+            
+
+
+
+
+            <a-entity id="ytp" websurface="url:https://aframe.io/;" position="19 10 0" rotation="0 -90 0" width="320" height="180"></a-entity>
 
 
             <a-box id="ert" position="0 3 -2" color="red" dynamic-body click-impulse></a-box>
@@ -766,24 +810,24 @@
 
 
             <!-- Mouse cursor so we can click on the scene with mouse or touch. --
-        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
-        -->
+    <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [gui-interactable]"></a-entity>
+    -->
             <a-entity id="leftHand" laser-controls="hand: left" raycaster="objects: [gui-interactable]"></a-entity>
             <a-entity id="rightHand" laser-controls="hand: right" raycaster="objects: [gui-interactable]"></a-entity>
 
             <!-- Camera + recorder. --
-          <a-entity id="cameraRig" position="0 1.6 0">
-              <a-entity camera camera-recorder="positionTo: -1 1.6 -7; lookAt: -8 5 8" position="5 1.6 0"></a-entity>
-          </a-entity>
+    <a-entity id="cameraRig" position="0 1.6 0">
+        <a-entity camera camera-recorder="positionTo: -1 1.6 -7; lookAt: -8 5 8" position="5 1.6 0"></a-entity>
+    </a-entity>
 
-          <!-- Camera. -->
+    <!-- Camera. -->
             <a-entity id="cameraWrapper">
                 <a-entity id="camera" camera look-controls wasd-controls orbit-controls="target:0 0 0;initialPosition:5 5 5">
                     <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
                 </a-entity>
             </a-entity>
-    </a-scene>
+</a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <!--
     <script src="aframe-animation-component.min.js"></script>-->

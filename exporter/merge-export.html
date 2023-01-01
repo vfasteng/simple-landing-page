@@ -52,10 +52,26 @@
               -->
     </div>
     <a-scene gltf-exporter>
+        <a-assets>
+            <a-asset-item id="abox" mixin="" ></a-asset-item>
+
+        </a-assets>
+
+
         <a-entity id="redbxx" geometry-merger="preserveOriginal: false" material="color: #AAA">
             <a-entity geometry="primitive: box; buffer: false" color="red" position="-1 0.5 -2"></a-entity>
             <a-entity geometry="primitive: sphere; buffer: false" color="blue" position="0 0.5 -2"></a-entity>
-            <a-entity geometry="primitive: cylinder; buffer: false" color="green" position="1 0.5 -2" scale="0.5 0.5 05"></a-entity>
+            <a-entity geometry="primitive: cylinder; buffer: false" color="green" position="1 0.5 -2" ></a-entity>
+            <a-entity geometry="primitive: cone; buffer: false" color="red" position="-1 0.5 2"></a-entity>
+            <a-entity geometry="primitive: tube; buffer: false" color="blue" position="0 0.5 2"></a-entity>
+            <a-entity geometry="primitive: octohedron; buffer: false" color="green" position="1 0.5 2" ></a-entity>
+
+
+
+
+
+
+
         </a-entity>
     </a-scene>
 

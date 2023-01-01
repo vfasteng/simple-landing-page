@@ -5,7 +5,7 @@
     <title>CADBOXX DEMO</title>
     <meta name="description" content=""></meta>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
+    <!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
 
     <script src="aframe-master.min.js"></script>
     <script src="aframe-gltf-exporter-component.min.js"></script>
@@ -134,7 +134,7 @@
                         enabled: false
                     });
                     this.el.addState("dragging");
-                }
+                }+
             })
             this.el.addEventListener("click", e => {
                 if (this.el.is("dragging")) {
@@ -414,7 +414,7 @@
         </a-assets>
 
         <!--cadboxx walls, floor and lighting to 40 square-->
-        <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
+        <a-entity id="planeboxx" physics position="0 0 0" scale="1 1 1">
             <a-entity id="planeboxx" position="0 0 0">
                 <a-entity id="planebox" position="0 0 0">
                     <a-plane side="double" color="green" position="0 -20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
