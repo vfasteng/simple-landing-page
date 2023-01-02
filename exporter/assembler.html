@@ -223,7 +223,7 @@
             </a-mixin>
             <a-mixin id="sphh" geometry="primitive: sphere; radius: 0.5"
                      clickable hoverable grabbable stretchable draggable droppable
-                     dynamic-body shadow>
+                     >
             </a-mixin>
             <a-mixin id="octt" geometry="primitive: octahedron; radius: 0.5"
                      clickable hoverable grabbable stretchable draggable droppable
@@ -644,16 +644,22 @@
                 </a-gui-progressbar>
 
             </a-gui-flex-container>
+        </a-entity>
 
+        <a-entity id="centersxyz" position="0 0 0" >
+            <a-cylinder id="centerx" mixin="cyll" color="red" scale=".2 .2 .2" position="0 0 0" rotation="0 0 90"></a-cylinder>
+            <a-cylinder id="centery" mixin="cyll" color="green" scale=".2 .2 .2" position="0 0 0" rotation="0 0 0"></a-cylinder>
+            <a-cylinder id="centerz" mixin="cyll" color="blue" scale=".2 .2 .2" position="0 0 0" rotation="90 0 0"></a-cylinder>
 
+        </a-entity>
+            
 
 
             <a-entity id="rotorxx" position="-19 0 0" rotation="0 0 0" scale="10 10 10"
                       animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
                 <a-entity id="flywheelx" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale=".1 2 2"></a-entity>
-                <a-cylinder id="centerx" mixin="cyll" src="pik6" position="0 0 0" rotation="0 0 90"></a-cylinder>
-
+                <a-cylinder id="centerx" mixin="cyll" color="red" scale=".2 .2 .2" position="0 0 0" rotation="0 0 90"></a-cylinder>
 
                 <a-entity id="crank-throwx" position="0 0 0" rotation="0 90 0" layout="type: circle; radius: 0.5">
                     <a-gltf-model id="poxs-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -676,7 +682,7 @@
                       animation__rotation__yy="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
                 <a-entity id="flywheely" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 .1 2"></a-entity>
-
+                <a-cylinder id="centery" mixin="cyll" color="green" scale=".2 .2 .2" position="0 0 0" rotation="0 0 0"></a-cylinder>
 
                 <a-entity id="crank-throwy" position="0 0 0" rotation="-90 0 0" layout="type: circle; radius: 0.5">
                     <a-gltf-model id="poys-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -699,6 +705,7 @@
                       animation__rotation__zz="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 0 0 360">
                 <a-entity id="flywheelz" gltf-model="#cb1" material="wireframe:false" position="0 0 0" rotation="0 0 0" scale="2 2 .1 "></a-entity>
+                <a-cylinder id="centerz" mixin="cyll" color="blue" scale=".2 .2 .2" position="0 0 0" rotation="90 0 0"></a-cylinder>
 
                 <a-entity id="crank-throwz" position="0 0 0" rotation="0 180 0" layout="type: circle; radius: 0.5">
                     <a-gltf-model id="pozs-one" src="#ccyl1" scale=".1 .1 .1" rotation="90 0 0"></a-gltf-model>
@@ -774,34 +781,44 @@
                 <a-gltf-model id="bott" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
                 </a-gltf-model>
-                <a-entity id="topxx" gltf-model="#cb1" gltf-part-plus model-center="bottomAlign:true" rotation="0 0 0" scale="1 1 1"
-                          constraint="type:hinge;target:#bott;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"
+                <a-entity id="topxx" gltf-model="#cbb1" gltf-part-plus model-center="bottomAlign:true" rotation="0 0 0" scale=".05 .05 .05"
+                          constraint="type:hinge;target:#bott;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:#model-center"
                           dynamic-body click-impulse>
 
                 </a-entity>
             </a-entity>
 
+
             <a-entity id="redddbx" position="5 0 0" rotation="0 0 0">
                 <a-gltf-model id="bert" src="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
                 </a-gltf-model>
-                <a-gltf-model id="toppyy" class="clickable" src="#cbb1" gltf-part-plus model-center="bottomAlign:true" position="0 1 0" rotation="0 0 0" scale=".1 .1 .1"
-                              constraint="type:hinge;target:#bert;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"
-                              dynamic-body click-impulse>
+                <a-entity id="pbx" class="clickable" gltf-part-plus="src:#planeboxx; part:#cbb1" model-center="bottomAlign:true" position="0 1 0" rotation="0 0 0" scale=".1 .1 .1"
+                          constraint="type:hinge;target:#bert;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"
+                          dynamic-body click-impulse>
 
-                </a-gltf-model>
+                </a-entity>
 
             </a-entity>
 
-            
+            <a-entity id="axistool" position="0 0 0 " static-body>
+                <a-entity id="sphh0" mixin="sphh black" position="0 0 0" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh1" mixin="sphh red" position="1 0 0" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh2" mixin="sphh red" position="-1 0 0" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh3" mixin="sphh green" position="0 1 0" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh4" mixin="sphh green" position="0 -1 0" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh5" mixin="sphh blue" position="0 0 1" material="wireframe:false" static-body></a-entity>
+                <a-entity id="sphh6" mixin="sphh blue" position="0 0 -1" material="wireframe:false" static-body></a-entity>
+
+            </a-entity>
 
 
-            
 
 
 
 
-            <a-entity id="ytp" websurface="url:https://aframe.io/;" position="19 10 0" rotation="0 -90 0" width="320" height="180"></a-entity>
+
+            <a-entity id="ytp" websurface="url:https://aframe.io/;" position="19 10 0" rotation="0 -90 0" style="width:320px; height:180px"></a-entity>
 
 
             <a-box id="ert" position="0 3 -2" color="red" dynamic-body click-impulse></a-box>
