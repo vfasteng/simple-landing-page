@@ -9,8 +9,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5.1/dat.gui.min.js" type="text/javascript"></script>
 	<script src="https://unpkg.com/aframe-physics-system/dist/aframe-physics-system.min.js"></script>
 	<script src="https://unpkg.com/aframe-extras/dist/aframe-extras.min.js"></script>
-	<!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
-	-->
+	<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
+	
 	<script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
 	<script src="aframe-gltf-exporter-component.min.js"></script>
@@ -147,7 +147,7 @@
 </head>
 <body>
 	<div id="container">
-		<button id="export-scene" class="button"><span>Export Scene</span></button>
+		<button id="model-upload" class="button" href="upper.html" target="_blank" ><span>Upload Model</span></button>
 		<button id="export-scene-bin" class="button"><span>Export Scene Binary</span></button>
 		<button id="export-redbxx" class="button"><span>Export RED Bxx</span></button>
 		<button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
@@ -719,8 +719,8 @@
 			<!--<a-gltf-model id="4cylassy" src="#4cylmotorglbassy" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
 			<a-light type="hemisphere" intensity="2.0"></a-light>
 		</a-gltf-model>
-			--
-					<a-entity id="redbxyx" position="3 0 0" rotation="0 11 0">
+			-->
+					<a-entity id="redbxyx" position="3 0 0" rotation="0 0 0">
 						<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
 						</a-entity>
@@ -732,7 +732,7 @@
 
 					</a-entity>
 
-					<a-entity id="redbbbx" position="3 0 0" rotation="0 11 0">
+					<a-entity id="redbbbx" position="-3 0 0" rotation="0 0 0">
 						<a-entity id="botxx" gltf-model="#bb030" position="0 0 0" rotation="0 0 0" scale="1 1 1" static-body>
 
 						</a-entity>
@@ -742,7 +742,7 @@
 
 						</a-entity>
 
-					</a-entity>-->
+					</a-entity>
 
 
 			<a-gltf-model id="bert" src="#bb030" position="0 1 0" rotation="0 0 0" scale="1 1 1" static-body>
