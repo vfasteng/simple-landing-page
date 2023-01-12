@@ -37,6 +37,9 @@
     <script src="https://rawgit.com/mayognaise/aframe-mouse-cursor-component/master/dist/aframe-mouse-cursor-component.min.js"></script>
     <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
     <script src="https://cdn.rawgit.com/elbobo/aframe-multisrc-component/b6d23310/dist/0.3/aframe-multisrc-component.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-physics-system/v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/aframe-gltf-part-component/dist/aframe-gltf-part-component.min.js"></script>
+    <script src="https://unpkg.com/aframe-ground-component@0.0.4/dist/aframe-ground-component.min.js"></script>
 
     <script>
         AFRAME.registerComponent('click-impulse', {
@@ -51,13 +54,36 @@
                             THREE.Math.randInt(-20, 20),
                             THREE.Math.randInt(-20, 20)
                         ),
-                            /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
+                                        /* world position */ new CANNON.Vec3().copy(el.getDOMAttribute('position'))
                     );
                 });
 
             }
         });
+
+        // forward mouse and touch events to the super-hands entity
+        AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+                this.eventRepeater = this.eventRepeater.bind(this)
+                this.el.sceneEl.addEventListener('loaded', () => {
+                    this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                    this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+                }, { once: true })
+            },
+            eventRepeater: function (evt) {
+                if (evt.type.startsWith('touch')) {
+                    evt.preventDefault()
+                    // avoid repeating touchmove because it interferes with look-controls
+                    if (evt.type === 'touchmove') { return }
+                }
+                this.el.emit(evt.type, evt.detail)
+            }
+        })
     </script>
+    
     <!--constrain-->
     <script src="aframe-ammo-constraints.js"></script>
     <script src="aframe-curve-component.js"></script>
@@ -138,7 +164,7 @@
 </div>
 
 <body>
-    
+
     <a-scene ground="preset: contact; ground: flat; dressingAmount: 0" physics="debug: false; friction: 0.1; restitution: 0.5">
         <a-assets>
             <a-mixin id="mycursor" position="0 0 -0.5" raycaster geometry="primitive: ring; radiusOuter: 0.008; radiusInner: 0.005; segmentsTheta: 32" material="color: white; shader: flat" static-body="shape: sphere; sphereRadius: 0.001" super-hands="colliderEvent: raycaster-intersection;colliderEventProperty: els;colliderEndEvent:raycaster-intersection-cleared; colliderEndEventProperty: clearedEls;colliderState:"></a-mixin>
@@ -424,7 +450,29 @@
                      constraint="type:pointTopoint;target:#bodya;axis:0 0 0;targetAxis:0 0 0;pivot:0 0 0;targetPivot:0 -2 0"
                      dynamic-body click-impulse></a-mixin>
 
+        
+        <a-asset-item id="bsassy" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/3assemblytrans.glb?v=1671885819561"></a-asset-item>
         </a-assets>
+
+        <a-entity gltf-part="src: #bsassy; part: Body1" material="color: black" position="5 0 0" scale="100 100 100" gltf-helpers="model-center:bottomAlign:true"></a-entity>
+
+
+        <a-entity id="p1" position="7 2 0" rotation="">
+            <a-entity id="bottom-square" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630" position="-5.259342635483639 -1.185000397591133 -0.6030480832897039" rotation="0.6406960426124326 -67.87391963769356 95.86118434413918" scale="" dynamic-body click-impulse velocity="">
+
+            </a-entity>
+            <a-entity id="top-hex" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803" position="-6.189610154056511 -1.463235913840886 -2.9060112128953284" rotation="0.07596481536248029 112.06125043865431 -95.64885329410548" scale="2 2 2" constraint="type: hinge; target: #bottom-square; axis: 0 1 0; targetAxis: 0 1 0; targetPivot: 0 2.5 0" dynamic-body="sphereRadius: NaN" click-impulse="" velocity="">
+
+            </a-entity>
+
+        </a-entity>
+
+
+        <a-entity gltf-part="src: #bsassy; part: Body1" material="color: black" position="0 5 0" scale="100 100 100" gltf-helpers="model-center:bottomAlign:true" dynamic-body click-impulse></a-entity>
+        <a-entity gltf-part="src: #bsassy; part: Body2" material="color: brown" position="0 5 0" scale="100 100 100" gltf-helpers="model-center:bottomAlign:true" static-body></a-entity>
+        <a-entity gltf-part="src: #bsassy; part: Body7" material="color: white" position="0 5 0" scale="100 100 100" gltf-helpers="model-center:bottomAlign:true" static-body></a-entity>
+
+
 
         <!--cadboxx walls, floor and lighting to 40 square-->
         <a-entity id="planeboxx" position="0 0 0" scale="1 1 1">
@@ -446,11 +494,11 @@
                 <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
 
                 <!--panel hosts--
-        <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
+            <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
 
-        </a-box>
-        <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
-        -->
+            </a-box>
+            <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
+            -->
                 <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
                     <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" onclick="cmm1()" static-body></a-box>
                     <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" onclick="cmm2()" static-body></a-box>
@@ -477,40 +525,40 @@
             </a-entity>
 
             <!--working--
-    <a-entity id="hinge-mixin-2p5" position="5 3 -3" rotation="0 0 0">
-        <a-entity id="bodya" mixin="hinge-bodya" >
+        <a-entity id="hinge-mixin-2p5" position="5 3 -3" rotation="0 0 0">
+            <a-entity id="bodya" mixin="hinge-bodya" >
 
-        </a-entity>
-        <a-entity id="bodyb" mixin="hinge-bodyb">
-
-        </a-entity>
-
-    </a-entity>
-    <!--p2p-mixin--
-            <a-entity id="ptp-mixin-2p5" position="3 0 -1" rotation="0 0 0">
-                <a-entity id="bodya" mixin="ptp-bodya">
-
-                </a-entity>
-                <a-entity id="bodyb" mixin="ptp-bodyb">
-
-                </a-entity>
+            </a-entity>
+            <a-entity id="bodyb" mixin="hinge-bodyb">
 
             </a-entity>
 
+        </a-entity>
+        <!--p2p-mixin--
+                <a-entity id="ptp-mixin-2p5" position="3 0 -1" rotation="0 0 0">
+                    <a-entity id="bodya" mixin="ptp-bodya">
 
-            <a-entity id="hinge-mixin-bottom" position="-5 3 -3" rotation="0 0 0">
-                <a-entity id="bodyc" mixin="hinge-bottom-bodya">
+                    </a-entity>
+                    <a-entity id="bodyb" mixin="ptp-bodyb">
+
+                    </a-entity>
 
                 </a-entity>
-                <a-entity id="bodyd" mixin="hinge-bottom-bodyb">
+
+
+                <a-entity id="hinge-mixin-bottom" position="-5 3 -3" rotation="0 0 0">
+                    <a-entity id="bodyc" mixin="hinge-bottom-bodya">
+
+                    </a-entity>
+                    <a-entity id="bodyd" mixin="hinge-bottom-bodyb">
+
+                    </a-entity>
 
                 </a-entity>
-
-            </a-entity>
-            <!---->
+                <!---->
             <a-entity id="hinge-mixin-planes1" position="0 2 3" rotation="0 0 0">
                 <a-entity id="bodye" mixin="hinge-planes-bodya">
-                    
+
                 </a-entity>
                 <a-entity id="bodyf" mixin="hinge-planes-bodyb">
                     <a-cylinder id="cc1" position="0 1 0" rotation="0 0 0" scale=".5 .5 .5" color="green"></a-cylinder>
@@ -520,8 +568,8 @@
 
 
             <!--
-    gltf-helpers="buffers:false" model-center="bottomAlign:true" position="0 0 0" rotation="0 0 0" constraint="type:hinge;target:#bb1;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0" dynamic-body click-impulse
-    -->
+        gltf-helpers="buffers:false" model-center="bottomAlign:true" position="0 0 0" rotation="0 0 0" constraint="type:hinge;target:#bb1;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0" dynamic-body click-impulse
+        -->
             <!--spinning-box-->
             <a-entity id="h4t" position="-3 0 0" rotation="0 0 0">
                 <a-cylinder id="hinge4-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
@@ -577,20 +625,20 @@
 						   targetAxis: 0 1 0;
 						   pivot: 0 0 0;
 					   	targetPivot: 0 2 0;">
-                    
+
                 </a-entity>
             </a-entity>
 
             <a-entity id="indicate" gltf-model="#bbooxx" position="2 5 0" rotation="0 0 -90" scale="1 1 1" play-all-model-animations="true"></a-entity>
             <!--
-    <a-entity id="shallwe" gltf-model="#boxxex" position="-5 0 0" rotation="0 0 0" scale="1 1 1" gltf-helpers="buffer:false;" model-center="bottomAlign:true" dynamic-body click-impulse></a-entity>
+        <a-entity id="shallwe" gltf-model="#boxxex" position="-5 0 0" rotation="0 0 0" scale="1 1 1" gltf-helpers="buffer:false;" model-center="bottomAlign:true" dynamic-body click-impulse></a-entity>
 
-    <a-entity id="bb1" gltf-model="#bb030" position="-5 0 -5">
-        <a-entity id="pprt1" mixin="bothin">
+        <a-entity id="bb1" gltf-model="#bb030" position="-5 0 -5">
+            <a-entity id="pprt1" mixin="bothin">
 
+            </a-entity>
         </a-entity>
-    </a-entity>
-            -->
+                -->
             <a-entity id="p1" position="5 3 0" rotation="0 0 0">
                 <a-entity id="bottom-square" gltf-model="#cb1" position="0 0 0" rotation="0 0 0" scale="1 1 1" dynamic-body click-impulse>
 
@@ -614,129 +662,129 @@
             </a-entity>
 
             <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body></a-entity>
-            <a-entity id="bbb2" gltf-model="#cb1" mixin="#hinge-mixin"  position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+            <a-entity id="bbb2" gltf-model="#cb1" mixin="#hinge-mixin" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
             <a-entity id="bbb3" gltf-model="#cb1" mixin="#hinge-mixin" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
-            <a-entity id="bbb4" gltf-model="#cb1" mixin="#hinge-mixin"  position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
+            <a-entity id="bbb4" gltf-model="#cb1" mixin="#hinge-mixin" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
 
 
 
 
 
             <!--gearbox--
-        <a-entity position="-2.5 2.5 6" rotation="0 0 0">
-                <a-cylinder id="hinge114-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
-                </a-cylinder>
-                <a-entity gltf-model="#114" position="0 2 0" rotation="0 0 0"
-                      scale="0.25 0.25 0.25"
-                      dynamic-body
-                      click-impulse
-                        constraint="type: hinge;
-                       target: #hinge114-target;
-                       axis: 0 0 1;
-                       targetAxis: 0 0 1;
-                       pivot: 0 0 0;
-                    targetPivot: 0 0 0;">
-                    <a-entity gltf-model="#117" position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
-                        <a-entity position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
+            <a-entity position="-2.5 2.5 6" rotation="0 0 0">
+                    <a-cylinder id="hinge114-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
+                    </a-cylinder>
+                    <a-entity gltf-model="#114" position="0 2 0" rotation="0 0 0"
+                          scale="0.25 0.25 0.25"
+                          dynamic-body
+                          click-impulse
+                            constraint="type: hinge;
+                           target: #hinge114-target;
+                           axis: 0 0 1;
+                           targetAxis: 0 0 1;
+                           pivot: 0 0 0;
+                        targetPivot: 0 0 0;">
+                        <a-entity gltf-model="#117" position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
+                            <a-entity position="0 2 0" rotation="0 0 0" scale="1 1 1" click-impulse>
+                            </a-entity>
                         </a-entity>
                     </a-entity>
-                </a-entity>
-    </a-entity>
+        </a-entity>
 
-    <!---->
+        <!---->
             <!--<a-entity mixin="red weight cube controller" position="-15 5 -15" scale="5 5 5"></a-entity>
-    <a-entity mixin="blue weight cube controller" position="0 5 -15" scale="5 5 5"></a-entity>
-    <a-entity mixin="red weight cube controller" position="15 5 -15" scale="5 5 5"></a-entity>
-    <a-entity mixin="blue weight cube controller" position="-15 5 0" scale="5 5 5"></a-entity>
-    <a-entity mixin="red weight cube controller" position="15 5 0" scale="5 5 5"></a-entity>
-    <a-entity mixin="red weight cube controller" position="-15 5 15" scale="5 5 5"></a-entity>
-    <a-entity mixin="blue weight cube controller" position="0 5 15" scale="5 5 5"></a-entity>
-    <a-entity mixin="red weight cube controller" position="15 5 15" scale="5 5 5"></a-entity>
-    -->
+        <a-entity mixin="blue weight cube controller" position="0 5 -15" scale="5 5 5"></a-entity>
+        <a-entity mixin="red weight cube controller" position="15 5 -15" scale="5 5 5"></a-entity>
+        <a-entity mixin="blue weight cube controller" position="-15 5 0" scale="5 5 5"></a-entity>
+        <a-entity mixin="red weight cube controller" position="15 5 0" scale="5 5 5"></a-entity>
+        <a-entity mixin="red weight cube controller" position="-15 5 15" scale="5 5 5"></a-entity>
+        <a-entity mixin="blue weight cube controller" position="0 5 15" scale="5 5 5"></a-entity>
+        <a-entity mixin="red weight cube controller" position="15 5 15" scale="5 5 5"></a-entity>
+        -->
             <!-- ...
-         <a-entity id="assy01" position="5 0 -5">
-             <a-box id="basetable" position="0 1 0" rotation="0 0 0" width="10" height="1" depth="2" color="blue" outline="true"
-                animation__rotation="property: rotation; dir: forward; dur: 100000;
-                     repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
-             <a-entity gltf-model="#g05" position="5 0 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow" static-body
-                       animation__rotation="property: rotation; dir: forward; dur: 1000;
-                     repeat: indefinite; easing: linear; loop: true; to: 0 360 0"
-                   ></a-entity>
-             <a-entity position="-5 1 0" rotation="0 0 0">
-                 <a-cylinder id="hinge4-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
-                 </a-cylinder>
-                 <a-entity gltf-model="#g05" position="0 2.5 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow"
-                       dynamic-body click-impulse
+             <a-entity id="assy01" position="5 0 -5">
+                 <a-box id="basetable" position="0 1 0" rotation="0 0 0" width="10" height="1" depth="2" color="blue" outline="true"
+                    animation__rotation="property: rotation; dir: forward; dur: 100000;
+                         repeat: indefinite; easing: linear; loop: true; to: 0 360 0">
+                 <a-entity gltf-model="#g05" position="5 0 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow" static-body
+                           animation__rotation="property: rotation; dir: forward; dur: 1000;
+                         repeat: indefinite; easing: linear; loop: true; to: 0 360 0"
+                       ></a-entity>
+                 <a-entity position="-5 1 0" rotation="0 0 0">
+                     <a-cylinder id="hinge4-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
+                     </a-cylinder>
+                     <a-entity gltf-model="#g05" position="0 2.5 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow"
+                           dynamic-body click-impulse
+                             constraint="type: hinge;
+                            target: #hinge4-target;
+                            axis: 0 1 0;
+                            targetAxis: 0 1 0;
+                            pivot: 0 0.1 0;
+                            targetPivot: 0 0.5 0;"></a-entity>
+                     </a-entity>
+                 <a-entity position="-5 1 0" rotation="180 0 0">
+                 <a-cylinder id="hinge3-target" position="0 0 0 " color="#777" static-body radius="0.5" height="0.01">
+                     </a-cylinder>
+                 <a-entity gltf-model="#g05" position="5 0 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow" static-body
                          constraint="type: hinge;
                         target: #hinge4-target;
                         axis: 0 1 0;
                         targetAxis: 0 1 0;
                         pivot: 0 0.1 0;
-                        targetPivot: 0 0.5 0;"></a-entity>
-                 </a-entity>
-             <a-entity position="-5 1 0" rotation="180 0 0">
-             <a-cylinder id="hinge3-target" position="0 0 0 " color="#777" static-body radius="0.5" height="0.01">
-                 </a-cylinder>
-             <a-entity gltf-model="#g05" position="5 0 0" rotation="0 0 -90" scale="0.25 0.25 0.25" material="color: yellow" static-body
-                     constraint="type: hinge;
-                    target: #hinge4-target;
-                    axis: 0 1 0;
-                    targetAxis: 0 1 0;
-                    pivot: 0 0.1 0;
-                    targetPivot: 0 -0.5 0;"></a-entity>
-                 <a-entity id="c11" class="cube" mixin="cube" position="0 0 0" material="color: blue"
-                   constraint="type: hinge;
-                    target: #hinge3-target;
-                    axis: 0 1 0;
-                    targetAxis: 0 1 0;
-                    pivot: 0 0.1 0;
-                    targetPivot: 0 -0.5 0;"></a-entity>
-                 <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: green"
+                        targetPivot: 0 -0.5 0;"></a-entity>
+                     <a-entity id="c11" class="cube" mixin="cube" position="0 0 0" material="color: blue"
                        constraint="type: hinge;
-                        target: #c11;
-                        axis: 0 0 1;
-                        targetAxis: 0 0 1;
-                        pivot: 0 0 0;
-                        targetPivot: 0 0 1.0"></a-entity>
+                        target: #hinge3-target;
+                        axis: 0 1 0;
+                        targetAxis: 0 1 0;
+                        pivot: 0 0.1 0;
+                        targetPivot: 0 -0.5 0;"></a-entity>
                      <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: green"
                            constraint="type: hinge;
                             target: #c11;
                             axis: 0 0 1;
                             targetAxis: 0 0 1;
                             pivot: 0 0 0;
-                            targetPivot: 0 0 -1.0"></a-entity>
+                            targetPivot: 0 0 1.0"></a-entity>
+                         <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: green"
+                               constraint="type: hinge;
+                                target: #c11;
+                                axis: 0 0 1;
+                                targetAxis: 0 0 1;
+                                pivot: 0 0 0;
+                                targetPivot: 0 0 -1.0"></a-entity>
 
-                 <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: red"
-                       constraint="type: hinge;
-                        target: #c11;
-                        axis: 1 0 0;
-                        targetAxis: 1 0 0;
-                        pivot: 0 0 0;
-                        targetPivot: 1.0 0 0"></a-entity>
                      <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: red"
                            constraint="type: hinge;
                             target: #c11;
                             axis: 1 0 0;
                             targetAxis: 1 0 0;
                             pivot: 0 0 0;
-                            targetPivot: -1.0 0 0"></a-entity>
+                            targetPivot: 1.0 0 0"></a-entity>
+                         <a-entity class="sphere" mixin="sphere" position="0 0 0" material="color: red"
+                               constraint="type: hinge;
+                                target: #c11;
+                                axis: 1 0 0;
+                                targetAxis: 1 0 0;
+                                pivot: 0 0 0;
+                                targetPivot: -1.0 0 0"></a-entity>
 
+                     </a-entity>
                  </a-entity>
              </a-entity>
+                 <!--fourspheres en
+         </a-box>
          </a-entity>
-             <!--fourspheres en
-     </a-box>
-     </a-entity>
 
-    <a-entity id="bx1" mixin="cube" position="1 2 -2" color="blue" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
-     <a-entity id="bx2" mixin="cube" position="2.5 2 -2" color="red" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
-     <a-entity id="bx3" mixin="cube" position="4.5 2 -2" color="green" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
-     <a-entity id="bx4" mixin="cube" position="1.75 4 -2" color="blue" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
-     <a-entity id="bx5" mixin="cube" position="3.75 4 -2" color="red" outline="0.2" scale="2 2 2" click-impulse  ></a-entity>
-     <a-entity id="bx6" mixin="cube" position="2.5 7 -2" color="green" outline="0.2" scale="2 2 2" click-impulse></a-entity>
+        <a-entity id="bx1" mixin="cube" position="1 2 -2" color="blue" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
+         <a-entity id="bx2" mixin="cube" position="2.5 2 -2" color="red" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
+         <a-entity id="bx3" mixin="cube" position="4.5 2 -2" color="green" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
+         <a-entity id="bx4" mixin="cube" position="1.75 4 -2" color="blue" outline="0.2" scale="2 2 2" click-impulse ></a-entity>
+         <a-entity id="bx5" mixin="cube" position="3.75 4 -2" color="red" outline="0.2" scale="2 2 2" click-impulse  ></a-entity>
+         <a-entity id="bx6" mixin="cube" position="2.5 7 -2" color="green" outline="0.2" scale="2 2 2" click-impulse></a-entity>
 
 
-     <!-- freewheel working with ckick-impulse from mouse-->
+         <!-- freewheel working with ckick-impulse from mouse-->
 
             <a-entity position="0 0 0">
                 <a-entity id="anchor"
@@ -757,38 +805,38 @@
                 </a-entity>
             </a-entity>
             <!--
-    <a-entity id="caster" position="0 2 -3">
+        <a-entity id="caster" position="0 2 -3">
 
-        <a-cylinder id="hinge3-target" position="0 0.1 0 " color="#777" static-body radius="0.5" height="0.1">
+            <a-cylinder id="hinge3-target" position="0 0.1 0 " color="#777" static-body radius="0.5" height="0.1">
 
-        </a-cylinder>
-        <a-entity id="c11" class="cube" mixin="cube" position="0 0 0" material="color: yellow"
-                  constraint="type: hinge;
-                   target: #hinge3-target;
-                   axis: 0 1 0;
-                   targetAxis: 0 1 0;
-                   pivot: 0 0.1 0;
-                   targetPivot: 0 -0.5 0;"></a-entity>
-        <a-entity gltf-model="#ccyl1" position="0 0 0" rotation="0 0 90"
-                  constraint="type: hinge;
-                       target: #c11;
-                       axis: 0 0 1;
-                       targetAxis: 0 0 1;
-                       pivot: 0 0 0;
-                       targetPivot: 0 0 1.0">
-
-        </a-entity>
-        <a-entity class="cube" mixin="cube" position="0 0 0" material="color: yellow"
-                  constraint="type: hinge;
+            </a-cylinder>
+            <a-entity id="c11" class="cube" mixin="cube" position="0 0 0" material="color: yellow"
+                      constraint="type: hinge;
+                       target: #hinge3-target;
+                       axis: 0 1 0;
+                       targetAxis: 0 1 0;
+                       pivot: 0 0.1 0;
+                       targetPivot: 0 -0.5 0;"></a-entity>
+            <a-entity gltf-model="#ccyl1" position="0 0 0" rotation="0 0 90"
+                      constraint="type: hinge;
                            target: #c11;
                            axis: 0 0 1;
                            targetAxis: 0 0 1;
                            pivot: 0 0 0;
-                           targetPivot: 0 0 -1.0">
+                           targetPivot: 0 0 1.0">
 
+            </a-entity>
+            <a-entity class="cube" mixin="cube" position="0 0 0" material="color: yellow"
+                      constraint="type: hinge;
+                               target: #c11;
+                               axis: 0 0 1;
+                               targetAxis: 0 0 1;
+                               pivot: 0 0 0;
+                               targetPivot: 0 0 -1.0">
+
+            </a-entity>
         </a-entity>
-    </a-entity>
-        -->
+            -->
 
             <a-entity id="indicate" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glbexport.glb?v=1665853790167" position="2 5 0" rotation="0 0 0" scale="1 1 1" play-all-model-animations></a-entity>
 
@@ -808,7 +856,7 @@
 
 
             <a-cylinder position="0 -0.1 0" radius="150" height=".2" color="lightblue" visible="false" static-body></a-cylinder>
-</a-scene>
+    </a-scene>
 
     <script>
         function getmodelall() {
@@ -1068,3 +1116,4 @@
 
 </body>
 </html>
+    <!--gltf-part -->
