@@ -469,6 +469,46 @@
 
                 </a-assets>
 
+                <!--cadboxx walls, floor and lighting to 40 square-->
+                <a-entity id="planeboxx" physics position="0 0 0" scale="1 1 1">
+                    <a-entity id="planeboxx" position="0 0 0">
+                        <a-entity id="planebox" position="0 0 0">
+                            <a-plane side="double" color="green" position="0 -20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                            <a-plane side="double" color="green" position="0 20 0" rotation="-90 0 0" height="40" width="40" material="" static-body></a-plane>
+                            <a-plane side="double" color="blue" position="0 0 20" rotation="0 0 0" height="40" width="40" material="" static-body></a-plane>
+                            <a-plane side="double" color="blue" position="0 0 -20" rotation="0 0 0" height="40" width="40" material="" satic-body></a-plane>
+                            <a-plane side="double" color="red" position="20 0 0" rotation="0 -90 0" height="40" width="40" material="" static-body></a-plane>
+                            <a-plane side="double" color="red" position="-20 0 0" rotation="0 90 0" height="40" width="40" material="" static-body></a-plane>
+                        </a-entity>
+                        <!--mesh overlay for walls-->
+                        <a-box position="0 -20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                        <a-box position="0 20 0" rotation="0 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                        <a-box position="0 0 -20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                        <a-box position="0 0 20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                        <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+                        <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
+
+                        <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
+                            <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" over-listener onclick="cmm1()" static-body></a-box>
+                            <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" over-listener onclick="cmm2()" static-body></a-box>
+                            <a-box id="cmnd3" class="clickable" position="-16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="purple" opacity="1" over-listener onclick="cmm3()" static-body></a-box>
+                            <a-box id="cmnd4" class="clickable" position="-8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="orange" opacity="1" over-listener onclick="cmm4()" static-body></a-box>
+                            <a-box id="cmnd5" class="clickable" position="-8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="brown" opacity="1" over-listener onclick="cmm5()" static-body></a-box>
+                            <a-box id="cmnd6" class="clickable" position="-8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="crimson" opacity="1" over-listener onclick="cmm6()" static-body></a-box>
+                            <a-box id="cmnd7" class="clickable" position="0 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm7()" static-body></a-box>
+                            <a-box id="cmnd8" class="clickable" position="0 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm8()" static-body></a-box>
+                            <a-box id="cmnd9" class="clickable" position="0 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm9()" static-body></a-box>
+                            <a-box id="cmnd10" class="clickable" position="8 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm10()" static-body></a-box>
+                            <a-box id="cmnd11" class="clickable" position="8 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm11()" static-body></a-box>
+                            <a-box id="cmnd12" class="clickable" position="8 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm12()" static-body></a-box>
+                            <a-box id="cmnd13" class="clickable" position="16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm13()" static-body></a-box>
+                            <a-box id="cmnd14" class="clickable" position="16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm14()" static-body></a-box>
+                            <a-box id="cmnd15" class="clickable" position="16 .2 -16" rotation="0 0 0" width="4" depth="4" height="0.5" color="yellow" opacity="1" over-listener onclick="cmm15()" static-body></a-box>
+
+                        </a-box>
+                    </a-entity>
+                </a-entity>
+
                 <!--Camera for websurfaces--
     <a-entity wasd-controls="acceleration: 20;"
               camera="active: true"
@@ -495,14 +535,17 @@
     <a-entity id="botzz" mixin="#cyll" position="0 0 0" rotation="0 0 0" scale="10 10 10" static-body>
 
     </a-entity>
-        -->
+        --
 
                 <a-entity id="spinning-plate=s" position="0 0 0" rotation="0 0 0">
                     <a-gltf-model></a-gltf-model>
-                </a-entity>0
+                </a-entity>
 
 
                 <!--cadboxx walls, floor and lighting to 40 square-->
+
+
+
                 <a-entity id="rotorxx" position="-19 0 0" rotation="0 0 0" scale="10 10 10"
                           animation__rotation__xx="property: rotation; dir: forward; dur: 5000;
             repeat: indefinite; easing: linear; loop: true; to: 360 0 0">
@@ -514,14 +557,14 @@
                         <a-gltf-model id="poxs-two" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 0"></a-gltf-model>
                         <a-gltf-model id="poxs-three" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 0"></a-gltf-model>
                         <a-gltf-model id="poxs-four" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 0"></a-gltf-model>
-                        <a-gltf-model id="poxs-five" src="ccyl1" color="red" scale=".51 .51 .51" rotation="0 -90 90"></a-gltf-model>
+                        <a-gltf-model id="poxs-five" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-six" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-seven" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-eight" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-ten" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-eleven" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
                         <a-gltf-model id="poxs-twelve" src="ccyl1" color="red" scale=".1 .1 .1" rotation="0 -90 90"></a-gltf-model>
-                        AFRAME
+
                     </a-entity>
                 </a-entity>
 
@@ -571,6 +614,75 @@
                     </a-entity>
                 </a-entity>
 
+                <!--spinning-box-->
+                <a-entity id="h4t" position="-3 0 0" rotation="0 0 0">
+                    <a-cylinder id="hinge4-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
+
+                    </a-cylinder>
+                    <a-entity id="h4model" gltf-model="#cb1"
+                              dynamic-body
+                              click-impulse
+                              constraint="type: hinge;
+						   target: #hinge4-target;
+						   axis: 0 1 0;
+						   targetAxis: 0 1 0;
+						   pivot: 0 0 0;
+					   	targetPivot: 0 2 0;"></a-entity>
+
+                    <a-entity id="h4mmodel" gltf-model="#cb1"
+                              scale="1 1 1"
+                              dynamic-body
+                              click-impulse
+                              constraint="type: hinge;
+						   target: #hinge4-target;
+						   axis: 0 1 0;
+						   targetAxis: 0 1 0;
+						   pivot: 0 0 0;
+					   	targetPivot: 0 4 0;"></a-entity>
+
+                    <a-entity id="h4mmmodel" gltf-model="#cb1"
+                              scale="1 1 1"
+                              dynamic-body
+                              click-impulse
+                              constraint="type: hinge;
+						   target: #hinge4-target;
+						   axis: 0 1 0;
+						   targetAxis: 0 1 0;
+						   pivot: 0 0 0;
+					   	targetPivot: 0 6 0;"></a-entity>
+
+                </a-entity>
+                <!--spinning-box2-->
+                <a-entity position="3 0 0" rotation="0 0 0">
+                    <a-cylinder id="hinge1-target" position="0 0 0" rotation="0 0 0" color="#777" static-body radius="0.5" height="0.01">
+
+                    </a-cylinder>
+                    <a-entity gltf-model="#cb1" gltf-helpers="buffers:false" model-center="bottomAlign:true"
+                              position="0 0 0" rotation="0 0 0"
+                              scale="1 1 1"
+                              constraint="type: hinge;
+						   target: #hinge1-target;
+						   axis: 0 1 0;
+						   targetAxis: 0 1 0;
+						   pivot: 0 0 0;
+					   	    targetPivot: 0 2 0;"
+                              dynamic-body
+                              click-impulse>
+                    </a-entity>
+                </a-entity>
+                <!--boxx and wheel-->
+                <a-entity id="p1" position="5 3 0" rotation="">
+                    <a-entity id="bottom-square" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630" position="-5.259342635483639 -1.185000397591133 -0.6030480832897039" rotation="0.6406960426124326 -67.87391963769356 95.86118434413918" scale="" dynamic-body="sphereRadius: NaN" click-impulse="" velocity="">
+
+                    </a-entity>
+                    <a-entity id="top-hex" gltf-model="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803" position="-6.189610154056511 -1.463235913840886 -2.9060112128953284" rotation="0.07596481536248029 112.06125043865431 -95.64885329410548" scale="2 2 2" constraint="type: hinge; target: #bottom-square; axis: 0 1 0; targetAxis: 0 1 0; targetPivot: 0 2.5 0" dynamic-body="sphereRadius: NaN" click-impulse="" velocity="">
+
+                    </a-entity>
+
+                </a-entity>
+
+
+                <!--
                 <a-gltf-model id="redbxx" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/planeboxx(2).glb?v=1672309898687" position="0 -2 0" rotation="0 0 0" scale=".3 .2 .2" class="clickable" dynamic-body click-impulse>
                     <a-entity id="sphh0" mixin="sphh black" position="0 0 0" material="wireframe:false" scale="3 3 3" dynamic-body></a-entity>
                     <a-entity id="sphh1" mixin="sphh red" position="1 0 0" material="wireframe:false" scale="3 3 3" dynamic-body></a-entity>

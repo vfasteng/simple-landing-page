@@ -5,13 +5,7 @@
     <title>CADBOXX DEMO</title>
     <meta name="description" content=""></meta>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
-    <!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
-
-    <script src="aframe-master.min.js"></script>
-    <script src="aframe-gltf-exporter-component.min.js"></script>
-    <script src="aframe-animation-component.min.js"></script>
-    <script src="https://unpkg.com/aframe-vartiste-toolkit@latest/vartiste-toolkit.js"></script>
-    
+    <script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>
     <!--<script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
     <!--<script src="https://unpkg.com/aframe-touch-inspector@1.1.2/dist/aframe-inspector.min.js"></script>-->
     <script src="https://unpkg.com/aframe-layout-component@4.3.1/dist/aframe-layout-component.min.js"></script>
@@ -36,10 +30,6 @@
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
     <script src="https://unpkg.com/aframe-csg-meshs/index.js"></script>
     <script src="../gltf-exporter/examples/basic/components/aframe-layout-component.min.js"></script>
-
-    <!--extras--
-      <script src="js/aframe-master.min.js"></script>WONT RUN IF YOU REF IT HERE  BUT IT IS THERE--
-    -->
 
     <script src="js/aframe-extras.min.js"></script>
     <script src="js/aframe-extras.controls.min1.js"></script>
@@ -233,9 +223,9 @@
         <button id="export-redbyy" class="button"><span>Export RED Byy</span></button>
         <button id="export-redbzz" class="button"><span>Export RED Bzz</span></button>
         <button id="cmnd1" class="button" onclick="cmm1()"><span>CMD1</span></button>
-        <button id="cmnd2" class="button" onclick="cmm2()" ><span>CMD2</span></button>
-        <button id="cmnd3" class="button" onclick="cmm3()" ><span>CMD3</span></button>
-        <button id="cmnd4" class="button" onclick="cmm4()" ><span>CMD4</span></button>
+        <button id="cmnd2" class="button" onclick="cmm2()"><span>CMD2</span></button>
+        <button id="cmnd3" class="button" onclick="cmm3()"><span>CMD3</span></button>
+        <button id="cmnd4" class="button" onclick="cmm4()"><span>CMD4</span></button>
         <button id="cmnd5" class="button" onclick="cmm5()"><span>CMD5</span></button>
         <!--
 
@@ -247,40 +237,7 @@
              cursor="rayOrigin: mouse"
              ground="preset: contact; ground: flat; dressingAmount: 0">
 
-        <script>
-            function exportGLTF(input, options) {
-                AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
-            }
 
-            document.getElementById('export-scene').addEventListener('click', function () {
-                exportGLTF();
-            });
-
-            document.getElementById('export-scene-bin').addEventListener('click', function () {
-                exportGLTF(undefined, { binary: true });
-            });
-
-            document.getElementById('export-redbxx').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbxx'), { binary: true });
-            });
-
-            document.getElementById('export-redbyy').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbyy'), { binary: true });
-            });
-
-            document.getElementById('export-redbzz').addEventListener('click', function () {
-                exportGLTF(document.getElementById('redbzz'), { binary: true });
-            });
-
-            document.getElementById('export-two').addEventListener('click', function () {
-                exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
-            });
-
-            document.getElementById('export-selector').addEventListener('click', function () {
-                exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
-            });
-
-        </script>
         <a-assets>
             <a-asset-item id="cb1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/cadboxx-one.glb?v=1659721895630"></a-asset-item>
             <a-asset-item id="ccyl1" src="https://cdn.glitch.global/2a3af8bb-e7b2-4e50-8ce2-68e3e8cf4538/glcyl.glb?v=1661360434803"></a-asset-item>
@@ -397,12 +354,12 @@
             <a-mixin id="yellow" material="color: yellow"></a-mixin>
 
             <!--
-    <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;" src="#prt1"></a-mixin>
 
-    <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
+        <a-mixin id="" geometry="gltf-model: model;src:#prt0"></a-mixin>
 
-    <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
-        -->
+        <a-mixin id="" constraint="type: hinge;axis:0 1 0;targetAxis:0 1 0;pivot:0 0 0;targetPivot:0 0 0"></a-mixin>
+            -->
             <a-mixin id="weight1" mass="1.0"></a-mixin>
             <a-mixin id="weight2" mass="2.0"></a-mixin>
             <a-mixin id="weight4" mass="4.0"></a-mixin>
@@ -431,13 +388,7 @@
                 <a-box position="0 0 20" rotation="90 0 0" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
                 <a-box position="-20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
                 <a-box position="20 0 0" rotation="0 0 90" width="40" depth="40" height="0.2" color="lightblue" opacity=".05" gridhelper="size: 40;divisions:5" static-body></a-box>
-
-                <!--panel hosts--
-                <a-box position="0 -19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" static-body>
-
-                </a-box>
-                <a-box position="0 19 0" rotation="0 0 0" width="20" depth="20" height="0.5" color="yellow" opacity="1" gridhelper="size: 20;divisions:5" static-body></a-box>
-                -->
+                                
                 <a-box position="0 0 -19.5" rotation="90 0 0" width="40" depth="40" height="0.5" color="lightblue" opacity=".1" static-body>
                     <a-box id="cmnd1" class="clickable" position="-16 .2 -1" rotation="0 0 0" width="4" depth="2" height="0.5" color="green" opacity="1" over-listener onclick="cmm1()" static-body></a-box>
                     <a-box id="cmnd2" class="clickable" position="-16 .2 -8" rotation="0 0 0" width="4" depth="4" height="0.5" color="red" opacity="1" over-listener onclick="cmm2()" static-body></a-box>
@@ -483,13 +434,27 @@
             </a-entity>
         </a-entity>
 
-        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body click-impulse ></a-entity>
+        <a-entity id="bbb1" mixin="gglb" gltf-model="#cb1" position="5.5 2.5 -2" rotation="0 0 0" scale="2 2 2" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb2" gltf-model="#cb1" position="4.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb3" gltf-model="#cb1" position="3.5 3.5 -2" rotation="0 0 0" scale="1 1 2" dynamic-body click-impulse></a-entity>
         <a-entity id="bbb4" gltf-model="#cb1" position="2.5 3.5 -2" rotation="0 0 0" scale="1 2 1" dynamic-body click-impulse></a-entity>
 
         <a-box id="c1" class="clickable" position="-1 3.5 -3" rotation="0 45 0" color="#4CC3D9" clickable dynamic-body click-impulse></a-box>
-        <a-sphere id="c2" class="clickable" position="0 3.75 -5" radius="1.25" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        
+        <a-sphere id="c12" class="clickable" position="0 -3.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-sphere id="c22" class="clickable" position="0 -1.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-sphere id="c32" class="clickable" position="0 1.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-sphere id="c42" class="clickable" position="0 3.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-sphere id="c52" class="clickable" position="0 5.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+        <a-sphere id="c62" class="clickable" position="0 7.75 -5" radius="2.5" color="#EF2D5E" clickable dynamic-body click-impulse></a-sphere>
+
+
+
+
+
+
+
+
         <a-cylinder id="c3" class="clickable" position="1 4.0 -3" radius="0.5" height="1.5" color="#FFC65D" clickable dynamic-body click-impulse></a-cylinder>
 
 
@@ -524,19 +489,19 @@
             <a-animation attribute="rotation" to="0 0 360" repeat="indefinite" easing="linear" dur="9600"></a-animation>
         </a-entity>
         <!--
-        <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
-        <a-light type="ambient" color="#445451"></a-light>
-        <a-light type="point" intensity="2" position="2 4 4"></a-light>
-        <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
+    <a-plane src="#groundTexture" rotation="-90 0 0" height="100" width="100"></a-plane>
+    <a-light type="ambient" color="#445451"></a-light>
+    <a-light type="point" intensity="2" position="2 4 4"></a-light>
+    <a-sky height="2048" radius="30" src="#skyTexture" theta-length="90" width="2048"></a-sky>
 
-            <a-entity>
-            <a-entity camera look-controls  wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 5; initialPosition: 5 0 7.5">
-                <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
+        <a-entity>
+        <a-entity camera look-controls  wasd-controls orbit-controls="target: 0 0 0; minDistance: 0.5; maxDistance: 5; initialPosition: 5 0 7.5">
+            <a-entity cursor="fuse: false; rayOrigin: mouse;"></a-entity>
 
-            </a-entity>
         </a-entity>
+    </a-entity>
 
-        <!-- Camera. -->
+    <!-- Camera. -->
         <a-entity id="cameraWrapper" position="0 1 5">
             <a-entity id="camera" camera look-controls wasd-controls></a-entity>
         </a-entity>
@@ -544,7 +509,40 @@
     </a-scene>
     <script src="aframe-physics-system.min.js"></script>
     <script src="aframe-animation-component.min.js"></script>
+    <script>
+        function exportGLTF(input, options) {
+            AFRAME.scenes[0].systems['gltf-exporter'].export(input, options);
+        }
 
+        document.getElementById('export-scene').addEventListener('click', function () {
+            exportGLTF();
+        });
+
+        document.getElementById('export-scene-bin').addEventListener('click', function () {
+            exportGLTF(undefined, { binary: true });
+        });
+
+        document.getElementById('export-redbxx').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbxx'), { binary: true });
+        });
+
+        document.getElementById('export-redbyy').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbyy'), { binary: true });
+        });
+
+        document.getElementById('export-redbzz').addEventListener('click', function () {
+            exportGLTF(document.getElementById('redbzz'), { binary: true });
+        });
+
+        document.getElementById('export-two').addEventListener('click', function () {
+            exportGLTF([document.getElementById('redbxx'), document.getElementById('redbyy')]);
+        });
+
+        document.getElementById('export-selector').addEventListener('click', function () {
+            exportGLTF(document.querySelectorAll("[geometry='primitive: box']"));
+        });
+
+    </script>
     <script>
         function cmm1() {
             document.getElementById('screenshot').addEventListener('click', function screenshot() {
